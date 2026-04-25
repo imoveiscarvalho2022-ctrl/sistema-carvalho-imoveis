@@ -110,6 +110,7 @@ tbody td{padding:9px 12px;color:var(--text);vertical-align:middle}
 .cob-input:focus{outline:none;border-color:var(--primary-light)}
 @media print{nav,header{display:none}main{padding:0}}
 </style>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
 
@@ -329,6 +330,7 @@ tbody td{padding:9px 12px;color:var(--text);vertical-align:middle}
     <div><h2>💳 Cobrança — Integração Cora</h2><span>Emissão e envio automático de boletos</span></div>
     <div class="btn-group" style="margin-top:0">
       <button class="btn btn-outline btn-sm" onclick="abrirConfigCora()">⚙️ Configurar API Cora</button>
+      <button class="btn btn-outline btn-sm" onclick="abrirConfigGmail()" id="btnGmailStatus">📧 Gmail</button>
       <button class="btn btn-primary btn-sm" onclick="gerarLoteCobranca()">🚀 Gerar Lote do Mês</button>
     </div>
   </div>
@@ -586,7 +588,30 @@ tbody td{padding:9px 12px;color:var(--text);vertical-align:middle}
   </div>
 </div>
 
-<!-- MODAL CONFIG CORA -->
+  <!-- MODAL CONFIG GMAIL -->
+<div class="modal-overlay" id="modalConfigGmail">
+  <div class="modal" style="max-width:500px">
+    <div class="modal-header"><h3>📧 Configurar Gmail</h3><button class="modal-close" onclick="fecharModal('modalConfigGmail')">✕</button></div>
+    <div id="gmailStatusBox" class="alert alert-info" style="font-size:12px;margin-bottom:14px">
+      Clique em "Conectar Gmail" para autorizar o envio de e-mails pela sua conta.
+    </div>
+    <div style="text-align:center;padding:20px 0">
+      <div id="gmailUserInfo" style="display:none;margin-bottom:16px">
+        <div style="font-size:13px;color:var(--success);font-weight:600">✅ Gmail conectado!</div>
+        <div id="gmailEmail" style="font-size:12px;color:var(--muted);margin-top:4px"></div>
+      </div>
+      <button class="btn btn-primary" onclick="conectarGmail()" id="btnConectarGmail">
+        <img src="https://www.gstatic.com/images/branding/product/1x/gmail_2020q4_32dp.png" style="width:18px;height:18px;vertical-align:middle;margin-right:6px">
+        Conectar Gmail
+      </button>
+      <button class="btn btn-danger btn-sm" onclick="desconectarGmail()" id="btnDesconectarGmail" style="display:none;margin-left:8px">Desconectar</button>
+    </div>
+    <div class="alert alert-warning" style="font-size:12px">
+      ⚠️ Ao conectar, o sistema poderá enviar e-mails pela sua conta Gmail com sua logo e identidade visual.
+    </div>
+    <div class="btn-group"><button class="btn btn-outline" onclick="fecharModal('modalConfigGmail')">Fechar</button></div>
+  </div>
+</div>
 <div class="modal-overlay" id="modalConfigCora">
   <div class="modal" style="max-width:500px">
     <div class="modal-header"><h3>⚙️ Configurar API Cora</h3><button class="modal-close" onclick="fecharModal('modalConfigCora')">✕</button></div>
@@ -1058,8 +1083,150 @@ function renderAlertas(){
 }
 
 // ══════════════════════════════════════════════════════════
-// VALORES PARA NOTA FISCAL
+// INTEGRAÇÃO GMAIL OAUTH2
 // ══════════════════════════════════════════════════════════
+const GMAIL_CLIENT_ID = '654009628416-2ibqmmiutnllhgpe9jb5nph8720vtmi4.apps.googleusercontent.com';
+const GMAIL_SCOPES = 'https://www.googleapis.com/auth/gmail.send';
+let gmailAccessToken = null;
+let gmailUserEmail = null;
+let tokenClient = null;
+
+function initGmailAuth() {
+  if(typeof google === 'undefined') return;
+  tokenClient = google.accounts.oauth2.initTokenClient({
+    client_id: GMAIL_CLIENT_ID,
+    scope: GMAIL_SCOPES,
+    callback: (response) => {
+      if(response.error) {
+        alert('Erro ao conectar Gmail: ' + response.error);
+        return;
+      }
+      gmailAccessToken = response.access_token;
+      localStorage.setItem('gmail_token', response.access_token);
+      buscarEmailUsuario();
+    }
+  });
+  // Carregar token salvo
+  const savedToken = localStorage.getItem('gmail_token');
+  if(savedToken) {
+    gmailAccessToken = savedToken;
+    const savedEmail = localStorage.getItem('gmail_user_email');
+    if(savedEmail) {
+      gmailUserEmail = savedEmail;
+      atualizarStatusGmail(true);
+    }
+  }
+}
+
+async function buscarEmailUsuario() {
+  try {
+    const resp = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+      headers: { Authorization: `Bearer ${gmailAccessToken}` }
+    });
+    const data = await resp.json();
+    gmailUserEmail = data.email;
+    localStorage.setItem('gmail_user_email', data.email);
+    atualizarStatusGmail(true);
+  } catch(e) {
+    atualizarStatusGmail(true);
+  }
+}
+
+function atualizarStatusGmail(conectado) {
+  const userInfo = document.getElementById('gmailUserInfo');
+  const emailEl = document.getElementById('gmailEmail');
+  const btnConectar = document.getElementById('btnConectarGmail');
+  const btnDesconectar = document.getElementById('btnDesconectarGmail');
+  const statusBox = document.getElementById('gmailStatusBox');
+  if(!userInfo) return;
+  if(conectado) {
+    userInfo.style.display = 'block';
+    if(emailEl && gmailUserEmail) emailEl.textContent = gmailUserEmail;
+    if(btnConectar) btnConectar.style.display = 'none';
+    if(btnDesconectar) btnDesconectar.style.display = 'inline-flex';
+    if(statusBox) { statusBox.className = 'alert alert-success'; statusBox.textContent = '✅ Gmail autorizado! Os e-mails serão enviados pela sua conta.'; }
+  } else {
+    userInfo.style.display = 'none';
+    if(btnConectar) btnConectar.style.display = 'inline-flex';
+    if(btnDesconectar) btnDesconectar.style.display = 'none';
+    if(statusBox) { statusBox.className = 'alert alert-info'; statusBox.textContent = 'Clique em "Conectar Gmail" para autorizar o envio de e-mails.'; }
+  }
+}
+
+function conectarGmail() {
+  if(!tokenClient) { alert('Aguarde o carregamento da API Google...'); return; }
+  tokenClient.requestAccessToken();
+}
+
+function desconectarGmail() {
+  if(gmailAccessToken) google.accounts.oauth2.revoke(gmailAccessToken);
+  gmailAccessToken = null; gmailUserEmail = null;
+  localStorage.removeItem('gmail_token');
+  localStorage.removeItem('gmail_user_email');
+  atualizarStatusGmail(false);
+}
+
+function abrirConfigGmail() {
+  atualizarStatusGmail(!!gmailAccessToken);
+  document.getElementById('modalConfigGmail').classList.add('open');
+}
+
+async function enviarEmailGmail(para, assunto, corpo, nomeDestinatario) {
+  if(!gmailAccessToken) {
+    // Fallback para mailto se não tiver Gmail conectado
+    const a = encodeURIComponent(assunto);
+    const c = encodeURIComponent(corpo);
+    window.open(`mailto:${para}?subject=${a}&body=${c}`);
+    return false;
+  }
+  try {
+    const cfg = cfgCora();
+    const remetente = gmailUserEmail || cfg.email || 'imoveiscarvalho2022@gmail.com';
+    const emailContent = [
+      `From: Carvalho Soluções Imobiliárias <${remetente}>`,
+      `To: ${nomeDestinatario} <${para}>`,
+      `Subject: =?UTF-8?B?${btoa(unescape(encodeURIComponent(assunto)))}?=`,
+      `MIME-Version: 1.0`,
+      `Content-Type: text/plain; charset=UTF-8`,
+      `Content-Transfer-Encoding: base64`,
+      ``,
+      btoa(unescape(encodeURIComponent(corpo)))
+    ].join('\r\n');
+
+    const encoded = btoa(unescape(encodeURIComponent(emailContent)))
+      .replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+
+    const resp = await fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages/send', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${gmailAccessToken}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ raw: encoded })
+    });
+
+    if(resp.ok) {
+      return true;
+    } else {
+      const err = await resp.json();
+      if(err.error?.code === 401) {
+        // Token expirado, reconectar
+        gmailAccessToken = null;
+        localStorage.removeItem('gmail_token');
+        alert('Sessão Gmail expirada. Reconecte em ⚙️ Gmail.');
+      }
+      return false;
+    }
+  } catch(e) {
+    console.error('Erro Gmail:', e);
+    return false;
+  }
+}
+
+// Inicializar quando Google API carregar
+window.addEventListener('load', () => {
+  setTimeout(initGmailAuth, 1500);
+});
 const SEED_NF = [
   {num:1,nome:"REI DAS CALHAS ORIGINAL",doc:"43.893.164/0001-06",endProp:"Estrada Francisco da Cruz Nunes 314 - Itaipu",valor:800,endImovel:"ESTR. FRANCISCO DA CRUZ NUNES 3198 - CEP 24340-105"},
   {num:2,nome:"VINÍCIUS AYPE MOTA",doc:"013.212.526-92",endProp:"PCA tele santana,85/1402 bl 1 - Barra da Tijuca/RJ.",valor:113,endImovel:"RUA ANDRADE NEVES 09 - SALA 714 - CEP 24210-000"},
@@ -1594,21 +1761,31 @@ function emitirBoletoV3(key,imovelIdx,comp){
   renderCobranca();
 }
 
-function enviarEmailCobV3(key,imovelIdx,comp){
+async function enviarEmailCobV3(key,imovelIdx,comp){
   const cob=garantirSalvo(key,imovelIdx,comp);
   if(!cob)return;
   if(!cob.email){alert('⚠️ E-mail não cadastrado. Edite o campo e-mail na tabela.');return;}
   const c=cfgCora();
-  const assunto=encodeURIComponent(`Boleto Aluguel ${fmtM(cob.competencia)} — ${cob.endereco}`);
-  const corpo=encodeURIComponent(
-    `Olá ${cob.inquilino},\n\nSegue cobrança referente a ${fmtM(cob.competencia)}.\n\n`+
+  const assunto=`Boleto Aluguel ${fmtM(cob.competencia)} — ${cob.endereco}`;
+  const corpo=`Olá ${cob.inquilino},\n\nSegue cobrança referente a ${fmtM(cob.competencia)}.\n\n`+
     `Imóvel: ${cob.endereco}\nAluguel: ${R(cob.aluguel)}`+
     `${cob.condominio?'\nCondomínio: '+R(cob.condominio):''}${cob.iptu?'\nIPTU: '+R(cob.iptu):''}`+
     `\nTotal: ${R(cob.total)}\nVencimento: ${fmtD(cob.vencimento)}`+
     `${cob.linhaDigitavel?'\n\nLinha digitável:\n'+cob.linhaDigitavel:''}`+
-    `\n\nAtenciosamente,\n${c.nome}`
-  );
-  window.open(`mailto:${cob.email}?subject=${assunto}&body=${corpo}`);
+    `\n\nAtenciosamente,\nCarvalho Soluções Imobiliárias\n${gmailUserEmail||c.email||''}`;
+
+  // Tentar enviar via Gmail API
+  const enviado = await enviarEmailGmail(cob.email, assunto, corpo, cob.inquilino);
+
+  if(enviado) {
+    alert(`✅ E-mail enviado com sucesso para ${cob.inquilino}!\n📧 ${cob.email}`);
+  } else if(!gmailAccessToken) {
+    // Fallback mailto já foi aberto pela função enviarEmailGmail
+    alert(`📧 Abrindo Gmail...\n\nPara envio automático, conecte seu Gmail em:\nCobrança → ⚙️ Gmail`);
+  } else {
+    alert('❌ Erro ao enviar. Verifique sua conexão Gmail.');
+    return;
+  }
   cob.enviadoEm=new Date().toISOString();
   delete cob._naoSalvo;
   localStorage.setItem(key,JSON.stringify(cob));
