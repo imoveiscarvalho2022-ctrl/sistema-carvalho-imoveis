@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carvalho Soluções Imobiliárias — Gestão Financeira</title>
+<style>
+:root{--primary:#1a3c5e;--primary-light:#2563a8;--accent:#e8a020;--accent-light:#f5c842;--success:#16a34a;--danger:#dc2626;--warning:#d97706;--bg:#f1f5f9;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--shadow:0 2px 12px rgba(0,0,0,.08);--radius:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+/* HEADER PRETO */
+header{background:#0d0d0d;color:#fff;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:62px;box-shadow:0 2px 8px rgba(0,0,0,.4);position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:36px;height:36px;background:#e8a020;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;overflow:hidden;flex-shrink:0}
+.logo-icon img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+.logo h1{font-size:15px;font-weight:700;line-height:1.2;color:#fff}
+.logo span{font-size:11px;color:#999}
+.header-right{display:flex;align-items:center;gap:14px}
+#headerDate{font-size:12px;color:#999}
+.logo-upload-btn{font-size:11px;color:#777;cursor:pointer;padding:4px 8px;border:1px solid #333;border-radius:5px;transition:all .2s;white-space:nowrap}
+.logo-upload-btn:hover{color:#e8a020;border-color:#e8a020}
+/* NAV BRANCO */
+nav{background:#fff;border-bottom:2px solid var(--border);display:flex;padding:0 16px;overflow-x:auto;position:sticky;top:62px;z-index:90;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+nav button{background:none;border:none;cursor:pointer;padding:12px 16px;font-size:12.5px;font-weight:600;color:var(--muted);border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s;display:flex;align-items:center;gap:6px}
+nav button:hover{color:var(--primary)}
+nav button.active{color:var(--primary);border-bottom-color:var(--accent)}
+main{padding:20px 24px;max-width:1400px;margin:0 auto}
+.section{display:none}.section.active{display:block}
+.card{background:var(--card);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.card-title{font-size:14px;font-weight:700;color:var(--primary);margin-bottom:14px;display:flex;align-items:center;gap:7px}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:20px}
+.kpi-card{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);border-left:4px solid var(--primary)}
+.kpi-card.accent{border-left-color:var(--accent)}.kpi-card.success{border-left-color:var(--success)}.kpi-card.danger{border-left-color:var(--danger)}.kpi-card.warning{border-left-color:var(--warning)}
+.kpi-label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.kpi-value{font-size:24px;font-weight:800;color:var(--primary);margin:3px 0 2px}
+.kpi-sub{font-size:11px;color:var(--muted)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:800px){.grid-2{grid-template-columns:1fr}}
+.form-group{margin-bottom:12px}
+.form-group label{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.4px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-size:13px;color:var(--text);background:#f8fafc;transition:border-color .2s;font-family:inherit}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--primary-light);background:#fff;box-shadow:0 0 0 3px rgba(37,99,168,.1)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:600px){.form-row,.form-row-3{grid-template-columns:1fr}}
+.btn{padding:9px 18px;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--primary-light);transform:translateY(-1px)}
+.btn-accent{background:var(--accent);color:#fff}.btn-accent:hover{background:var(--accent-light);color:var(--primary)}
+.btn-success{background:var(--success);color:#fff}.btn-success:hover{background:#15803d}
+.btn-danger{background:var(--danger);color:#fff}.btn-danger:hover{background:#b91c1c}
+.btn-outline{background:#fff;color:var(--primary);border:1.5px solid var(--primary)}.btn-outline:hover{background:var(--primary);color:#fff}
+.btn-sm{padding:5px 11px;font-size:11.5px}
+.btn-group{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+thead th{background:var(--primary);color:#fff;padding:10px 12px;text-align:left;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+thead th:first-child{border-radius:6px 0 0 0}thead th:last-child{border-radius:0 6px 0 0}
+tbody tr{border-bottom:1px solid var(--border);transition:background .15s}
+tbody tr:hover{background:#f0f7ff}
+tbody td{padding:9px 12px;color:var(--text);vertical-align:middle}
+.badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:10.5px;font-weight:700;text-transform:uppercase}
+.badge-success{background:#dcfce7;color:#15803d}.badge-danger{background:#fee2e2;color:#b91c1c}
+.badge-warning{background:#fef3c7;color:#92400e}.badge-info{background:#dbeafe;color:#1e40af}
+.badge-purple{background:#f3e8ff;color:#7c3aed}
+.badge-ok{background:#dcfce7;color:#15803d}.badge-pend{background:#fef3c7;color:#92400e}
+.alert{padding:12px 14px;border-radius:7px;margin-bottom:12px;font-size:13px}
+.alert-warning{background:#fef3c7;border:1px solid #f59e0b;color:#92400e}
+.alert-danger{background:#fee2e2;border:1px solid #f87171;color:#991b1b}
+.alert-success{background:#dcfce7;border:1px solid #86efac;color:#166534}
+.alert-info{background:#dbeafe;border:1px solid #93c5fd;color:#1e40af}
+.calc-result{background:linear-gradient(135deg,#1a3c5e,#2563a8);color:#fff;border-radius:var(--radius);padding:18px;margin-top:14px}
+.calc-result h3{font-size:13px;opacity:.8;margin-bottom:6px}
+.calc-result .valor{font-size:28px;font-weight:800}
+.calc-result .detalhe{font-size:12px;opacity:.75;margin-top:5px}
+.hist-item{background:#f8fafc;border:1px solid var(--border);border-radius:7px;padding:12px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.hist-item:hover{background:#f0f7ff}
+.section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:8px}
+.section-header h2{font-size:18px;font-weight:800;color:var(--primary)}
+.section-header span{font-size:12px;color:var(--muted)}
+.empty-state{text-align:center;padding:40px 20px;color:var(--muted)}
+.empty-state .icon{font-size:40px;margin-bottom:10px}
+.empty-state p{font-size:14px}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:11px;padding:24px;max-width:620px;width:95%;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.modal-header h3{font-size:16px;font-weight:700;color:var(--primary)}
+.modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted)}
+.form-tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:18px}
+.form-tab{background:none;border:none;padding:9px 14px;font-size:12.5px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px}
+.form-tab.active{color:var(--primary);border-bottom-color:var(--accent)}
+.form-tab-panel{display:none}.form-tab-panel.active{display:block}
+.divider{border:none;border-top:1px solid var(--border);margin:16px 0}
+.search-bar{position:relative}
+.search-bar input{padding-left:34px}
+.search-bar .icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px;pointer-events:none}
+.mt-3{margin-top:12px}.mb-3{margin-bottom:12px}
+.text-success{color:var(--success)}.text-danger{color:var(--danger)}.text-muted{color:var(--muted)}.fw-bold{font-weight:700}
+.fech-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+.fech-table th{background:var(--primary);color:#fff;padding:10px 14px;text-align:center;font-size:12px;font-weight:700}
+.fech-table td{padding:9px 14px;text-align:center;border-bottom:1px solid var(--border);font-weight:600}
+.fech-table tr:hover td{background:#f0f7ff}
+.fech-total{background:#f1f5f9;font-weight:800}
+/* COBRANÇA */
+.cob-pending{background:#fef3c7;color:#92400e;padding:2px 9px;border-radius:20px;font-size:10.5px;font-weight:700;text-transform:uppercase}
+.cob-paid{background:#dcfce7;color:#15803d;padding:2px 9px;border-radius:20px;font-size:10.5px;font-weight:700;text-transform:uppercase}
+.cob-overdue{background:#fee2e2;color:#b91c1c;padding:2px 9px;border-radius:20px;font-size:10.5px;font-weight:700;text-transform:uppercase}
+.cob-generated{background:#dbeafe;color:#1e40af;padding:2px 9px;border-radius:20px;font-size:10.5px;font-weight:700;text-transform:uppercase}
+.cob-input{width:90px;padding:3px 6px;border:1px solid var(--border);border-radius:4px;font-size:11.5px;font-family:inherit;background:#f8fafc}
+.cob-input:focus{outline:none;border-color:var(--primary-light)}
+@media print{nav,header{display:none}main{padding:0}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon" id="logoIconContainer">🏠</div>
+    <div>
+      <h1>Carvalho Soluções Imobiliárias</h1>
+      <span>Sistema de Gestão Financeira</span>
+    </div>
+  </div>
+  <div class="header-right">
+    <label class="logo-upload-btn" title="Clique para adicionar sua logo">
+      🖼 Logo
+      <input type="file" accept="image/*" style="display:none" onchange="trocarLogo(event)">
+    </label>
+    <div id="headerDate"></div>
+  </div>
+</header>
+
+<nav>
+  <button class="active" onclick="showSection('dashboard',this)">📊 Dashboard</button>
+  <button onclick="showSection('imoveis',this)">🏠 Contratos</button>
+  <button onclick="showSection('valoresNF',this)">🧾 Valores p/ NF</button>
+  <button onclick="showSection('fluxoCaixa',this)">💼 Fluxo de Caixa</button>
+  <button onclick="showSection('reajuste',this)">📈 Reajuste</button>
+  <button onclick="showSection('financeiro',this)">💰 Financeiro</button>
+  <button onclick="showSection('historico',this)">📋 Histórico</button>
+  <button onclick="showSection('seguros',this)">🔥 Seguros</button>
+  <button onclick="showSection('fechamentos',this)">📅 Fechamentos</button>
+  <button onclick="showSection('alertas',this)">🔔 Alertas</button>
+  <button onclick="showSection('cobranca',this)">💳 Cobrança Cora</button>
+</nav>
+
+<main>
+
+<!-- DASHBOARD -->
+<div class="section active" id="dashboard">
+  <div class="section-header">
+    <div><h2>Dashboard Geral</h2><span>Visão completa da carteira — Carvalho Soluções Imobiliárias</span></div>
+    <button class="btn btn-primary btn-sm" onclick="showSection('imoveis',document.querySelectorAll('nav button')[1])">+ Novo Contrato</button>
+  </div>
+  <div id="dashAlerts"></div>
+  <div class="kpi-grid">
+    <div class="kpi-card accent"><div class="kpi-label">Total Contratos</div><div class="kpi-value" id="kpiTotal">0</div><div class="kpi-sub">na carteira</div></div>
+    <div class="kpi-card success"><div class="kpi-label">Ativos</div><div class="kpi-value" id="kpiAtivos">0</div><div class="kpi-sub">locações em andamento</div></div>
+    <div class="kpi-card"><div class="kpi-label">Receita Mensal</div><div class="kpi-value" id="kpiReceita">R$ 0</div><div class="kpi-sub">soma dos aluguéis</div></div>
+    <div class="kpi-card warning"><div class="kpi-label">Reajustes (60d)</div><div class="kpi-value" id="kpiReajustes">0</div><div class="kpi-sub">próximos 60 dias</div></div>
+    <div class="kpi-card danger"><div class="kpi-label">Em Atraso</div><div class="kpi-value" id="kpiAtraso">0</div><div class="kpi-sub">pagamentos atrasados</div></div>
+    <div class="kpi-card success"><div class="kpi-label">Comissão (10%)</div><div class="kpi-value" id="kpiComissao">R$ 0</div><div class="kpi-sub">estimativa mensal</div></div>
+  </div>
+  <div class="grid-2">
+    <div class="card"><div class="card-title">🏠 Últimos Contratos</div><div id="dashUltimos"></div></div>
+    <div class="card"><div class="card-title">📈 Próximos Reajustes</div><div id="dashProxRej"></div></div>
+  </div>
+</div>
+
+<!-- CONTRATOS -->
+<div class="section" id="imoveis">
+  <div class="section-header">
+    <div><h2>Contratos</h2><span id="totalImoveis">0 contratos</span></div>
+    <button class="btn btn-primary btn-sm" onclick="abrirModalImovel()">+ Novo Contrato</button>
+  </div>
+  <div class="card mb-3">
+    <div class="form-row">
+      <div class="form-group" style="margin-bottom:0">
+        <label>Buscar</label>
+        <div class="search-bar"><span class="icon">🔍</span><input type="text" id="buscaImovel" placeholder="Nome, endereço, garantia..." oninput="filtrarImoveis()"></div>
+      </div>
+      <div class="form-group" style="margin-bottom:0">
+        <label>Status</label>
+        <select id="filtroStatus" onchange="filtrarImoveis()">
+          <option value="">Todos</option><option value="ativo">Ativo</option><option value="vago">Vago</option><option value="rescindido">Rescindido</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Inquilino</th><th>Endereço</th><th>Aluguel</th><th>Vencto</th><th>Garantia</th><th>Período</th><th>Índice</th><th>Próx. Reajuste</th><th>Status</th><th>Ações</th></tr></thead>
+        <tbody id="tbodyImoveis"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- REAJUSTE -->
+<div class="section" id="reajuste">
+  <div class="section-header"><h2>Calculadora de Reajuste</h2><span>IGP-M · IPCA · INPC · Fixo</span></div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">🧮 Cálculo de Reajuste</div>
+      <div class="form-group"><label>Selecionar Contrato</label><select id="calcImovel" onchange="preencherCalcImovel()"><option value="">— Preencher manualmente —</option></select></div>
+      <div class="form-group"><label>Valor Atual (R$)</label><input type="number" id="calcValorAtual" placeholder="Ex: 1500.00" min="0" step="0.01"></div>
+      <div class="form-group"><label>Índice</label>
+        <select id="calcIndice" onchange="calcIndiceChange()">
+          <option value="">Selecione</option><option value="igpm">IGP-M (FGV)</option><option value="ipca">IPCA (IBGE)</option><option value="inpc">INPC</option><option value="fixo">Percentual Fixo</option>
+        </select>
+      </div>
+      <div class="form-group" id="grpFixo" style="display:none"><label>Percentual Fixo (%)</label><input type="number" id="calcPercFixo" placeholder="Ex: 5.5" step="0.01"></div>
+      <div class="form-group"><label>Período</label>
+        <select id="calcPeriodo" onchange="calcPeriodoChange()">
+          <option value="12">12 meses (anual)</option><option value="6">6 meses (semestral)</option><option value="24">24 meses (bienal)</option><option value="custom">Personalizado</option>
+        </select>
+      </div>
+      <div class="form-group" id="grpCustom" style="display:none"><label>Percentual Acumulado (%)</label><input type="number" id="calcPercCustom" placeholder="Ex: 8.34" step="0.01"></div>
+      <div class="form-group"><label>Vigência a partir de</label><input type="date" id="calcDataInicio"></div>
+      <button class="btn btn-accent" style="width:100%" onclick="calcularReajuste()">📈 Calcular Reajuste</button>
+      <div id="resultadoCalc" style="display:none">
+        <div class="calc-result"><h3>Novo Valor do Aluguel</h3><div class="valor" id="calcNovoValor"></div><div class="detalhe" id="calcDetalhe"></div></div>
+        <div class="card mt-3" style="border:1.5px solid var(--accent);padding:14px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12.5px">
+            <div><span class="text-muted">Anterior:</span><br><strong id="calcAnterior"></strong></div>
+            <div><span class="text-muted">Aumento:</span><br><strong class="text-success" id="calcAumento"></strong></div>
+            <div><span class="text-muted">Índice:</span><br><strong id="calcIndiceUsado"></strong></div>
+            <div><span class="text-muted">Percentual:</span><br><strong id="calcPercUsado"></strong></div>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-success btn-sm" onclick="aplicarReajuste()">✅ Aplicar ao Contrato</button>
+            <button class="btn btn-outline btn-sm" onclick="window.print()">🖨️ Imprimir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card mb-3">
+        <div class="card-title">📊 Índices de Referência (12m)</div>
+        <p style="font-size:11px;color:var(--muted);margin-bottom:12px">⚠️ Atualize mensalmente conforme IBGE e FGV.</p>
+        <div class="form-row">
+          <div class="form-group"><label>IGP-M (%)</label><input type="number" id="idxIGPM" step="0.01" placeholder="Ex: 6.54"></div>
+          <div class="form-group"><label>IPCA (%)</label><input type="number" id="idxIPCA" step="0.01" placeholder="Ex: 5.06"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>INPC (%)</label><input type="number" id="idxINPC" step="0.01" placeholder="Ex: 4.87"></div>
+          <div class="form-group"><label>Mês Ref.</label><input type="month" id="idxMes"></div>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="salvarIndices()">💾 Salvar Índices</button>
+        <div id="idxMsg" style="display:none;color:var(--success);font-size:12px;margin-top:6px">✅ Salvo!</div>
+      </div>
+      <div class="card"><div class="card-title">📅 Reajustes Pendentes</div><div id="listaReajPendentes"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FINANCEIRO -->
+<div class="section" id="financeiro">
+  <div class="section-header"><h2>Controle Financeiro</h2><button class="btn btn-primary btn-sm" onclick="abrirModalPagamento()">+ Registrar Pagamento</button></div>
+  <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:18px">
+    <div class="kpi-card success"><div class="kpi-label">Recebido no Mês</div><div class="kpi-value" id="finRecebido">R$ 0</div></div>
+    <div class="kpi-card danger"><div class="kpi-label">Em Aberto</div><div class="kpi-value" id="finAberto">R$ 0</div></div>
+    <div class="kpi-card warning"><div class="kpi-label">Multas/Juros</div><div class="kpi-value" id="finMultas">R$ 0</div></div>
+    <div class="kpi-card accent"><div class="kpi-label">Comissão (10%)</div><div class="kpi-value" id="finComissao">R$ 0</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">💳 Pagamentos</div>
+    <div class="table-wrap"><table><thead><tr><th>Endereço</th><th>Inquilino</th><th>Competência</th><th>Valor</th><th>Pagamento</th><th>Atraso</th><th>Multa/Juros</th><th>Status</th><th>Ações</th></tr></thead><tbody id="tbodyPagamentos"></tbody></table></div>
+  </div>
+</div>
+
+<!-- HISTÓRICO -->
+<div class="section" id="historico">
+  <div class="section-header"><h2>Histórico de Reajustes</h2><span id="totalHistorico">0 reajustes</span></div>
+  <div class="card">
+    <div class="form-group mb-3" style="max-width:280px"><label>Filtrar por contrato</label><select id="filtroHistImovel" onchange="renderHistorico()"><option value="">Todos</option></select></div>
+    <div id="listaHistorico"></div>
+  </div>
+</div>
+
+<!-- SEGUROS -->
+<div class="section" id="seguros">
+  <div class="section-header">
+    <div><h2>Apólices de Seguro Incêndio</h2><span id="totalSeguros">0 apólices</span></div>
+    <button class="btn btn-primary btn-sm" onclick="abrirModalSeguro()">+ Nova Apólice</button>
+  </div>
+  <div class="card">
+    <div class="table-wrap">
+      <table><thead><tr><th>Endereço</th><th>Número da Apólice</th><th>Status</th><th>Ações</th></tr></thead>
+      <tbody id="tbodySeguros"></tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- FECHAMENTOS -->
+<div class="section" id="fechamentos">
+  <div class="section-header">
+    <div><h2>Fechamentos Anuais</h2><span>Resumo financeiro por ano</span></div>
+    <button class="btn btn-primary btn-sm" onclick="abrirModalFechamento()">+ Novo Registro</button>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">💼 ADM Entrada + Prestação</div>
+      <table class="fech-table"><thead><tr><th>Ano</th><th>ADM Entrada</th><th>Prestação</th><th>Total</th></tr></thead><tbody id="tbodyFechAdm"></tbody></table>
+    </div>
+    <div class="card">
+      <div class="card-title">🏷️ Vendas</div>
+      <table class="fech-table"><thead><tr><th>Ano</th><th>Valor Vendas</th></tr></thead><tbody id="tbodyFechVendas"></tbody></table>
+    </div>
+  </div>
+  <div class="card mt-3">
+    <div class="card-title">📊 Todos os Registros</div>
+    <div class="table-wrap">
+      <table><thead><tr><th>Categoria</th><th>Ano</th><th>Valor</th><th>Ações</th></tr></thead><tbody id="tbodyFechTodos"></tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- ALERTAS -->
+<div class="section" id="alertas">
+  <div class="section-header"><h2>Central de Alertas</h2></div>
+  <div id="listaAlertas"></div>
+</div>
+
+<!-- COBRANÇA CORA -->
+<div class="section" id="cobranca">
+  <div class="section-header">
+    <div><h2>💳 Cobrança — Integração Cora</h2><span>Emissão e envio automático de boletos</span></div>
+    <div class="btn-group" style="margin-top:0">
+      <button class="btn btn-outline btn-sm" onclick="abrirConfigCora()">⚙️ Configurar API Cora</button>
+      <button class="btn btn-primary btn-sm" onclick="gerarLoteCobranca()">🚀 Gerar Lote do Mês</button>
+    </div>
+  </div>
+  <div id="cobAlertaConfig" class="alert alert-warning" style="display:none">
+    ⚠️ <strong>API Cora não configurada.</strong> Clique em <strong>⚙️ Configurar API Cora</strong> para inserir Client ID e Client Secret e ativar a emissão de boletos.
+  </div>
+  <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:18px">
+    <div class="kpi-card accent"><div class="kpi-label">Total a Cobrar</div><div class="kpi-value" id="cobTotalValor">R$ 0</div><div class="kpi-sub" id="cobTotalQtd">0 cobranças</div></div>
+    <div class="kpi-card success"><div class="kpi-label">Pagos</div><div class="kpi-value" id="cobPagos">0</div><div class="kpi-sub">confirmados</div></div>
+    <div class="kpi-card danger"><div class="kpi-label">Em Aberto</div><div class="kpi-value" id="cobAbertos">0</div><div class="kpi-sub">pendentes</div></div>
+    <div class="kpi-card warning"><div class="kpi-label">Vencidos</div><div class="kpi-value" id="cobVencidos">0</div><div class="kpi-sub">atrasados</div></div>
+  </div>
+  <div class="card mb-3">
+    <div class="form-row" style="align-items:flex-end">
+      <div class="form-group" style="margin-bottom:0"><label>Competência</label><input type="month" id="cobCompetencia"></div>
+      <div class="form-group" style="margin-bottom:0"><label>Vencimento</label>
+        <select id="cobFiltroVenc"><option value="">Todos</option><option value="1">Dia 1</option><option value="5">Dia 5</option><option value="8">Dia 8</option></select>
+      </div>
+      <div class="form-group" style="margin-bottom:0"><label>Status</label>
+        <select id="cobFiltroStatus"><option value="">Todos</option><option value="pendente">Pendente</option><option value="gerado">Gerado</option><option value="pago">Pago</option><option value="vencido">Vencido</option></select>
+      </div>
+      <div style="display:flex;gap:8px;flex-shrink:0">
+        <button class="btn btn-outline btn-sm" onclick="renderCobranca()">🔍 Filtrar</button>
+        <button class="btn btn-success btn-sm" onclick="enviarEmailsLote()">📧 Enviar Selecionados</button>
+        <button class="btn btn-outline btn-sm" onclick="selecionarTodosCob()">☑️ Todos</button>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title" style="margin-bottom:10px">
+      📋 Cobranças do Período
+      <span id="cobResumoGrupos" style="font-size:11px;font-weight:400;color:var(--muted);margin-left:10px"></span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th style="width:32px"><input type="checkbox" id="checkTodosCob" onchange="toggleTodosCob(this)"></th>
+          <th>Inquilino</th>
+          <th>Endereço</th>
+          <th style="text-align:center">Vencimento</th>
+          <th style="text-align:right">Aluguel</th>
+          <th style="text-align:center">Condomínio</th>
+          <th style="text-align:center">IPTU</th>
+          <th style="text-align:right">Total</th>
+          <th style="text-align:center">E-mail</th>
+          <th style="text-align:center">Status</th>
+          <th style="text-align:center">Ações</th>
+        </tr></thead>
+        <tbody id="tbodyCobranca"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- VALORES PARA NOTA FISCAL -->
+<div class="section" id="valoresNF">
+  <div class="section-header">
+    <div><h2>🧾 Valores para Nota Fiscal</h2><span id="nfTotal">71 registros</span></div>
+    <div class="btn-group" style="margin-top:0">
+      <button class="btn btn-primary btn-sm" onclick="abrirModalNF()">+ Novo Registro</button>
+      <button class="btn btn-outline btn-sm" onclick="exportarNF()">📥 Exportar CSV</button>
+    </div>
+  </div>
+  <div class="card mb-3">
+    <div class="form-row">
+      <div class="form-group" style="margin-bottom:0">
+        <label>Buscar</label>
+        <div class="search-bar"><span class="icon">🔍</span><input type="text" id="buscaNF" placeholder="Nome, CPF/CNPJ, endereço..." oninput="filtrarNF()"></div>
+      </div>
+      <div class="form-group" style="margin-bottom:0;display:flex;align-items:flex-end">
+        <div style="background:#f0f7ff;border:1px solid var(--border);border-radius:7px;padding:10px 16px;display:flex;gap:24px;width:100%">
+          <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Total Registros</span><br><strong id="nfTotalReg" style="font-size:18px;color:var(--primary)">0</strong></div>
+          <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Soma Valores NF</span><br><strong id="nfSomaValores" style="font-size:18px;color:var(--success)">R$ 0</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th style="width:40px">Nº</th>
+          <th>Nome</th>
+          <th>CPF/CNPJ</th>
+          <th>Endereço Proprietário</th>
+          <th style="text-align:right">Valor NF (R$)</th>
+          <th>Endereço Imóvel / CEP</th>
+          <th style="text-align:center">Ações</th>
+        </tr></thead>
+        <tbody id="tbodyNF"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- FLUXO DE CAIXA -->
+<div class="section" id="fluxoCaixa">
+  <div class="section-header">
+    <div><h2>💼 Fluxo de Caixa</h2><span>Custos operacionais da empresa</span></div>
+    <button class="btn btn-primary btn-sm" onclick="adicionarLinhaCusto()">+ Adicionar Custo</button>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:18px">
+    <div class="kpi-card success"><div class="kpi-label">Receita Mensal (Aluguéis)</div><div class="kpi-value" id="fcReceita">R$ 0</div><div class="kpi-sub">soma dos contratos ativos</div></div>
+    <div class="kpi-card danger"><div class="kpi-label">Total Custos</div><div class="kpi-value" id="fcCustos">R$ 0</div><div class="kpi-sub">despesas cadastradas</div></div>
+    <div class="kpi-card accent"><div class="kpi-label">Resultado</div><div class="kpi-value" id="fcResultado">R$ 0</div><div class="kpi-sub">receita − custos</div></div>
+  </div>
+
+  <div class="grid-2">
+    <!-- Tabela de custos -->
+    <div class="card">
+      <div class="card-title">📋 Custos Operacionais</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Categoria</th><th>Descrição</th><th style="text-align:right">Valor (R$)</th><th style="text-align:center">Ações</th></tr></thead>
+          <tbody id="tbodyCustos"></tbody>
+          <tfoot>
+            <tr style="background:#f1f5f9;font-weight:700">
+              <td colspan="2" style="padding:10px 12px;color:var(--primary)">TOTAL CUSTOS</td>
+              <td style="text-align:right;padding:10px 12px;color:var(--danger);font-size:15px" id="fcTotalCustos">R$ 0</td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-outline btn-sm" onclick="adicionarLinhaCusto()">+ Linha</button>
+        <button class="btn btn-success btn-sm" onclick="salvarCustos()">💾 Salvar</button>
+      </div>
+    </div>
+
+    <!-- Resumo mensal -->
+    <div>
+      <div class="card mb-3">
+        <div class="card-title">📊 Resumo Financeiro</div>
+        <div id="fcResumo"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">💡 Custos Rápidos</div>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Clique para adicionar categorias comuns:</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <button class="btn btn-outline btn-sm" onclick="addCustoRapido('Aluguel Escritório')">🏢 Aluguel</button>
+          <button class="btn btn-outline btn-sm" onclick="addCustoRapido('Água')">💧 Água</button>
+          <button class="btn btn-outline btn-sm" onclick="addCustoRapido('Luz/Energia')">💡 Luz</button>
+          <button class="btn btn-outline btn-sm" onclick="addCustoRapido('Internet')">🌐 Internet</button>
+          <button class="btn btn-outline btn-sm" onclick="addCustoRapido('Portal Imobiliário')">🏠 Portal</button>
+          <button class="btn btn-outline btn-sm" onclick="addCustoRapido('Sistema')">💻 Sistema</button>
+          <button class="btn btn-outline btn-sm" onclick="addCustoRapido('Contabilidade')">📒 Contabilidade</button>
+          <button class="btn btn-outline btn-sm" onclick="addCustoRapido('Funcionário')">👤 Funcionário</button>
+          <button class="btn btn-outline btn-sm" onclick="addCustoRapido('Marketing')">📣 Marketing</button>
+          <button class="btn btn-outline btn-sm" onclick="addCustoRapido('Combustível')">⛽ Combustível</button>
+          <button class="btn btn-outline btn-sm" onclick="addCustoRapido('Outros')">➕ Outros</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- MODAL NF -->
+<div class="modal-overlay" id="modalNF">
+  <div class="modal" style="max-width:600px">
+    <div class="modal-header"><h3 id="modalNFTitle">Novo Registro NF</h3><button class="modal-close" onclick="fecharModal('modalNF')">✕</button></div>
+    <div class="form-row"><div class="form-group"><label>Nº</label><input type="number" id="nfNum" min="1"></div><div class="form-group"><label>Valor NF (R$) *</label><input type="number" id="nfValor" step="0.01" min="0"></div></div>
+    <div class="form-group"><label>Nome *</label><input type="text" id="nfNome"></div>
+    <div class="form-group"><label>CPF/CNPJ *</label><input type="text" id="nfDoc" placeholder="000.000.000-00 ou 00.000.000/0001-00"></div>
+    <div class="form-group"><label>Endereço do Proprietário</label><input type="text" id="nfEndProp"></div>
+    <div class="form-group"><label>Endereço do Imóvel / CEP</label><input type="text" id="nfEndImovel"></div>
+    <div class="btn-group"><button class="btn btn-primary" onclick="salvarNF()">💾 Salvar</button><button class="btn btn-outline" onclick="fecharModal('modalNF')">Cancelar</button></div>
+    <input type="hidden" id="nfEditIndex" value="-1">
+  </div>
+</div>
+
+<!-- MODAL CONTRATO -->
+<div class="modal-overlay" id="modalImovel">
+  <div class="modal">
+    <div class="modal-header"><h3 id="modalImovelTitle">Novo Contrato</h3><button class="modal-close" onclick="fecharModalImovel()">✕</button></div>
+    <div class="form-tabs">
+      <button class="form-tab active" onclick="showFTab('tabImovel',this)">🏠 Imóvel</button>
+      <button class="form-tab" onclick="showFTab('tabInquilino',this)">👤 Inquilino</button>
+      <button class="form-tab" onclick="showFTab('tabContrato',this)">📄 Contrato</button>
+    </div>
+    <div class="form-tab-panel active" id="tabImovel">
+      <div class="form-group"><label>Tipo</label><select id="fTipo"><option>Apartamento</option><option>Casa</option><option>Sala Comercial</option><option>Galpão</option><option>Terreno</option><option>Outro</option></select></div>
+      <div class="form-group"><label>Endereço Completo *</label><input type="text" id="fEndereco" placeholder="Rua, número, complemento"></div>
+      <div class="form-row"><div class="form-group"><label>Bairro</label><input type="text" id="fBairro" placeholder="Ex: Icaraí"></div><div class="form-group"><label>Cidade</label><input type="text" id="fCidade" value="Niterói"></div></div>
+      <div class="form-row-3"><div class="form-group"><label>Área (m²)</label><input type="number" id="fArea" min="0"></div><div class="form-group"><label>Quartos</label><input type="number" id="fQuartos" min="0"></div><div class="form-group"><label>Vagas</label><input type="number" id="fVagas" min="0"></div></div>
+      <div class="form-group"><label>Obs. Imóvel</label><textarea id="fObsImovel" rows="2"></textarea></div>
+    </div>
+    <div class="form-tab-panel" id="tabInquilino">
+      <div class="form-row"><div class="form-group"><label>Nome *</label><input type="text" id="fNomeInquilino"></div><div class="form-group"><label>CPF</label><input type="text" id="fCPF" maxlength="14" placeholder="000.000.000-00"></div></div>
+      <div class="form-row"><div class="form-group"><label>Telefone</label><input type="text" id="fTelefone" placeholder="(21) 99999-9999"></div><div class="form-group"><label>E-mail</label><input type="email" id="fEmail"></div></div>
+      <div class="form-row"><div class="form-group"><label>Fiador</label><input type="text" id="fFiador"></div><div class="form-group"><label>Contato Fiador</label><input type="text" id="fFiadorContato"></div></div>
+    </div>
+    <div class="form-tab-panel" id="tabContrato">
+      <div class="form-row"><div class="form-group"><label>Valor Aluguel (R$) *</label><input type="number" id="fAluguel" min="0" step="0.01"></div><div class="form-group"><label>Dia Vencimento</label><select id="fVencimento"><option value="1">Dia 1</option><option value="5">Dia 5</option><option value="8">Dia 8</option><option value="10">Dia 10</option><option value="15">Dia 15</option><option value="17">Dia 17</option><option value="20">Dia 20</option><option value="25">Dia 25</option></select></div></div>
+      <div class="form-row"><div class="form-group"><label>Condomínio (R$)</label><input type="number" id="fCondominio" min="0" step="0.01" placeholder="0.00"></div><div class="form-group"><label>IPTU (R$)</label><input type="number" id="fIPTU" min="0" step="0.01" placeholder="0.00"></div></div>
+      <div class="form-row"><div class="form-group"><label>Início do Contrato</label><input type="date" id="fDataInicio"></div><div class="form-group"><label>Término (opcional)</label><input type="date" id="fDataFim"></div></div>
+      <div class="form-group"><label>Garantia</label><input type="text" id="fGarantia" placeholder="Ex: Depósito R$ 3.300 (Prop), Seguro Fiança..."></div>
+      <div class="form-row"><div class="form-group"><label>Período do Contrato</label><input type="text" id="fPeriodoContrato" placeholder="Ex: 30 MESES, 12/30 MESES"></div><div class="form-group"><label>Mês de Reajuste</label><input type="text" id="fMesReajuste" placeholder="Ex: JULHO, MARÇO"></div></div>
+      <div class="form-row"><div class="form-group"><label>Índice de Reajuste</label><select id="fIndice"><option value="IGP-M">IGP-M (FGV)</option><option value="IPCA">IPCA (IBGE)</option><option value="INPC">INPC</option><option value="Fixo">Percentual Fixo</option></select></div><div class="form-group"><label>Periodicidade</label><select id="fPeriodicidade"><option value="12">Anual (12m)</option><option value="6">Semestral (6m)</option><option value="24">Bienal (24m)</option></select></div></div>
+      <div class="form-row"><div class="form-group"><label>Status</label><select id="fStatus"><option value="ativo">Ativo</option><option value="vago">Vago</option><option value="rescindido">Rescindido</option></select></div><div class="form-group"><label>Comissão (%)</label><input type="number" id="fComissao" min="0" max="100" step="0.5" placeholder="Ex: 10"></div></div>
+      <div class="form-group"><label>Obs. Contrato</label><textarea id="fObsContrato" rows="2"></textarea></div>
+    </div>
+    <hr class="divider">
+    <div class="btn-group"><button class="btn btn-primary" onclick="salvarImovel()">💾 Salvar</button><button class="btn btn-outline" onclick="fecharModalImovel()">Cancelar</button></div>
+    <input type="hidden" id="fEditIndex" value="-1">
+  </div>
+</div>
+
+<!-- MODAL PAGAMENTO -->
+<div class="modal-overlay" id="modalPagamento">
+  <div class="modal" style="max-width:460px">
+    <div class="modal-header"><h3>Registrar Pagamento</h3><button class="modal-close" onclick="fecharModalPagamento()">✕</button></div>
+    <div class="form-group"><label>Contrato *</label><select id="pImovel" onchange="preencherPagImovel()"><option value="">Selecione</option></select></div>
+    <div class="form-row"><div class="form-group"><label>Competência *</label><input type="month" id="pCompetencia"></div><div class="form-group"><label>Valor (R$)</label><input type="number" id="pValor" step="0.01"></div></div>
+    <div class="form-row"><div class="form-group"><label>Data Pagamento</label><input type="date" id="pDataPagto"></div><div class="form-group"><label>Status</label><select id="pStatus"><option value="pago">Pago</option><option value="pendente">Pendente</option><option value="atrasado">Atrasado</option></select></div></div>
+    <div class="form-row"><div class="form-group"><label>Multa (R$)</label><input type="number" id="pMulta" value="0" step="0.01"></div><div class="form-group"><label>Juros (R$)</label><input type="number" id="pJuros" value="0" step="0.01"></div></div>
+    <div class="form-group"><label>Observação</label><input type="text" id="pObs" placeholder="Pix, parcial..."></div>
+    <div class="btn-group"><button class="btn btn-success" onclick="salvarPagamento()">✅ Salvar</button><button class="btn btn-outline" onclick="fecharModalPagamento()">Cancelar</button></div>
+  </div>
+</div>
+
+<!-- MODAL VER CONTRATO -->
+<div class="modal-overlay" id="modalVerImovel">
+  <div class="modal" style="max-width:660px">
+    <div class="modal-header"><h3 id="verTitle">Detalhes</h3><button class="modal-close" onclick="fecharModal('modalVerImovel')">✕</button></div>
+    <div id="verContent"></div>
+  </div>
+</div>
+
+<!-- MODAL SEGURO -->
+<div class="modal-overlay" id="modalSeguro">
+  <div class="modal" style="max-width:460px">
+    <div class="modal-header"><h3 id="modalSeguroTitle">Nova Apólice</h3><button class="modal-close" onclick="fecharModal('modalSeguro')">✕</button></div>
+    <div class="form-group"><label>Endereço *</label><input type="text" id="sEndereco" placeholder="Endereço do imóvel"></div>
+    <div class="form-group"><label>Número da Apólice</label><input type="text" id="sApolice" placeholder="Ex: 01142800030254 - Too Seguros"></div>
+    <div class="btn-group"><button class="btn btn-primary" onclick="salvarSeguro()">💾 Salvar</button><button class="btn btn-outline" onclick="fecharModal('modalSeguro')">Cancelar</button></div>
+    <input type="hidden" id="sEditIndex" value="-1">
+  </div>
+</div>
+
+<!-- MODAL FECHAMENTO -->
+<div class="modal-overlay" id="modalFechamento">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-header"><h3>Novo Registro</h3><button class="modal-close" onclick="fecharModal('modalFechamento')">✕</button></div>
+    <div class="form-group"><label>Categoria *</label>
+      <select id="fechCategoria"><option value="ADM ENTRADA">ADM Entrada</option><option value="PRESTAÇÃO">Prestação</option><option value="VENDA">Venda</option><option value="GASTOS">Gastos</option></select>
+    </div>
+    <div class="form-row"><div class="form-group"><label>Ano *</label><input type="number" id="fechAno" placeholder="Ex: 2026" min="2000" max="2100"></div><div class="form-group"><label>Valor (R$) *</label><input type="number" id="fechValor" step="0.01" min="0"></div></div>
+    <div class="form-group"><label>Observação</label><input type="text" id="fechObs"></div>
+    <div class="btn-group"><button class="btn btn-primary" onclick="salvarFechamento()">💾 Salvar</button><button class="btn btn-outline" onclick="fecharModal('modalFechamento')">Cancelar</button></div>
+  </div>
+</div>
+
+<!-- MODAL CONFIG CORA -->
+<div class="modal-overlay" id="modalConfigCora">
+  <div class="modal" style="max-width:500px">
+    <div class="modal-header"><h3>⚙️ Configurar API Cora</h3><button class="modal-close" onclick="fecharModal('modalConfigCora')">✕</button></div>
+    <div class="alert alert-info" style="margin-bottom:14px;font-size:12px">🔐 Credenciais salvas localmente no seu navegador. Nunca enviadas para servidores externos.</div>
+    <div class="form-group"><label>Client ID *</label><input type="text" id="coraClientId" placeholder="int-XXXXXXXXXXXXXXXX"></div>
+    <div class="form-group"><label>Client Secret *</label><input type="password" id="coraClientSecret" placeholder="••••••••••••••••••••"></div>
+    <div class="form-group"><label>E-mail Remetente (Gmail) *</label><input type="email" id="coraEmailRemetente" placeholder="seuemail@gmail.com"></div>
+    <div class="form-group"><label>Nome Remetente</label><input type="text" id="coraEmailNome" placeholder="Carvalho Soluções Imobiliárias"></div>
+    <div class="alert alert-warning" style="font-size:12px;margin-top:8px">⚠️ A emissão real de boletos via API Cora requer servidor HTTPS. Em uso local, o sistema opera em <strong>modo simulação</strong> gerando todos os dados do boleto.</div>
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="salvarConfigCora()">💾 Salvar</button>
+      <button class="btn btn-success btn-sm" onclick="testarConexaoCora()">🔌 Testar Conexão</button>
+      <button class="btn btn-outline" onclick="fecharModal('modalConfigCora')">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DETALHE COBRANÇA -->
+<div class="modal-overlay" id="modalDetCob">
+  <div class="modal" style="max-width:520px">
+    <div class="modal-header"><h3 id="detCobTitle">Detalhe da Cobrança</h3><button class="modal-close" onclick="fecharModal('modalDetCob')">✕</button></div>
+    <div id="detCobContent"></div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════
+// SEED DATA — todos os contratos, apólices e fechamentos
+// ══════════════════════════════════════════════════════════
+const SEED_IMOVEIS = [{"tipo": "Sala Comercial", "endereco": "RUA ANDRADE NEVES 09 - SALA 714", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "LUIZ", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1132.0, "vencimento": "15", "dataInicio": "2022-07-15", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO R$ 3.300,00 ( PROPRIETÁRIO)", "periodoContrato": "30 MESES", "mesReajuste": "JULHO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.459311"}, {"tipo": "Apartamento", "endereco": "RUA ZORAIDA BRASIL 137 - 202", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "DANIELA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1100.0, "vencimento": "05", "dataInicio": "2022-11-25", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO R$ 1.800,00 ( PROPRIETÁRIA)", "periodoContrato": "12/30 MESES", "mesReajuste": "NOVEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460450"}, {"tipo": "Apartamento", "endereco": "ESTR. FREI ORLANDO 567 - 408 / BLOCO 07", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "MÁRCIO/JULIANA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1600.0, "vencimento": "15", "dataInicio": "2023-04-20", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO R$ 3.600,00 ( PROPRIETÁRIO)", "periodoContrato": "30 MESES", "mesReajuste": "ABRIL", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460487"}, {"tipo": "Apartamento", "endereco": "LUIZ PALMIER 500 - 408/BLOCO 02", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "CARLOS", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2300.0, "vencimento": "05", "dataInicio": "2023-05-27", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "FIADOR", "periodoContrato": "18/30 MESES", "mesReajuste": "MAIO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460512"}, {"tipo": "Apartamento", "endereco": "RUA NORONHA TORREZÃO 24- 1011", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "ROGER", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1100.0, "vencimento": "10", "dataInicio": "2023-06-15", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 2.700,00 (PROPRIETAIO)", "periodoContrato": "12/30 MESES", "mesReajuste": "JUNHO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460535"}, {"tipo": "Galpão", "endereco": "RUA SILVA JARDIM 55 - GALPÃO", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "CONTERLURB", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 10296.0, "vencimento": "17", "dataInicio": "2023-07-24", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 30.000,00 (PROPRIETÁRIO)", "periodoContrato": "30 MESES", "mesReajuste": "JULHO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460559"}, {"tipo": "Apartamento", "endereco": "ESTR. WASHINGTON LUIS 739 - 108", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "THAMIRES/KARLA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1000.0, "vencimento": "10", "dataInicio": "2023-09-28", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 3.000,00 ( BERNARDO)", "periodoContrato": "30 MESES", "mesReajuste": "SETEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460580"}, {"tipo": "Apartamento", "endereco": "ARY PARREIRAS 15 - 1103", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "IURI", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1266.0, "vencimento": "10", "dataInicio": "2023-11-22", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 3.600,00 (BERNARDO)", "periodoContrato": "18/30 MESES", "mesReajuste": "NOVEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460599"}, {"tipo": "Sala Comercial", "endereco": "RUA CORONEL RODRIGUES 422 - SALA 510", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "LAYNA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1075.0, "vencimento": "05", "dataInicio": "2024-04-10", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 1.980 ( PROPRIETÁRIO)", "periodoContrato": "12/30 MESES", "mesReajuste": "ABRIL", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460663"}, {"tipo": "Apartamento", "endereco": "ALAMEDA SÃO BOA VENTURA 540 - 428", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "RICARDO/MONICA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 650.0, "vencimento": "05", "dataInicio": "2024-04-29", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 1.950 (ADM)", "periodoContrato": "30 MESES", "mesReajuste": "ABRIL", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460693"}, {"tipo": "Apartamento", "endereco": "TRAVESSA ELZIR BRANDÃO 113 - 504 BL E", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "CAMILA/PALO/BRUNA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 700.0, "vencimento": "15", "dataInicio": "2024-05-15", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 1.400,00 ( PROPRIETÁRIO)", "periodoContrato": "24 MESES", "mesReajuste": "MAIO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460724"}, {"tipo": "Sala Comercial", "endereco": "RUA CORONEL RODRIGUES 422 - SALA 606", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "MATHEUS", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 991.7, "vencimento": "05", "dataInicio": "2024-06-03", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇAÕ R$ 2.700 ( ADM)", "periodoContrato": "18/30 MESES", "mesReajuste": "JUNHO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460752"}, {"tipo": "Apartamento", "endereco": "TRAVESSA ELZIR BRANDÃO 110 - 201", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "OLGA/DOMITILA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2059.0, "vencimento": "10", "dataInicio": "2024-07-02", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "FIADOR", "periodoContrato": "30 MESES", "mesReajuste": "JULHO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460780"}, {"tipo": "Apartamento", "endereco": "RUA NORONHA TORREZÃO 24 - 605", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "HUGO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1029.0, "vencimento": "10", "dataInicio": "2024-07-03", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO - R$ 3 MIL ( ADM )", "periodoContrato": "30 MESES", "mesReajuste": "JULHO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460803"}, {"tipo": "Apartamento", "endereco": "ELZIR BRANDÃO 113 - 201 BLOCO D", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "FERNANDA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 770.0, "vencimento": "05", "dataInicio": "2024-07-20", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO - R$ 1,5 MIL ( ADM )", "periodoContrato": "30 MESES", "mesReajuste": "JULHO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460824"}, {"tipo": "Apartamento", "endereco": "RUA LUIZ PALMIER 500 - 709 BL 01", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "NATÁLIA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2369.0, "vencimento": "05", "dataInicio": "2024-08-15", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO - R$ 6,9MIL ( PROPRIETÁRIO)", "periodoContrato": "30 MESES", "mesReajuste": "AGOSTO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460844"}, {"tipo": "Apartamento", "endereco": "AV. JOÃO BRASIL 189  - 503 BL 02", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "JULIA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1545.0, "vencimento": "05", "dataInicio": "2024-08-20", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO - R$ 4,5 MIL ( ADM)", "periodoContrato": "18/30 MESES", "mesReajuste": "AGOSTO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460863"}, {"tipo": "Apartamento", "endereco": "TRAVESSA JOSÉ FERREIRA 711", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "EVARISTO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1133.0, "vencimento": "08", "dataInicio": "2024-08-30", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO 3,3MIL ( PROPRIETÁRIO)", "periodoContrato": "30 MESES", "mesReajuste": "AGOSTO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460916"}, {"tipo": "Apartamento", "endereco": "JOÃO BRASIL 189 - 603 BL 2", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "LUIZ/MARIA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1545.0, "vencimento": "10", "dataInicio": "2024-09-02", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "FIADOR", "periodoContrato": "30 MESES", "mesReajuste": "SETEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460940"}, {"tipo": "Apartamento", "endereco": "RUA HEITOR CARRILHO 1 - 405 BL 1", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "RODRIGO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2626.5, "vencimento": "05", "dataInicio": "2024-09-17", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "SETEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460962"}, {"tipo": "Apartamento", "endereco": "DR. PAULO CÉSAR 87 - 202 BL 03", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "BONG", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1300.0, "vencimento": "05", "dataInicio": "2024-10-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO 3MIL (ADM)", "periodoContrato": "30 MESES", "mesReajuste": "OUTUBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460988"}, {"tipo": "Apartamento", "endereco": "RUA BENJAMIN CONSTANT 442 - 402/ B 10", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "THAÍS", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 700.0, "vencimento": "05", "dataInicio": "2024-10-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "OUTUBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461014"}, {"tipo": "Apartamento", "endereco": "BENJAMIN CONSTANT 51 - 412", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "VICTÓRIA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 950.0, "vencimento": "05", "dataInicio": "2024-10-14", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇAÕ R$ 2.850MILC( ADM)", "periodoContrato": "30 MESES", "mesReajuste": "OUTUBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461040"}, {"tipo": "Apartamento", "endereco": "PRAIA DE ICARAÍ 155 - 501", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "MATHEUS", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 3167.0, "vencimento": "05", "dataInicio": "2024-10-15", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "OUTUBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461070"}, {"tipo": "Apartamento", "endereco": "RUA GAVIÃO PEIXOTO 70 - 1509", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "DIOGO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1412.0, "vencimento": "05", "dataInicio": "2024-10-17", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "FIADOR", "periodoContrato": "30 MESES", "mesReajuste": "OUTUBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461113"}, {"tipo": "Apartamento", "endereco": "RUA DEPUTADO FEDERAL JOSÉ LEOMIL, 16", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "JAIME", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2500.0, "vencimento": "10", "dataInicio": "2024-11-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 7,5 MIL (ADM)", "periodoContrato": "30 MESES", "mesReajuste": "NOVEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461161"}, {"tipo": "Apartamento", "endereco": "RUA DA CONCEIÇÃO 141 - 408", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "MAYARA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 700.0, "vencimento": "05", "dataInicio": "2024-11-13", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "NOVEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461210"}, {"tipo": "Apartamento", "endereco": "RUA ZORAIDA BRASIL 56 - 201", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "MARIANA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 600.0, "vencimento": "10", "dataInicio": "2025-01-15", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO 1,8MIL ( PROP)", "periodoContrato": "18/30 MESES", "mesReajuste": "JANEIRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461280"}, {"tipo": "Apartamento", "endereco": "RUA PERERIA DA SILVA 212 - 602", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "ROUDON", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2500.0, "vencimento": "05", "dataInicio": "2025-02-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 1OMIL (ADM)", "periodoContrato": "12/30MESES", "mesReajuste": "FEVEREIRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461356"}, {"tipo": "Apartamento", "endereco": "MIGUEL DE FRIAS 245 - 303", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "LUCIANO/AMAURI", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2900.0, "vencimento": "05", "dataInicio": "2025-02-03", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "FIADOR", "periodoContrato": "30 MESES", "mesReajuste": "FEVEREIRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461410"}, {"tipo": "Apartamento", "endereco": "VISCONDE DE SEPETIBA 50 - 408", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "JOSÉ", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2500.0, "vencimento": "05", "dataInicio": "2025-02-04", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "FEVEREIRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461480"}, {"tipo": "Apartamento", "endereco": "RUA EUSÉBIO DE QUEIROS, 15 - 301", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "HERMES", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1100.0, "vencimento": "05", "dataInicio": "2025-02-15", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 3,3MIL (Adm)", "periodoContrato": "18/30 MESES", "mesReajuste": "FEVEREIRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461554"}, {"tipo": "Apartamento", "endereco": "RUA FAGUNDES VARELA 507 - 401", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "PAULO CÉSAR", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 3425.73, "vencimento": "10", "dataInicio": "2025-03-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "MARÇO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461673"}, {"tipo": "Apartamento", "endereco": "RUA MARIZ E BARROS 98 - 401", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "VICTOR", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2335.72, "vencimento": "05", "dataInicio": "2025-03-06", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 6.750 MIL (ADM)", "periodoContrato": "30 MESES", "mesReajuste": "MARÇO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461774"}, {"tipo": "Apartamento", "endereco": "RUA DA CONCEIÇÃO 141 - 307", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "CLARISSE", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 700.0, "vencimento": "05", "dataInicio": "2025-04-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 2.100 (Adm)", "periodoContrato": "30 MESES", "mesReajuste": "ABRIL", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461865"}, {"tipo": "Apartamento", "endereco": "RUA AMAPÁ 190 - 106", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "ALÉDIO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2300.0, "vencimento": "10", "dataInicio": "2025-04-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "FIADOR", "periodoContrato": "12/30MESES", "mesReajuste": "ABRIL", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461934"}, {"tipo": "Apartamento", "endereco": "RUA DOMINGUES DE SÁ 461- 1101", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "ALAN", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 4500.0, "vencimento": "10", "dataInicio": "2025-04-26", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 13,5MIL (ADM)", "periodoContrato": "3O MESES", "mesReajuste": "ABRIL", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462078"}, {"tipo": "Apartamento", "endereco": "RUA DA CONCEIÇÃO 141 - 308", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "JOELMA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 650.0, "vencimento": "08", "dataInicio": "2025-05-17", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA (LOFT)", "periodoContrato": "30 MESES", "mesReajuste": "DEZEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462168"}, {"tipo": "Apartamento", "endereco": "RUA DA CONCEIÇÃO 141 - 309", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "DIEGO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 700.0, "vencimento": "05", "dataInicio": "2025-05-31", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 2.100 (Adm)", "periodoContrato": "30 MESES", "mesReajuste": "MAIO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462237"}, {"tipo": "Apartamento", "endereco": "RUA NORONHA TORREZÃO 407 - 504", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "EMERSON", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1100.0, "vencimento": "05", "dataInicio": "2025-06-02", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 3,3 (ADM)", "periodoContrato": "30 MESES", "mesReajuste": "JUHNO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462278"}, {"tipo": "Apartamento", "endereco": "RUA GERALDO MARTINS 64 - 303", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "MARIANNE", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 3900.0, "vencimento": "05", "dataInicio": "2025-06-17", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "15/30 MESES", "mesReajuste": "JUNHO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462317"}, {"tipo": "Apartamento", "endereco": "RUA LUIZ PALMIER 1001- 209 BL 6", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "RAQUEL", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2200.0, "vencimento": "10", "dataInicio": "2025-07-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "JULHO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462352"}, {"tipo": "Apartamento", "endereco": "RUA VIEIRA BUENO, 68", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "CADIC LTDA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 9000.0, "vencimento": "15", "dataInicio": "2025-07-03", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 27.000,00 ( PROP)", "periodoContrato": "24 MESES", "mesReajuste": "JULHO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462390"}, {"tipo": "Sala Comercial", "endereco": "LOJA 02 ITAIPU", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "TAINÁ", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 990.0, "vencimento": "05", "dataInicio": "2025-07-15", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "JULHO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462436"}, {"tipo": "Apartamento", "endereco": "RUA ANDRADE NEVES 63 - 302", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "JOANA/ANTÔNIO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1600.0, "vencimento": "05", "dataInicio": "2025-08-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 4.800,00 (PROP)", "periodoContrato": "12/30 MESES", "mesReajuste": "AGOSTO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462476"}, {"tipo": "Apartamento", "endereco": "RUA WALDIR CABRAL 22- 703", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "HEITOR", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1350.0, "vencimento": "05", "dataInicio": "2025-08-04", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "18/30 MESES", "mesReajuste": "AGOSTO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462511"}, {"tipo": "Apartamento", "endereco": "RUA PRINCESA ISABEL 130 -201", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "MATHEUS", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1100.0, "vencimento": "08", "dataInicio": "2025-08-18", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "CAUÇÃO R$ 3.300,00 (ADM)", "periodoContrato": "30 MESES", "mesReajuste": "AGOSTO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462566"}, {"tipo": "Casa", "endereco": "RUA SANTOS MOREIRA 64 - CASA 16", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "ANDRÉ", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1900.0, "vencimento": "08", "dataInicio": "2025-08-29", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "AGOSTO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462664"}, {"tipo": "Apartamento", "endereco": "TRAVESSA FANI 14 - 103", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "ALINE/MARINETE", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2150.0, "vencimento": "05", "dataInicio": "2025-09-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "SETEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462733"}, {"tipo": "Apartamento", "endereco": "RUBENS BRASIL 369 - 1305", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "LUCAS", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1300.0, "vencimento": "05", "dataInicio": "2025-09-05", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "SETEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462772"}, {"tipo": "Apartamento", "endereco": "RUA MIGUEL COUTO 371 - 1502", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "LUIZ", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2500.0, "vencimento": "05", "dataInicio": "2025-09-08", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "FIADOR", "periodoContrato": "30 MESES", "mesReajuste": "SETEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462815"}, {"tipo": "Apartamento", "endereco": "RUA ATOR PAULO GUSTAVO 388 - 1305", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "FÁTIMA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2100.0, "vencimento": "05", "dataInicio": "2025-09-15", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "SETEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462855"}, {"tipo": "Apartamento", "endereco": "RUA ZORAIDA BRASIL 137 - 201", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "THALIAT/JOÃO. V", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1100.0, "vencimento": "05", "dataInicio": "2025-09-25", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO R$2.400 ( PROPRIETÁRIA)", "periodoContrato": "12/30 MESES", "mesReajuste": "SETEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462906"}, {"tipo": "Apartamento", "endereco": "ESTRADA DA PACIÊNCIA 1235 - 105/ BL 3", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "MATHEUS", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1300.0, "vencimento": "05", "dataInicio": "2025-10-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 3.900,00 (PROPRIETÁIRO)", "periodoContrato": "30 MESES", "mesReajuste": "OUTUBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462964"}, {"tipo": "Apartamento", "endereco": "RUA LUIZ EDURDO, 13 - 801", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "BRENDA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1700.0, "vencimento": "08", "dataInicio": "2025-10-15", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "OUTUBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463004"}, {"tipo": "Galpão", "endereco": "GALPÃO ITAIPU", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "BRUNO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 6000.0, "vencimento": "15", "dataInicio": "2025-10-17", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "FIADOR", "periodoContrato": "12/30 MESES", "mesReajuste": "OUTUBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463047"}, {"tipo": "Sala Comercial", "endereco": "LOJA 01 ITAIPU", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "FATIMA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 900.0, "vencimento": "08", "dataInicio": "2025-10-31", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "OUTUBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463078"}, {"tipo": "Apartamento", "endereco": "FREI ORLANDO 567 - 603 BL 01", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "MARCUS", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1400.0, "vencimento": "08", "dataInicio": "2025-11-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 4.200,00 (PROPRIETÁIRO)", "periodoContrato": "24 MESES", "mesReajuste": "NOVEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463109"}, {"tipo": "Apartamento", "endereco": "RUA EVILÁSIO SILVA 15 - FUNDOS", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "ANA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1100.0, "vencimento": "08", "dataInicio": "2025-11-19", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "CAUÇÃO R$ 2.200,00 (ADM)", "periodoContrato": "18/30 MESES", "mesReajuste": "NOVEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463138"}, {"tipo": "Apartamento", "endereco": "RUA MEN DE SÁ 117 - 802", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "ANA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 4500.0, "vencimento": "08", "dataInicio": "2025-12-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "DEZEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463170"}, {"tipo": "Apartamento", "endereco": "RUA LOPES DA CUNHA 145 - 508", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "RAYSSA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1200.0, "vencimento": "08", "dataInicio": "2025-12-11", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 3.600,00 (PROP)", "periodoContrato": "30 MESES", "mesReajuste": "DEZEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463223"}, {"tipo": "Apartamento", "endereco": "RUA CAROLINA ALVES 32 - 306 BLOCO 1", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "PEDRO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2000.0, "vencimento": "08", "dataInicio": "2025-12-20", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA (LOFT)", "periodoContrato": "30 MESES", "mesReajuste": "DEZEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463257"}, {"tipo": "Casa", "endereco": "DR. SARDINHA 46 - CASA 06", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "MARILISA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2400.0, "vencimento": "08", "dataInicio": "2026-01-20", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇLÃO 7.200 ADM", "periodoContrato": "30 MESES", "mesReajuste": "JANEIRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463290"}, {"tipo": "Apartamento", "endereco": "RUA Desembargador Geraldo Toledo, 41 - 103", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "PIETRO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2500.0, "vencimento": "08", "dataInicio": "2026-02-09", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 7.500,00 (PROP)", "periodoContrato": "18/30 MESES", "mesReajuste": "FEVEREIRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463323"}, {"tipo": "Apartamento", "endereco": "RUA GALDINO DO VALE 08", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "MARIA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 5000.0, "vencimento": "08", "dataInicio": "2026-02-13", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "FIADOR", "periodoContrato": "30 MESES", "mesReajuste": "FEVEREIRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463351"}, {"tipo": "Apartamento", "endereco": "RUA ANDRADE NEVES 09- 727", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "RYAN", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1550.0, "vencimento": "08", "dataInicio": "2026-02-20", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "CAUÇÃO R$ 4.650,00 (PROP)", "periodoContrato": "30 MESES", "mesReajuste": "FEVEREIRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463379"}, {"tipo": "Apartamento", "endereco": "RUA NORONHA TORREZÃO 407 - 901 BL3", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "FABIO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1100.0, "vencimento": "05", "dataInicio": "2026-03-17", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "CAUÇÃO R$ 3.300,00 (ADM)", "periodoContrato": "30 MESES", "mesReajuste": "MARÇO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463415"}, {"tipo": "Sala Comercial", "endereco": "RUA ANDRADE NEVES 09 - SALA 610", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "INGRID", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1250.0, "vencimento": "05", "dataInicio": "2026-03-17", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "-------------------------", "periodoContrato": "8 MESES", "mesReajuste": "MARÇO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463451"}, {"tipo": "Apartamento", "endereco": "RUA ZORAIDA BRASIL 60 -301", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "JHONATAM", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1400.0, "vencimento": "05", "dataInicio": "2026-05-15", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA LOFT", "periodoContrato": "30 MESES", "mesReajuste": "ABRIL", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463516"}, {"tipo": "Apartamento", "endereco": "RUA AMAPÁ 12 - 603", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "WILKER/LEANDRO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 5500.0, "vencimento": "05", "dataInicio": "", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA LOFT", "periodoContrato": "24 MESES", "mesReajuste": "ABRIL", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463565"}, {"tipo": "Apartamento", "endereco": "RUA GERALDO MARTINS 155- 1607", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "GABRIEL", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 3300.0, "vencimento": "05", "dataInicio": "", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "CARTA PETROBRAS", "periodoContrato": "30 MESES", "mesReajuste": "ABRIL", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463658"}, {"tipo": "Apartamento", "endereco": "RUA JOAQUIM TÁVORA 122 - 1606", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "INGRID", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 4300.0, "vencimento": "01", "dataInicio": "", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "CAUÇÃO R$ 12.900,00 (PROP)", "periodoContrato": "30 MESES", "mesReajuste": "ABRIL", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463706"}];
+const SEED_APOLICES = [{"endereco": "RUA CAROLINA ALVES 32 - 306 BLOCO 1", "apolice": "01142800030254 - Too Seguros"}, {"endereco": "RUA MEN DE SÁ 117 - 802 BLOCO 1", "apolice": "01142800037086 - Too Seguros"}, {"endereco": "MARIO VIANA 357 - CASA 2", "apolice": "01142800048957 - Too Seguros"}, {"endereco": "AV. PROFESSOR JOÃO BRASIL 189 - 503/BL 2", "apolice": "01142800044591 - Too Seguros"}, {"endereco": "OLIVEIRA BOTELHO 102", "apolice": "Pendente"}, {"endereco": "GALPÃO ITAIPU", "apolice": "Pendente"}, {"endereco": "NOVA CIDADE", "apolice": "Pendente"}, {"endereco": "AV. SILVIO PICANÇO 671 - 504/BLOCO 1", "apolice": "Pendente"}, {"endereco": "RUA ANDRADE NEVES 09 - SALA 714", "apolice": "Pendente"}, {"endereco": "RUA LUIZ PALMIER 500 - 704/BLOCO 2", "apolice": "01142800035767 - Too Seguros"}, {"endereco": "RUA ZORAIDA BRASIL 137 - 201", "apolice": "01142800037396 - Too Seguros"}, {"endereco": "RUA ZORAIDA BRASIL 137 - 202", "apolice": "01142800034710 - Too Seguros"}, {"endereco": "DR. PAULO CÉSAR 87 - 202 BLOCO 3", "apolice": "01142800037015 - Too Seguros"}, {"endereco": "RUA ARY PARREIRAS 15 - 1103", "apolice": "01142800036666 - Too Seguros"}, {"endereco": "Av. Dr. Geraldo de Melo Ourivio, 502 - 205", "apolice": "01142800035342 - Too Seguros"}, {"endereco": "AV. ROBERTO SILVEIRA 187 - 1301", "apolice": "01142800035484 - Too Seguros"}, {"endereco": "ESTRADA DA PACIÊNCIA 1235 - 105/BL 03", "apolice": "01142800037432 - Too Seguros"}, {"endereco": "CASA ENGENHOCA - CASA 2", "apolice": "Pendente"}];
+const SEED_FECHAMENTOS = [{"categoria": "ADM ENTRADA", "ano": 2023, "valor": 40700}, {"categoria": "ADM ENTRADA", "ano": 2024, "valor": 62650}, {"categoria": "ADM ENTRADA", "ano": 2025, "valor": 53810}, {"categoria": "ADM ENTRADA", "ano": 2026, "valor": 11700}, {"categoria": "PRESTAÇÃO", "ano": 2023, "valor": 9800}, {"categoria": "PRESTAÇÃO", "ano": 2024, "valor": 18420}, {"categoria": "PRESTAÇÃO", "ano": 2025, "valor": 21615}, {"categoria": "PRESTAÇÃO", "ano": 2026, "valor": 4200}, {"categoria": "VENDA", "ano": 2024, "valor": 10000}, {"categoria": "VENDA", "ano": 2025, "valor": 20000}, {"categoria": "VENDA", "ano": 2026, "valor": 13200}];
+
+// ══════════════════════════════════════════════════════════
+// ESTADO
+// ══════════════════════════════════════════════════════════
+let imoveis, pagamentos, historico, indices, apolices, fechamentos;
+let calcTemp = null;
+let fechEditIdx = -1;
+
+function carregarDados() {
+  if (!localStorage.getItem('csi_v5_seeded')) {
+    localStorage.setItem('csi_imoveis', JSON.stringify(SEED_IMOVEIS));
+    localStorage.setItem('csi_apolices', JSON.stringify(SEED_APOLICES));
+    localStorage.setItem('csi_fechamentos', JSON.stringify(SEED_FECHAMENTOS));
+    localStorage.setItem('csi_pagamentos', JSON.stringify([]));
+    localStorage.setItem('csi_historico', JSON.stringify([]));
+    localStorage.setItem('csi_indices', JSON.stringify({igpm:'',ipca:'',inpc:'',mes:''}));
+    localStorage.setItem('csi_v5_seeded', '1');
+  }
+  imoveis    = JSON.parse(localStorage.getItem('csi_imoveis')    || '[]');
+  pagamentos = JSON.parse(localStorage.getItem('csi_pagamentos') || '[]');
+  historico  = JSON.parse(localStorage.getItem('csi_historico')  || '[]');
+  indices    = JSON.parse(localStorage.getItem('csi_indices')    || '{}');
+  apolices   = JSON.parse(localStorage.getItem('csi_apolices')   || '[]');
+  fechamentos= JSON.parse(localStorage.getItem('csi_fechamentos')|| '[]');
+  carregarNF();
+  carregarCustos();
+}
+
+function salvar() {
+  localStorage.setItem('csi_imoveis',    JSON.stringify(imoveis));
+  localStorage.setItem('csi_pagamentos', JSON.stringify(pagamentos));
+  localStorage.setItem('csi_historico',  JSON.stringify(historico));
+  localStorage.setItem('csi_indices',    JSON.stringify(indices));
+  localStorage.setItem('csi_apolices',   JSON.stringify(apolices));
+  localStorage.setItem('csi_fechamentos',JSON.stringify(fechamentos));
+}
+
+// ══════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  carregarDados();
+  carregarLogo();
+  const hoje = new Date().toISOString().split('T')[0];
+  document.getElementById('headerDate').textContent = new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
+  document.getElementById('calcDataInicio').value = hoje;
+  document.getElementById('pDataPagto').value     = hoje;
+  document.getElementById('pCompetencia').value   = hoje.slice(0,7);
+  document.getElementById('idxMes').value         = hoje.slice(0,7);
+  document.getElementById('cobCompetencia').value = hoje.slice(0,7);
+  document.getElementById('idxIGPM').value = indices.igpm || '';
+  document.getElementById('idxIPCA').value = indices.ipca || '';
+  document.getElementById('idxINPC').value = indices.inpc || '';
+  document.getElementById('idxMes').value  = indices.mes  || hoje.slice(0,7);
+  renderAll();
+});
+
+// ══════════════════════════════════════════════════════════
+// NAVEGAÇÃO
+// ══════════════════════════════════════════════════════════
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(btn) btn.classList.add('active');
+  renderAll();
+}
+function showFTab(id, btn) {
+  document.querySelectorAll('.form-tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.form-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function fecharModal(id) { document.getElementById(id).classList.remove('open'); }
+function fecharModalImovel()   { fecharModal('modalImovel'); }
+function fecharModalPagamento(){ fecharModal('modalPagamento'); }
+
+// ══════════════════════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════════════════════
+const R = v => Number(v).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+function fmtD(d){if(!d)return'—';const p=d.split('-');return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:'—';}
+function fmtM(m){if(!m)return'—';const[y,mo]=m.split('-');return['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'][+mo-1]+'/'+y;}
+function diasAte(d){if(!d)return null;const h=new Date();h.setHours(0,0,0,0);return Math.round((new Date(d+'T00:00:00')-h)/86400000);}
+function proxReaj(im){
+  if(!im.dataInicio)return null;
+  const per=parseInt(im.periodicidade)||12;
+  const base=new Date(im.dataInicio+'T00:00:00');
+  const hoje=new Date();hoje.setHours(0,0,0,0);
+  let p=new Date(base);
+  while(p<=hoje)p.setMonth(p.getMonth()+per);
+  return p.toISOString().split('T')[0];
+}
+
+// ══════════════════════════════════════════════════════════
+// RENDER ALL
+// ══════════════════════════════════════════════════════════
+function renderAll(){
+  renderDash(); renderTabela(); renderSelects(); renderReajPend();
+  renderHistorico(); renderPagamentos(); renderFinanceiro();
+  renderAlertas(); renderSeguros(); renderFechamentos();
+  renderCobranca(); renderNF(); renderFluxoCaixa();
+}
+
+// ══════════════════════════════════════════════════════════
+// DASHBOARD
+// ══════════════════════════════════════════════════════════
+function renderDash(){
+  const ativ=imoveis.filter(i=>i.status==='ativo');
+  const rec=ativ.reduce((s,i)=>s+(+i.aluguel||0),0);
+  let rp=0;
+  imoveis.forEach(im=>{if(im.status!=='ativo')return;const p=proxReaj(im);if(p){const d=diasAte(p);if(d!=null&&d<=60&&d>=0)rp++;}});
+  const atr=pagamentos.filter(p=>p.status==='atrasado').length;
+  document.getElementById('kpiTotal').textContent=imoveis.length;
+  document.getElementById('kpiAtivos').textContent=ativ.length;
+  document.getElementById('kpiReceita').textContent=R(rec);
+  document.getElementById('kpiReajustes').textContent=rp;
+  document.getElementById('kpiAtraso').textContent=atr;
+  document.getElementById('kpiComissao').textContent=R(rec*.1);
+  let ah='';
+  imoveis.forEach(im=>{if(im.status!=='ativo')return;const p=proxReaj(im);if(p){const d=diasAte(p);if(d!=null&&d<=30&&d>=0)ah+=`<div class="alert alert-warning">⚠️ <strong>Reajuste em ${d===0?'HOJE':d+' dias'}</strong> — ${im.endereco} (${im.nomeInquilino||'—'}) · ${R(im.aluguel)} · ${fmtD(p)}</div>`;}});
+  if(atr>0)ah+=`<div class="alert alert-danger">🔴 <strong>${atr} pagamento(s) em atraso.</strong></div>`;
+  document.getElementById('dashAlerts').innerHTML=ah;
+  const ult=[...imoveis].reverse().slice(0,6);
+  document.getElementById('dashUltimos').innerHTML=ult.length?ult.map(im=>`<div class="hist-item"><div><strong>${im.nomeInquilino||'—'}</strong> — ${im.tipo}<br><small class="text-muted">${im.endereco}</small></div><div style="text-align:right"><strong class="text-success">${R(im.aluguel)}</strong><br><span class="badge badge-${im.status==='ativo'?'success':im.status==='vago'?'warning':'danger'}">${im.status}</span></div></div>`).join(''):'<div class="empty-state"><div class="icon">🏠</div><p>Nenhum contrato.</p></div>';
+  const pr=imoveis.filter(i=>i.status==='ativo').map(im=>{const p=proxReaj(im);return{im,p,d:p?diasAte(p):null};}).filter(x=>x.d!=null).sort((a,b)=>a.d-b.d).slice(0,6);
+  document.getElementById('dashProxRej').innerHTML=pr.length?pr.map(({im,p,d})=>`<div class="hist-item"><div><strong>${im.nomeInquilino||'—'}</strong><br><small class="text-muted">${im.endereco} · ${im.indice}</small></div><div style="text-align:right"><span class="badge badge-${d<=30?'danger':d<=60?'warning':'info'}">${d===0?'HOJE':d+'d'}</span><br><small class="text-muted">${fmtD(p)}</small></div></div>`).join(''):'<div class="empty-state"><div class="icon">📅</div><p>Nenhum reajuste próximo.</p></div>';
+  document.getElementById('totalImoveis').textContent=imoveis.length+' contrato(s)';
+}
+
+// ══════════════════════════════════════════════════════════
+// CONTRATOS
+// ══════════════════════════════════════════════════════════
+function renderTabela(lista){
+  const dados=lista||imoveis;
+  const tb=document.getElementById('tbodyImoveis');
+  if(!dados.length){tb.innerHTML='<tr><td colspan="10"><div class="empty-state"><div class="icon">🏠</div><p>Nenhum contrato.</p></div></td></tr>';return;}
+  tb.innerHTML=dados.map(im=>{
+    const ri=imoveis.indexOf(im);
+    const p=proxReaj(im);const d=p?diasAte(p):null;
+    const pb=p&&d!=null?`<span class="badge badge-${d<=30?'danger':d<=60?'warning':'info'}">${fmtD(p)}</span>`:'—';
+    const gar=(im.garantia||'').replace(/DEPÓSITO CAUÇÃO/i,'Dep.Caução').replace(/SEGURO FIANÇA/i,'Seg.Fiança').replace(/DEPÓSITO/i,'Dep.');
+    return`<tr>
+      <td><strong>${im.nomeInquilino||'—'}</strong></td>
+      <td><small>${im.tipo}</small><br>${im.endereco}</td>
+      <td class="fw-bold text-success">${R(im.aluguel)}</td>
+      <td>Dia ${im.vencimento||'—'}</td>
+      <td style="max-width:140px;font-size:11px">${gar||'—'}</td>
+      <td><small>${im.periodoContrato||'—'}</small></td>
+      <td><span class="badge badge-info">${im.indice||'IGP-M'}</span></td>
+      <td>${pb}</td>
+      <td><span class="badge badge-${im.status==='ativo'?'success':im.status==='vago'?'warning':'danger'}">${im.status}</span></td>
+      <td>
+        <button class="btn btn-outline btn-sm" onclick="verImovel(${ri})" title="Ver">👁</button>
+        <button class="btn btn-primary btn-sm" onclick="editarImovel(${ri})" title="Editar">✏️</button>
+        <button class="btn btn-danger btn-sm" onclick="excluirImovel(${ri})" title="Excluir">🗑</button>
+      </td></tr>`;
+  }).join('');
+}
+
+function filtrarImoveis(){
+  const b=document.getElementById('buscaImovel').value.toLowerCase();
+  const s=document.getElementById('filtroStatus').value;
+  renderTabela(imoveis.filter(im=>{
+    const t=`${im.endereco} ${im.nomeInquilino} ${im.bairro} ${im.garantia}`.toLowerCase();
+    return t.includes(b)&&(!s||im.status===s);
+  }));
+}
+
+function abrirModalImovel(){
+  document.getElementById('fEditIndex').value=-1;
+  document.getElementById('modalImovelTitle').textContent='Novo Contrato';
+  ['fEndereco','fBairro','fArea','fQuartos','fVagas','fObsImovel','fNomeInquilino','fCPF','fTelefone','fEmail','fFiador','fFiadorContato','fAluguel','fCondominio','fIPTU','fGarantia','fPeriodoContrato','fMesReajuste','fDataFim','fObsContrato','fComissao'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+  document.getElementById('fCidade').value='Niterói';
+  document.getElementById('fTipo').value='Apartamento';
+  document.getElementById('fVencimento').value='5';
+  document.getElementById('fIndice').value='IGP-M';
+  document.getElementById('fPeriodicidade').value='12';
+  document.getElementById('fStatus').value='ativo';
+  document.getElementById('fDataInicio').value=new Date().toISOString().split('T')[0];
+  showFTab('tabImovel',document.querySelectorAll('.form-tab')[0]);
+  document.getElementById('modalImovel').classList.add('open');
+}
+
+function editarImovel(idx){
+  const im=imoveis[idx];
+  document.getElementById('fEditIndex').value=idx;
+  document.getElementById('modalImovelTitle').textContent='Editar Contrato';
+  const map={fTipo:'tipo',fEndereco:'endereco',fBairro:'bairro',fCidade:'cidade',fArea:'area',fQuartos:'quartos',fVagas:'vagas',fObsImovel:'obsImovel',fNomeInquilino:'nomeInquilino',fCPF:'cpf',fTelefone:'telefone',fEmail:'email',fFiador:'fiador',fFiadorContato:'fiadorContato',fAluguel:'aluguel',fCondominio:'condominio',fIPTU:'iptu',fVencimento:'vencimento',fDataInicio:'dataInicio',fDataFim:'dataFim',fGarantia:'garantia',fPeriodoContrato:'periodoContrato',fMesReajuste:'mesReajuste',fIndice:'indice',fPeriodicidade:'periodicidade',fStatus:'status',fComissao:'comissao',fObsContrato:'obsContrato'};
+  Object.entries(map).forEach(([fid,key])=>{const e=document.getElementById(fid);if(e)e.value=im[key]||'';});
+  document.getElementById('fVencimento').value=String(parseInt(im.vencimento||'5'));
+  showFTab('tabImovel',document.querySelectorAll('.form-tab')[0]);
+  document.getElementById('modalImovel').classList.add('open');
+}
+
+function salvarImovel(){
+  const end=document.getElementById('fEndereco').value.trim();
+  if(!end){alert('Informe o endereço.');return;}
+  const dados={tipo:document.getElementById('fTipo').value,endereco:end,bairro:document.getElementById('fBairro').value,cidade:document.getElementById('fCidade').value,area:document.getElementById('fArea').value,quartos:document.getElementById('fQuartos').value,vagas:document.getElementById('fVagas').value,obsImovel:document.getElementById('fObsImovel').value,nomeInquilino:document.getElementById('fNomeInquilino').value,cpf:document.getElementById('fCPF').value,telefone:document.getElementById('fTelefone').value,email:document.getElementById('fEmail').value,fiador:document.getElementById('fFiador').value,fiadorContato:document.getElementById('fFiadorContato').value,aluguel:parseFloat(document.getElementById('fAluguel').value)||0,condominio:parseFloat(document.getElementById('fCondominio').value)||0,iptu:parseFloat(document.getElementById('fIPTU').value)||0,vencimento:document.getElementById('fVencimento').value,dataInicio:document.getElementById('fDataInicio').value,dataFim:document.getElementById('fDataFim').value,garantia:document.getElementById('fGarantia').value,periodoContrato:document.getElementById('fPeriodoContrato').value,mesReajuste:document.getElementById('fMesReajuste').value,indice:document.getElementById('fIndice').value,periodicidade:document.getElementById('fPeriodicidade').value,status:document.getElementById('fStatus').value,comissao:document.getElementById('fComissao').value,obsContrato:document.getElementById('fObsContrato').value,cadastradoEm:new Date().toISOString()};
+  const idx=parseInt(document.getElementById('fEditIndex').value);
+  if(idx>=0)imoveis[idx]={...imoveis[idx],...dados};else imoveis.push(dados);
+  salvar();fecharModalImovel();renderAll();
+}
+
+function excluirImovel(idx){
+  if(!confirm(`Excluir contrato de "${imoveis[idx].nomeInquilino||imoveis[idx].endereco}"?`))return;
+  imoveis.splice(idx,1);salvar();renderAll();
+}
+
+function verImovel(idx){
+  const im=imoveis[idx];const p=proxReaj(im);
+  document.getElementById('verTitle').textContent=`${im.tipo} — ${im.endereco}`;
+  document.getElementById('verContent').innerHTML=`
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13px">
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Inquilino</span><br><strong>${im.nomeInquilino||'—'}</strong></div>
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Status</span><br><span class="badge badge-${im.status==='ativo'?'success':im.status==='vago'?'warning':'danger'}">${im.status}</span></div>
+    <div style="grid-column:1/-1"><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Endereço</span><br>${im.endereco}${im.bairro?', '+im.bairro:''} — ${im.cidade}</div>
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">CPF</span><br>${im.cpf||'—'}</div>
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Telefone</span><br>${im.telefone||'—'}</div>
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">E-mail</span><br>${im.email||'—'}</div>
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Fiador</span><br>${im.fiador||'—'}</div>
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Contato Fiador</span><br>${im.fiadorContato||'—'}</div>
+  </div>
+  <hr class="divider">
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;font-size:13px">
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Aluguel</span><br><strong style="font-size:17px;color:var(--success)">${R(im.aluguel)}</strong></div>
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Condomínio</span><br><strong>${R(im.condominio||0)}</strong></div>
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">IPTU</span><br><strong>${R(im.iptu||0)}</strong></div>
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Vencimento</span><br>Dia ${im.vencimento||'—'}</div>
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Índice</span><br>${im.indice||'—'}</div>
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Próx. Reajuste</span><br>${p?fmtD(p):'—'}</div>
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Início Contrato</span><br>${fmtD(im.dataInicio)}</div>
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Mês Reajuste</span><br>${im.mesReajuste||'—'}</div>
+    <div style="grid-column:1/-1"><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Garantia</span><br>${im.garantia||'—'}</div>
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Período</span><br>${im.periodoContrato||'—'}</div>
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Comissão</span><br>${im.comissao?im.comissao+'%':'—'}</div>
+  </div>
+  ${im.obsContrato?`<hr class="divider"><p style="font-size:12.5px"><strong>Obs:</strong> ${im.obsContrato}</p>`:''}
+  <div class="btn-group"><button class="btn btn-primary btn-sm" onclick="editarImovel(${idx});fecharModal('modalVerImovel')">✏️ Editar</button></div>`;
+  document.getElementById('modalVerImovel').classList.add('open');
+}
+
+// ══════════════════════════════════════════════════════════
+// SELECTS
+// ══════════════════════════════════════════════════════════
+function renderSelects(){
+  ['calcImovel','pImovel'].forEach(id=>{
+    const el=document.getElementById(id);if(!el)return;
+    const v=el.value;
+    const lista=id==='pImovel'?imoveis.filter(i=>i.status==='ativo'):imoveis;
+    el.innerHTML=`<option value="">${id==='calcImovel'?'— Manual —':'Selecione'}</option>`+lista.map(im=>`<option value="${imoveis.indexOf(im)}">${im.nomeInquilino||'?'} — ${im.endereco}</option>`).join('');
+    el.value=v;
+  });
+  const fh=document.getElementById('filtroHistImovel');
+  if(fh){const v=fh.value;fh.innerHTML='<option value="">Todos</option>'+imoveis.map((im,i)=>`<option value="${i}">${im.nomeInquilino||'?'} — ${im.endereco}</option>`).join('');fh.value=v;}
+}
+
+// ══════════════════════════════════════════════════════════
+// REAJUSTE
+// ══════════════════════════════════════════════════════════
+function calcIndiceChange(){document.getElementById('grpFixo').style.display=document.getElementById('calcIndice').value==='fixo'?'block':'none';}
+function calcPeriodoChange(){document.getElementById('grpCustom').style.display=document.getElementById('calcPeriodo').value==='custom'?'block':'none';}
+
+function preencherCalcImovel(){
+  const idx=document.getElementById('calcImovel').value;if(!idx)return;
+  const im=imoveis[+idx];
+  document.getElementById('calcValorAtual').value=im.aluguel||'';
+  document.getElementById('calcIndice').value={'IGP-M':'igpm','IPCA':'ipca','INPC':'inpc','Fixo':'fixo'}[im.indice]||'';
+  document.getElementById('calcPeriodo').value=im.periodicidade||'12';
+  calcIndiceChange();
+}
+
+function calcularReajuste(){
+  const val=parseFloat(document.getElementById('calcValorAtual').value);
+  const ind=document.getElementById('calcIndice').value;
+  if(!val||val<=0){alert('Informe o valor.');return;}
+  if(!ind){alert('Selecione o índice.');return;}
+  let perc=0,nome='';
+  if(ind==='fixo'){perc=parseFloat(document.getElementById('calcPercFixo').value)||0;nome='Percentual Fixo';}
+  else if(document.getElementById('calcPeriodo').value==='custom'){perc=parseFloat(document.getElementById('calcPercCustom').value)||0;nome=ind.toUpperCase();}
+  else{const mp={igpm:indices.igpm,ipca:indices.ipca,inpc:indices.inpc};const mn={igpm:'IGP-M (FGV)',ipca:'IPCA (IBGE)',inpc:'INPC'};nome=mn[ind];perc=parseFloat(mp[ind])||0;if(!perc){alert('Índice não informado. Atualize em Reajuste → Índices.');return;}const per=document.getElementById('calcPeriodo').value;if(per==='6')perc=((1+perc/100)**.5-1)*100;if(per==='24')perc=((1+perc/100)**2-1)*100;}
+  const nv=val*(1+perc/100);const au=nv-val;
+  calcTemp={val,nv,perc,nome,data:document.getElementById('calcDataInicio').value,idx:document.getElementById('calcImovel').value};
+  document.getElementById('calcNovoValor').textContent=R(nv);
+  document.getElementById('calcDetalhe').textContent=`Vigência a partir de ${fmtD(document.getElementById('calcDataInicio').value)}`;
+  document.getElementById('calcAnterior').textContent=R(val);
+  document.getElementById('calcAumento').textContent=`+ ${R(au)}`;
+  document.getElementById('calcIndiceUsado').textContent=nome;
+  document.getElementById('calcPercUsado').textContent=perc.toFixed(4)+'%';
+  document.getElementById('resultadoCalc').style.display='block';
+}
+
+function aplicarReajuste(){
+  if(!calcTemp)return;
+  const{val,nv,perc,nome,data,idx}=calcTemp;
+  const reg={imovelIdx:idx!==''?+idx:-1,endereco:idx!==''?imoveis[+idx].endereco:'Manual',nomeInquilino:idx!==''?imoveis[+idx].nomeInquilino:'—',valorAnterior:val,novoValor:nv,percentual:perc,indice:nome,dataAplicacao:data,dataRegistro:new Date().toISOString()};
+  historico.unshift(reg);
+  if(idx!==''){imoveis[+idx].aluguel=nv;alert(`✅ Reajuste aplicado!\n${imoveis[+idx].endereco}\nNovo aluguel: ${R(nv)}`);}
+  salvar();document.getElementById('resultadoCalc').style.display='none';calcTemp=null;renderAll();
+}
+
+function renderReajPend(){
+  const el=document.getElementById('listaReajPendentes');if(!el)return;
+  const p=imoveis.filter(i=>i.status==='ativo').map(im=>{const pr=proxReaj(im);return{im,pr,d:pr?diasAte(pr):null,idx:imoveis.indexOf(im)};}).filter(x=>x.d!=null&&x.d<=60).sort((a,b)=>a.d-b.d);
+  el.innerHTML=p.length?p.map(({im,pr,d,idx})=>`<div class="hist-item" style="cursor:pointer" onclick="document.getElementById('calcImovel').value='${idx}';preencherCalcImovel()"><div><strong>${im.nomeInquilino||'—'}</strong><br><small class="text-muted">${im.endereco} · ${R(im.aluguel)} · ${im.indice}</small></div><div style="text-align:right"><span class="badge badge-${d<=30?'danger':'warning'}">${d===0?'HOJE':d+'d'}</span><br><small class="text-muted">${fmtD(pr)}</small></div></div>`).join(''):'<div class="empty-state"><div class="icon">✅</div><p>Nenhum nos próximos 60 dias.</p></div>';
+}
+
+function salvarIndices(){
+  indices={igpm:document.getElementById('idxIGPM').value,ipca:document.getElementById('idxIPCA').value,inpc:document.getElementById('idxINPC').value,mes:document.getElementById('idxMes').value};
+  salvar();const m=document.getElementById('idxMsg');m.style.display='block';setTimeout(()=>m.style.display='none',2000);
+}
+
+// ══════════════════════════════════════════════════════════
+// HISTÓRICO
+// ══════════════════════════════════════════════════════════
+function renderHistorico(){
+  const f=document.getElementById('filtroHistImovel')?.value;
+  let dados=historico;if(f)dados=historico.filter(h=>String(h.imovelIdx)===f);
+  document.getElementById('totalHistorico').textContent=dados.length+' reajuste(s)';
+  const el=document.getElementById('listaHistorico');if(!el)return;
+  el.innerHTML=dados.length?dados.map(h=>`<div class="hist-item"><div style="flex:1"><strong>${h.endereco}</strong> <small class="text-muted">(${h.nomeInquilino||'—'})</small><br><small class="text-muted">Aplicado em ${fmtD(h.dataAplicacao)} · ${h.indice}</small></div><div style="text-align:right;min-width:180px"><span class="text-muted">${R(h.valorAnterior)}</span> → <strong class="text-success">${R(h.novoValor)}</strong><br><span class="badge badge-info">+${(+h.percentual).toFixed(2)}%</span> <button class="btn btn-danger btn-sm" onclick="excluirHist(${historico.indexOf(h)})">🗑</button></div></div>`).join(''):'<div class="empty-state"><div class="icon">📋</div><p>Nenhum reajuste aplicado.</p></div>';
+}
+function excluirHist(idx){if(!confirm('Remover?'))return;historico.splice(idx,1);salvar();renderHistorico();}
+
+// ══════════════════════════════════════════════════════════
+// FINANCEIRO
+// ══════════════════════════════════════════════════════════
+function abrirModalPagamento(){renderSelects();document.getElementById('modalPagamento').classList.add('open');}
+function preencherPagImovel(){const idx=document.getElementById('pImovel').value;if(!idx)return;document.getElementById('pValor').value=imoveis[+idx].aluguel||'';}
+
+function salvarPagamento(){
+  const idx=document.getElementById('pImovel').value;if(!idx){alert('Selecione o contrato.');return;}
+  const comp=document.getElementById('pCompetencia').value;if(!comp){alert('Informe a competência.');return;}
+  const im=imoveis[+idx];
+  pagamentos.unshift({imovelIdx:+idx,endereco:im.endereco,nomeInquilino:im.nomeInquilino,competencia:comp,valor:parseFloat(document.getElementById('pValor').value)||0,dataPagto:document.getElementById('pDataPagto').value,status:document.getElementById('pStatus').value,multa:parseFloat(document.getElementById('pMulta').value)||0,juros:parseFloat(document.getElementById('pJuros').value)||0,obs:document.getElementById('pObs').value,registradoEm:new Date().toISOString()});
+  salvar();fecharModalPagamento();renderAll();
+}
+
+function renderPagamentos(){
+  const tb=document.getElementById('tbodyPagamentos');if(!tb)return;
+  if(!pagamentos.length){tb.innerHTML='<tr><td colspan="9"><div class="empty-state"><div class="icon">💰</div><p>Nenhum pagamento.</p></div></td></tr>';return;}
+  tb.innerHTML=pagamentos.map((p,i)=>{
+    const venc=imoveis[p.imovelIdx]?.vencimento||'';
+    const[y,m]=p.competencia.split('-');
+    const dv=`${y}-${m}-${String(venc).padStart(2,'0')}`;
+    const da=p.dataPagto&&dv?Math.max(0,Math.round((new Date(p.dataPagto)-new Date(dv))/86400000)):0;
+    return`<tr><td><strong>${p.endereco}</strong></td><td>${p.nomeInquilino||'—'}</td><td>${fmtM(p.competencia)}</td><td>${R(p.valor)}</td><td>${fmtD(p.dataPagto)}</td><td>${da>0?`<span class="text-danger">${da}d</span>`:'<span class="text-success">Em dia</span>'}</td><td>${(p.multa||0)+(p.juros||0)>0?R((p.multa||0)+(p.juros||0)):'—'}</td><td><span class="badge badge-${p.status==='pago'?'success':p.status==='pendente'?'warning':'danger'}">${p.status}</span></td><td><button class="btn btn-danger btn-sm" onclick="excluirPag(${i})">🗑</button></td></tr>`;
+  }).join('');
+}
+function excluirPag(idx){if(!confirm('Excluir?'))return;pagamentos.splice(idx,1);salvar();renderAll();}
+
+function renderFinanceiro(){
+  const hoje=new Date();const mc=`${hoje.getFullYear()}-${String(hoje.getMonth()+1).padStart(2,'0')}`;
+  const dm=pagamentos.filter(p=>p.competencia===mc);
+  const rec=dm.filter(p=>p.status==='pago').reduce((s,p)=>s+p.valor,0);
+  const ab=dm.filter(p=>p.status!=='pago').reduce((s,p)=>s+p.valor,0);
+  const mul=pagamentos.reduce((s,p)=>s+(p.multa||0)+(p.juros||0),0);
+  document.getElementById('finRecebido').textContent=R(rec);
+  document.getElementById('finAberto').textContent=R(ab);
+  document.getElementById('finMultas').textContent=R(mul);
+  document.getElementById('finComissao').textContent=R(rec*.1);
+}
+
+// ══════════════════════════════════════════════════════════
+// SEGUROS
+// ══════════════════════════════════════════════════════════
+function renderSeguros(){
+  const tb=document.getElementById('tbodySeguros');if(!tb)return;
+  document.getElementById('totalSeguros').textContent=apolices.length+' apólice(s)';
+  if(!apolices.length){tb.innerHTML='<tr><td colspan="4"><div class="empty-state"><div class="icon">🔥</div><p>Nenhuma apólice.</p></div></td></tr>';return;}
+  tb.innerHTML=apolices.map((a,i)=>{
+    const ok=a.apolice&&a.apolice.toLowerCase()!=='pendente';
+    return`<tr><td>${a.endereco}</td><td>${a.apolice||'—'}</td><td><span class="badge badge-${ok?'ok':'pend'}">${ok?'Ativa':'Pendente'}</span></td><td><button class="btn btn-primary btn-sm" onclick="editarSeguro(${i})">✏️</button> <button class="btn btn-danger btn-sm" onclick="excluirSeguro(${i})">🗑</button></td></tr>`;
+  }).join('');
+}
+function abrirModalSeguro(){document.getElementById('sEditIndex').value=-1;document.getElementById('modalSeguroTitle').textContent='Nova Apólice';document.getElementById('sEndereco').value='';document.getElementById('sApolice').value='';document.getElementById('modalSeguro').classList.add('open');}
+function editarSeguro(idx){const a=apolices[idx];document.getElementById('sEditIndex').value=idx;document.getElementById('modalSeguroTitle').textContent='Editar Apólice';document.getElementById('sEndereco').value=a.endereco||'';document.getElementById('sApolice').value=a.apolice||'';document.getElementById('modalSeguro').classList.add('open');}
+function salvarSeguro(){
+  const end=document.getElementById('sEndereco').value.trim();if(!end){alert('Informe o endereço.');return;}
+  const d={endereco:end,apolice:document.getElementById('sApolice').value};
+  const idx=+document.getElementById('sEditIndex').value;
+  if(idx>=0)apolices[idx]=d;else apolices.push(d);
+  salvar();fecharModal('modalSeguro');renderSeguros();
+}
+function excluirSeguro(idx){if(!confirm('Excluir apólice?'))return;apolices.splice(idx,1);salvar();renderSeguros();}
+
+// ══════════════════════════════════════════════════════════
+// FECHAMENTOS
+// ══════════════════════════════════════════════════════════
+function renderFechamentos(){
+  const anos=[...new Set(fechamentos.filter(f=>f.categoria==='ADM ENTRADA'||f.categoria==='PRESTAÇÃO').map(f=>f.ano))].sort((a,b)=>a-b);
+  const tbAdm=document.getElementById('tbodyFechAdm');
+  let totAdm=0,totPre=0;
+  tbAdm.innerHTML=anos.map(ano=>{
+    const adm=fechamentos.filter(f=>f.categoria==='ADM ENTRADA'&&f.ano===ano).reduce((s,f)=>s+f.valor,0);
+    const pre=fechamentos.filter(f=>f.categoria==='PRESTAÇÃO'&&f.ano===ano).reduce((s,f)=>s+f.valor,0);
+    totAdm+=adm;totPre+=pre;
+    return`<tr><td>${ano}</td><td>${adm?R(adm):'—'}</td><td>${pre?R(pre):'—'}</td><td class="text-success fw-bold">${R(adm+pre)}</td></tr>`;
+  }).join('')+`<tr class="fech-total"><td>Total</td><td>${R(totAdm)}</td><td>${R(totPre)}</td><td class="text-success">${R(totAdm+totPre)}</td></tr>`;
+  const anosV=[...new Set(fechamentos.filter(f=>f.categoria==='VENDA').map(f=>f.ano))].sort((a,b)=>a-b);
+  const tbV=document.getElementById('tbodyFechVendas');
+  let totV=0;
+  tbV.innerHTML=anosV.map(ano=>{
+    const v=fechamentos.filter(f=>f.categoria==='VENDA'&&f.ano===ano).reduce((s,f)=>s+f.valor,0);
+    totV+=v;return`<tr><td>${ano}</td><td class="text-success fw-bold">${R(v)}</td></tr>`;
+  }).join('')+`<tr class="fech-total"><td>Total</td><td class="text-success">${R(totV)}</td></tr>`;
+  const tb=document.getElementById('tbodyFechTodos');
+  tb.innerHTML=fechamentos.length?[...fechamentos].sort((a,b)=>b.ano-a.ano).map(f=>`<tr><td><span class="badge badge-info">${f.categoria}</span></td><td>${f.ano}</td><td class="fw-bold">${R(f.valor)}</td><td><button class="btn btn-primary btn-sm" onclick="editarFech(${fechamentos.indexOf(f)})">✏️</button> <button class="btn btn-danger btn-sm" onclick="excluirFech(${fechamentos.indexOf(f)})">🗑</button></td></tr>`).join(''):'<tr><td colspan="4"><div class="empty-state"><div class="icon">📅</div><p>Nenhum registro.</p></div></td></tr>';
+}
+function abrirModalFechamento(){fechEditIdx=-1;['fechAno','fechValor','fechObs'].forEach(id=>document.getElementById(id)&&(document.getElementById(id).value=''));document.getElementById('fechCategoria').value='ADM ENTRADA';document.getElementById('modalFechamento').classList.add('open');}
+function salvarFechamento(){
+  const cat=document.getElementById('fechCategoria').value;
+  const ano=parseInt(document.getElementById('fechAno').value);
+  const val=parseFloat(document.getElementById('fechValor').value);
+  if(!cat||!ano||!val){alert('Preencha categoria, ano e valor.');return;}
+  const item={categoria:cat,ano,valor:val,obs:document.getElementById('fechObs').value};
+  if(fechEditIdx>=0){fechamentos[fechEditIdx]=item;}else{fechamentos.push(item);}
+  fechEditIdx=-1;salvar();fecharModal('modalFechamento');renderFechamentos();
+}
+function editarFech(idx){fechEditIdx=idx;const f=fechamentos[idx];document.getElementById('fechCategoria').value=f.categoria;document.getElementById('fechAno').value=f.ano;document.getElementById('fechValor').value=f.valor;document.getElementById('fechObs').value=f.obs||'';document.getElementById('modalFechamento').classList.add('open');}
+function excluirFech(idx){if(!confirm('Excluir registro?'))return;fechamentos.splice(idx,1);salvar();renderFechamentos();}
+
+// ══════════════════════════════════════════════════════════
+// ALERTAS
+// ══════════════════════════════════════════════════════════
+function renderAlertas(){
+  const al=[];
+  imoveis.forEach(im=>{
+    if(im.status!=='ativo')return;
+    const p=proxReaj(im);if(p){const d=diasAte(p);if(d!=null&&d<=60&&d>=0)al.push({tipo:d<=30?'danger':'warning',icon:'📈',urg:d,msg:`<strong>Reajuste em ${d===0?'HOJE':d+' dias'}</strong> — ${im.endereco} (${im.nomeInquilino||'—'})<br>Aluguel: ${R(im.aluguel)} · Índice: ${im.indice} · Data: ${fmtD(p)}`});}
+    if(im.dataFim){const d=diasAte(im.dataFim);if(d!=null&&d<=90&&d>=0)al.push({tipo:d<=30?'danger':'warning',icon:'📄',urg:d,msg:`<strong>Contrato vence em ${d} dias</strong> — ${im.endereco} (${im.nomeInquilino||'—'})<br>Término: ${fmtD(im.dataFim)}`});}
+  });
+  pagamentos.filter(p=>p.status==='atrasado').forEach(p=>al.push({tipo:'danger',icon:'💸',urg:-1,msg:`<strong>Pagamento em atraso</strong> — ${p.endereco} (${p.nomeInquilino||'—'})<br>${fmtM(p.competencia)} · ${R(p.valor)}`}));
+  al.sort((a,b)=>a.urg-b.urg);
+  const el=document.getElementById('listaAlertas');if(!el)return;
+  el.innerHTML=al.length?al.map(a=>`<div class="alert alert-${a.tipo}">${a.icon} ${a.msg}</div>`).join(''):'<div class="alert alert-success">✅ Nenhum alerta. Tudo em dia!</div>';
+}
+
+// ══════════════════════════════════════════════════════════
+// VALORES PARA NOTA FISCAL
+// ══════════════════════════════════════════════════════════
+const SEED_NF = [
+  {num:1,nome:"REI DAS CALHAS ORIGINAL",doc:"43.893.164/0001-06",endProp:"Estrada Francisco da Cruz Nunes 314 - Itaipu",valor:800,endImovel:"ESTR. FRANCISCO DA CRUZ NUNES 3198 - CEP 24340-105"},
+  {num:2,nome:"VINÍCIUS AYPE MOTA",doc:"013.212.526-92",endProp:"PCA tele santana,85/1402 bl 1 - Barra da Tijuca/RJ.",valor:113,endImovel:"RUA ANDRADE NEVES 09 - SALA 714 - CEP 24210-000"},
+  {num:3,nome:"ANDERSON RICARDO MATHIAS NAUFEL",doc:"069.810.057-35",endProp:"Rua Mariz e Barros 272/806 – Icaraí/Niterói",valor:200,endImovel:"RUA CAROLINA ALVES 32 - 306 BLOCO 1 - CEP 24322-310"},
+  {num:4,nome:"ILKA GOMES GODINHO CASTANHEIRA",doc:"039.423.587-86",endProp:"João Ornaldo Rodrigues, 242 – Ceasa/São José de Ubá",valor:110,endImovel:"RUA ZORAIDA BRASIL 137 - 202 - CEP 24130-135"},
+  {num:5,nome:"BER",doc:"077.544.687-43",endProp:"Rua Tupiniquins 272, São Francisco/Niterói.",valor:110,endImovel:"RUA ZORAIDA BRASIL 137 - 201 - CEP 24130-135"},
+  {num:6,nome:"LEONARDO TEXEIRA CLETO",doc:"026.473.947-76",endProp:"Av. do Contorno 06 – apto 103, Centro, Cabo Frio/RJ.",valor:450,endImovel:"MEN DE SÁ 117 - 802/BLOCO 01 - CEP 24220-260"},
+  {num:7,nome:"MARCELUS ANDRADE DOS SANTOS",doc:"072.156.427-55",endProp:"Rua Presidente Pedreira 139, 1201 – Ingá, Niterói/RJ.",valor:160,endImovel:"ESTR. FREI ORLANDO 567 - 408/BLOCO 07 - CEP 24350-200"},
+  {num:8,nome:"RICARDO OLIVEIRA ALMEIDA",doc:"077.032.147-01",endProp:"Rua 8 de Maio, 276 – Santo Aleixo, Magé/RJ.",valor:230,endImovel:"LUIZ PALMIER 500 - 408/BLOCO 02 - CEP 24110-310"},
+  {num:9,nome:"WALDINEI DE MENDONÇA COUTINHO",doc:"000.944.087-93",endProp:"AV. Professor Florestan Fernandes,1036 – 302; BL 1 – Camboinhas",valor:107,endImovel:"RUA CORONEL RODRIGUES 422 - 510 - CEP 24440-460"},
+  {num:10,nome:"ANDERSON LUIZ DOURADO MONTEIRO",doc:"071.700.827-48",endProp:"Travessa Dom Bosco, 84 – 1504; BL 2; Santa Rosa, Niterói/RJ.",valor:110,endImovel:"RUA NORONHA TORREZÃO 24 - 1011 - CEP 24240-182"},
+  {num:11,nome:"SUSANA PAOLA BARBAGELATA KLEBER",doc:"028.785.627-55",endProp:"Rua Washington Luís 520, casa 63 – Sapê, Niterói/RJ",valor:100,endImovel:"ESTR. WASHINGTON LUIS 739 - 108 - CEP 24315-375"},
+  {num:12,nome:"NEUZA RODRIGUES RAMOS",doc:"420.806.577-04",endProp:"Rua Waldir Cabral 22, apto 1602 – Santa Rosa, Niterói/RJ",valor:103,endImovel:"TRAVESSA JOSÉ FERREIRA 711 - CEP 24310-050"},
+  {num:13,nome:"ANA CRISTINA DE BARROS NOGUEIRA",doc:"491.751.307-34",endProp:"Bulhões de Carvalho, 565, 204, Copacabana/RJ",valor:126,endImovel:"ARY PARREIRAS 15 - 1103 - CEP 24230-320"},
+  {num:14,nome:"ADRIANA MONTEIRO",doc:"037.810.217-69",endProp:"Rua Dom Helder Câmara 272 – Camboinhas, Niterói/RJ.",valor:1100,endImovel:"RUA SILVA JARDIM 55 - CEP 25901-378"},
+  {num:15,nome:"NATHALIA MARIA FELIX NOGUEIRA",doc:"092.190.427-46",endProp:"RUA LOPES DA CUNHA 145 - BL 05 - 501, FONSECA, NITEROI",valor:100,endImovel:"ALAMEDA SÃO BOA VENTURA 540 - 428 BL 2 - CEP 24120-191"},
+  {num:16,nome:"MARIA FERNANDA LIMA DE OLIVEIRA",doc:"043.984.567-08",endProp:"Rua dos Jatobas QD 111 LT 04 casa 5 – Itaipu, Niterói/RJ.",valor:140,endImovel:"ESTR FREI ORLANDO 567 - 603 BL 01 - CEP 24350-200"},
+  {num:17,nome:"ANDERSON RAMOS SOUZA",doc:"781.240.695-49",endProp:"RUA JOSÉ ANCHIETA FONTANA, 655 - 101, JD CAMBURI, VITORIA/ES",valor:100,endImovel:"TRAVESSA ELZIR BRANDÃO 113 - 504 BL E - CEP 24241-140"},
+  {num:18,nome:"GABRIEL CARVALHO FERREIRA",doc:"118.460.217-40",endProp:"Dr. Paulo César 137, apto 903 BL 01 - ICARAÍ - NITERÓI",valor:100,endImovel:"RUA CORONEL RODRIGUES 422 - 606 - CEP 24440-460"},
+  {num:19,nome:"ANTONIO PORPHIRIO DIAS CORRÊA",doc:"222.416.557-91",endProp:"RUA 08 LT 01 FUNDOS, BARRA - MARICÁ",valor:205,endImovel:"TRAVESSA ELZIR BRANDÃO 110 - 201 - CEP 24241-140"},
+  {num:20,nome:"MAGDA STELLA GOMES DE OLIVEIRA",doc:"771.129.977-04",endProp:"Rua Ministro Otávio Kelly 221, 604 - Icaraí; Niterói/RJ.",valor:102,endImovel:"RUA NORONHA TORREZÃO 24 - 605 - CEP 24240-182"},
+  {num:21,nome:"MARCELO RIBEIRO",doc:"018.912.657-41",endProp:"Estrada Washington Luis 196 - casa 03, Sapê; Niterói/RJ",valor:100,endImovel:"TRAVESSA DOUTOR ELZIR BRANDÃO 113"},
+  {num:22,nome:"RICARDO BARRETO NOLASCO",doc:"503.871.897-34",endProp:"Estrada Francisco da Cruz Nunes 3300 - casa 408; Itaipu, Niterói/RJ",valor:236,endImovel:"LUIZ PALMIER 500 - 709/BLOCO 01 - CEP 24110-310"},
+  {num:23,nome:"RUBENS ANTONIO",doc:"070.235.737-55",endProp:"JOÃO BRASIL 189 - 603 BLOCO 2 - FONSECA, Niterói/RJ",valor:154,endImovel:"JOÃO BRASIL 189 - 603 BL 2 - CEP 24130-088"},
+  {num:24,nome:"VÍTOR VENTURA DA SILVA",doc:"494.507.788-68",endProp:"Rua Jacarandas, 880, apto 1302, Bl 01 – Barra da Tijuca, RJ.",valor:154,endImovel:"AV. JOÃO BRASIL 189 - 503/BL2 - CEP 24130-088"},
+  {num:25,nome:"SÉRGIO SOUZA DA SILVA",doc:"039.388.967-01",endProp:"RUA BARRA DO PIRAÍ, 387 CASA 02, RIO DAS OSTRAS - RJ",valor:260,endImovel:"RUA PROF. HEITOR CARRILHO 01 - 405 BL 01"},
+  {num:26,nome:"RODRIGO OCTÁVIO AGUEDA BANDEIRA CARDOSO",doc:"717.909.181-20",endProp:"RUA PAISSANDU, 94 - 902 - FLAMENGO, RIO DE JANEIRO",valor:316.7,endImovel:"PRAIA DE ICARAÍ 155"},
+  {num:27,nome:"VERÔNICA DOURADO MONTEIRO",doc:"076.009.077-71",endProp:"RUA PROFESSOR OTACÍLIO 3, 1303 - SANTA ROSA, NITERÓI",valor:140,endImovel:"RUA GAVIÃO PEIXOTO 70 - 1509"},
+  {num:28,nome:"ROBERVAL SANTOS FIGUEIREDO",doc:"843.509.545-20",endProp:"RUA OLIVEIRA BOTELHO, 785 - 607 BL 1; NEVES, SÃO GONÇALO",valor:100,endImovel:"RUA BENJAMIN CONSTANT 442 - 404 BL 10"},
+  {num:29,nome:"ULDERICO LEMOS JUNIOR",doc:"396.305.016-00",endProp:"Rua Evaristo Barbosa, 387, Itajubá/MG.",valor:130,endImovel:"DR PAULO CÉSAR 87 - 202 BLOCO 3"},
+  {num:30,nome:"MARIA PACHECO DE MORAES",doc:"359.467.337-53",endProp:"Alameda São Boaventura 300, apto 302 Bloco 01; Fonseca – Niterói/RJ.",valor:100,endImovel:"RUA BENJAMIN CONSTANT 51 - 412"},
+  {num:31,nome:"DOUGLAS BITTENCOURT DA SILVA",doc:"057.142.217-96",endProp:"Travessa Antônio Pedro 12, 1202, Icaraí - Niterói/RJ",valor:264.7,endImovel:"TRAVESSA ANTÔNIO PEDRO 12, 402"},
+  {num:32,nome:"RAFAEL BARROSO MACIEL",doc:"088.359.107-30",endProp:"RUA Deputado Federal José Leomil 16 - Fonseca, Niterói/RJ",valor:250,endImovel:"RUA DEPUTADO FEDERAL JOSÉ LEOMIL, 16 - FONSECA, NITERÓI/RJ"},
+  {num:33,nome:"CARLA GOUVÊA GONDIM BARROS",doc:"029.486.897-67",endProp:"RUA SIBIPIRUNAS 44 - MARAVISTA, NITERÓI/RJ",valor:100,endImovel:"RUA DA CONCEIÇÃO 141 - 408, CENTRO - NITERÓI/RJ"},
+  {num:34,nome:"FILIPE CELSO TORRES",doc:"132.553.237-11",endProp:"RUA VISCONDE DE SEPETIBA 50 - 408",valor:259.5,endImovel:"RUA VISCONDE DE SEPETIBA 50 - 408 - CEP 24020-206"},
+  {num:35,nome:"MARILENE BRÁS DA SILVA CAMPOS",doc:"012.616.547-57",endProp:"Rua Manuel Serrão, 233, Casa 01, Nova Cidade – São Gonçalo/RJ.",valor:100,endImovel:"RUA ZORAIDA BRASIL 56 - 201, FONSECA - NITERÓI"},
+  {num:36,nome:"RICARDO BARRETO NOLASCO",doc:"503.871.897-34",endProp:"Estrada Francisco da Cruz Nunes 3300 - casa 408; Itaipu, Niterói/RJ",valor:176,endImovel:"RUA DESEMBARGADOR GERALDO TOLEDO, 41 - 103 - BOA VIAGEM, NITERÓI/RJ"},
+  {num:37,nome:"LIGIA DE OLIVEIRA VIANNA",doc:"380.938.397-04",endProp:"Rua das Acácias, 197, Itaipu - Niterói/RJ.",valor:301,endImovel:"RUA MIGUEL DE FRIAS 245 - 303, ICARAÍ - NITERÓI/RJ"},
+  {num:38,nome:"CARLOS VINÍCIUS MOURÃO LOPES DE AMORIM",doc:"053.457.947-74",endProp:"Rua Eurico Manoel do Carmo 02 – Bl 01 - 501, Charitas - Niterói/RJ.",valor:259.5,endImovel:"RUA PEREIRA DA SILVA 212 - 602 - ICARAÍ, NITERÓI"},
+  {num:39,nome:"LUZIA TEIXEIRA RAMOS",doc:"879.296.867-87",endProp:"Rua Coronel Tamarindo 77, 301 – Gragoatá, Niterói/RJ.",valor:114.1,endImovel:"RUA EUSÉBIO DE QUEIROS, 15 - 301, CENTRO - NITERÓI"},
+  {num:40,nome:"LUIZ EDUARDO FREIRE DOS SANTOS",doc:"891.998.477-87",endProp:"Rua Jacarandas da Península 1160/B03, 1304 – Barra da Tijuca, RJ.",valor:342.57,endImovel:"RUA FAGUNDES VARELA 507 - 401, ICARAÍ - NITERÓI/RJ"},
+  {num:41,nome:"VERONICA BARRETO SOARES TEIXEIRA",doc:"872.646.927-87",endProp:"Rua Guilherme Greenhlgh, 16 – 1502 – Icaraí, Niterói/RJ.",valor:233.55,endImovel:"RUA MARIZ E BARROS 98 - 401, ICARAÍ - NITERÓI/RJ"},
+  {num:42,nome:"EDWILSON SENA DOS SANTOS",doc:"302.821.792-91",endProp:"RUA DOMINGUES DE SÁ 469 - 1101 - ICARAÍ, NITERÓI/RJ",valor:450,endImovel:"RUA DOMINGUES DE SÁ 469 - 1101 - ICARAÍ, NITERÓI/RJ"},
+  {num:43,nome:"FERNANDO ANTÔNIO ALMEIDA COELHO",doc:"380.121.623-34",endProp:"Rua Antônio Rocha, 1055 – 904, Jardim das Oliveiras, Fortaleza/CE.",valor:230,endImovel:"RUA AMAPÁ 190 - 106, SÃO FRANCISCO - NITERÓI/RJ"},
+  {num:44,nome:"MANOELLA CONSTANTINO FRAGOSO",doc:"129.093.467-30",endProp:"Rua José Higino 290 - 502, Tijuca, Rio de Janeiro/RJ.",valor:100,endImovel:"RUA DA CONCEIÇÃO 141 - 307, CENTRO - NITERÓI/RJ"},
+  {num:45,nome:"JAMILLE MEISSONIER PASSINI NARDIN",doc:"121.371.907-02",endProp:"Rua Climaco Pereira, 35, Casa verde, Aracatiba, Maricá/RJ.",valor:120,endImovel:"RUA LOPES DA CUNHA 145 - 508, FONSECA - NITERÓI/RJ"},
+  {num:46,nome:"CAMILA BENIRSCHKE",doc:"076.697.577-01",endProp:"Av. Professor Florestan Fernandes 1036, 207 Bloco 09, Camboinhas, Niterói/RJ.",valor:100,endImovel:"RUA DA CONCEIÇÃO 141 - 308, CENTRO - NITERÓI/RJ"},
+  {num:47,nome:"CAMILA BENIRSCHKE",doc:"076.697.577-02",endProp:"Av. Professor Florestan Fernandes 1036, 207 Bloco 09, Camboinhas, Niterói/RJ.",valor:100,endImovel:"RUA DA CONCEIÇÃO 141 - 309, CENTRO - NITERÓI/RJ"},
+  {num:48,nome:"MARCO ANTONIO GUIMARÃES ESTELLITA",doc:"390.684.557-53",endProp:"Rua Noronha Torrezão 407, 504 Bloco 09, Santa Rosa, Niterói/RJ",valor:110,endImovel:"RUA NORONHA TORREZÃO 407 - 504 BLOCO 9 - NITERÓI, RJ"},
+  {num:49,nome:"RICARDO AUGUSTO QUITETE JORGE",doc:"866.188.497-72",endProp:"Rua Dom Helder Câmara 272 – Camboinhas, Niterói/RJ.",valor:900,endImovel:"RUA VIEIRA BUENO, 68 - SÃO CRISTÓVÃO, RIO DE JANEIRO/RJ"},
+  {num:50,nome:"FERNANDO DE AMORIM FERNANDES",doc:"005.595.560-63",endProp:"RUA MEM DE SÁ 117 APTO 1501, ICARAÍ - NITERÓI/RJ",valor:390,endImovel:"RUA GERALDO MARTINS 64 - 303, ICARAÍ - NITERÓI/RJ"},
+  {num:51,nome:"RAPHAEL DE FREITAS ROSA",doc:"101.611.307-20",endProp:"RUA LUIZ PALMIER 1001 - 209, BARRETO - NITERÓI",valor:209,endImovel:"RUA LUIZ PALMIER 1001 - 209, BARRETO - NITERÓI - RJ"},
+  {num:52,nome:"JOANA ELISA TEIXEIRA DE OLIVEIRA",doc:"321.662.178-26",endProp:"RUA VISCONDE DE SEPETIBA 50 - 1108, CENTRO - NITERÓI",valor:160,endImovel:"RUA ANDRADE NEVES 63 - 302 CEP 24210-000"},
+  {num:53,nome:"EGLEY AMAROLINA PEREIRA CARVALHO",doc:"049.560.766-57",endProp:"Rua Princesa Isabel 130 - 401, Fátima - Niterói",valor:110,endImovel:"RUA PRINCESA ISABEL 130, 201, FÁTIMA, NITERÓI"},
+  {num:54,nome:"SANDRA REGINA MARQUES DE OLIVEIRA",doc:"864.766.027-72",endProp:"Quadra J, Lote 12, Mar do Norte - Rio das Ostras/RJ",valor:190,endImovel:"RUA SANTOS MOREIRA 64 - CASA 16"},
+  {num:55,nome:"RODRIGO OLIVEIRA DE CARVALHO",doc:"104.033.437-71",endProp:"Rua Pablo Picasso 171 – Vila Progresso; Niterói/RJ.",valor:135,endImovel:"RUA WALDIR CABRAL 22 - 703 - CEP 24230-420"},
+  {num:56,nome:"JANE ESPÍNDOLA CAMPOS",doc:"043.965.847-09",endProp:"Travessa Dr. Roberto Tortelly 08, 302 Bloco 01 – ICARAÍ, NITERÓI",valor:215,endImovel:"TRAVESSA FANY 14 - 103 - CEP 24020-240"},
+  {num:57,nome:"HUMBERTO ANTONIO SERRA DAHER",doc:"450.344.007-15",endProp:"Rua Presidente Backer 337, 906 - Icaraí, Niterói/RJ.",valor:250,endImovel:"RUA MIGUEL COUTO 371, 1502 - ICARAÍ, NITERÓI/RJ"},
+  {num:58,nome:"ELBER CORREA ARMOND",doc:"500.898.897-20",endProp:"Rua Mariz e Barros 48/901, Niterói/RJ.",valor:210,endImovel:"RUA ATOR PAULO GUSTAVO 388 - 1305, ICARAÍ - NITERÓI"},
+  {num:59,nome:"RODRIGO NUNES DE BRITO",doc:"101.750.677-91",endProp:"RUA RUBENS BRASIL 369 - APTO 1202, FONSECA, NITERÓI - RJ",valor:135,endImovel:"RUA RUBENS BRASIL 369, 1305 - CEP: 24130-070"},
+  {num:60,nome:"MELISSA MATEUS CANDIDO",doc:"121.262.017-83",endProp:"Rua Travessa Arvelo, 21 – Sobrado; Barreto, Niterói/RJ.",valor:130,endImovel:"ESTRADA DA PACIÊNCIA 1235 - 105/BL 3 - CEP 24753-440"},
+  {num:61,nome:"ANDERSON FIDELIS COUTO",doc:"086.440.417-46",endProp:"Rua Mariz e Barros, 354 - Apto 202, Icaraí, Niterói/RJ.",valor:170,endImovel:"RUA EDUARDO LUIZ GOMES 13, 801 – CENTRO, NITERÓI/RJ"},
+  {num:62,nome:"WALZER JUNQUEIRA FERRAZ SIMÕES",doc:"776.325.597-87",endProp:"Rua Dr. Antônio Marques Mathias, Jardim Atlântico Leste, Maricá/RJ.",valor:240,endImovel:"RUA DR SARDINHA 46 - CASA 6"},
+  {num:63,nome:"ANA CAROLINA RIBEIRO SALGADO",doc:"053.899.887-36",endProp:"RUA MEM DE SÁ 117 APTO 1501, ICARAÍ - NITERÓI/RJ",valor:100,endImovel:"RUA EVILÁSIO SILVA 17 - CASA 2"},
+  {num:64,nome:"MÁRCIO PIRES ALVES",doc:"018.981.907-39",endProp:"Estrada Francisco da Cruz Nunes, 96 loja 01, Piratininga, Niterói/RJ.",valor:400,endImovel:"RUA GALDINO DO VALE 08 - PIRATININGA"},
+  {num:65,nome:"MORGANA ABREU MENEZES LUZ LIMA",doc:"109.069.697-35",endProp:"Av. Almirante Ary Parreiras, 16 – 509, Icaraí - Niterói/RJ.",valor:155,endImovel:"RUA ANDRADE NEVES 09 - 727, CENTRO - NITEROI"},
+  {num:66,nome:"CLEA GOMES COSTA",doc:"051.871.067-08",endProp:"Rua Fagundes Varela 534/201, Ingá, Niterói/RJ.",valor:110,endImovel:"RUA NORONHA 407 - 901 BL 3, SANTA ROSA - NITEROI"},
+  {num:67,nome:"MARCELO CAPELO FIDALGO",doc:"032.260.567-94",endProp:"Rua Barão do Amazonas 366 centro Niterói RJ",valor:125,endImovel:"RUA ANDRADE NEVES 09 - SALA 610"},
+  {num:68,nome:"NAJLA MOHANA DAMASCENO",doc:"113.295.777-01",endProp:"Rua. Ator Paulo Gustavo n 143, apto 203 bloco B, Icaraí – Niterói",valor:140,endImovel:"RUA ZORAIDA BRASIL 60 - 301, FONSECA - NITEROI"},
+  {num:69,nome:"SERGIO LUIZ BRAGA FRANCA",doc:"079.621.947-82",endProp:"Nossa Senhora de Lourdes, 150, 303 – Bloco 4, São Francisco – Niterói",valor:550,endImovel:"RUA AMAPÁ 12, 603 - SÃO FRANCISCO - NITEROI"},
+  {num:70,nome:"NOBILIS CONSTRUÇÕES E EMPREENDIMENTOS LTDA",doc:"03.422.293/0001-93",endProp:"Visconde do Rio Branco 571 – Loja 03; Centro – Niterói/RJ.",valor:300,endImovel:"RUA GERALDO MARTINS 64 - 303, ICARAÍ - NITERÓI/RJ"},
+  {num:71,nome:"NOBILIS CONSTRUÇÕES E EMPREENDIMENTOS LTDA",doc:"03.422.293/0001-93",endProp:"Visconde do Rio Branco 571 – Loja 03; Centro – Niterói/RJ.",valor:260,endImovel:"RUA JOAQUIM TÁVORA, 155 - 1606 - ICARAÍ - NITEROI"}
+];
+
+let dadosNF = [];
+
+function carregarNF(){
+  if(!localStorage.getItem('csi_nf_seeded')){
+    localStorage.setItem('csi_nf',JSON.stringify(SEED_NF));
+    localStorage.setItem('csi_nf_seeded','1');
+  }
+  dadosNF = JSON.parse(localStorage.getItem('csi_nf')||'[]');
+}
+
+function salvarNFStorage(){ localStorage.setItem('csi_nf',JSON.stringify(dadosNF)); }
+
+function renderNF(lista){
+  const dados = lista || dadosNF;
+  const soma = dados.reduce((s,n)=>s+(+n.valor||0),0);
+  document.getElementById('nfTotalReg').textContent = dados.length;
+  document.getElementById('nfSomaValores').textContent = R(soma);
+  document.getElementById('nfTotal').textContent = dados.length+' registros';
+  const tb = document.getElementById('tbodyNF');
+  if(!dados.length){tb.innerHTML='<tr><td colspan="7"><div class="empty-state"><div class="icon">🧾</div><p>Nenhum registro.</p></div></td></tr>';return;}
+  tb.innerHTML = dados.map((n,i)=>{
+    const ri = dadosNF.indexOf(n);
+    return`<tr>
+      <td style="text-align:center;font-weight:700;color:var(--muted)">${n.num}</td>
+      <td><strong style="font-size:12px">${n.nome}</strong></td>
+      <td style="font-size:11px;color:var(--muted)">${n.doc}</td>
+      <td style="font-size:11px;max-width:180px">${n.endProp}</td>
+      <td style="text-align:right"><strong class="text-success">${R(n.valor)}</strong></td>
+      <td style="font-size:11px;max-width:180px">${n.endImovel}</td>
+      <td style="text-align:center">
+        <button class="btn btn-primary btn-sm" onclick="editarNF(${ri})">✏️</button>
+        <button class="btn btn-danger btn-sm" onclick="excluirNF(${ri})">🗑</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function filtrarNF(){
+  const b = document.getElementById('buscaNF').value.toLowerCase();
+  renderNF(dadosNF.filter(n=>`${n.nome} ${n.doc} ${n.endImovel} ${n.endProp}`.toLowerCase().includes(b)));
+}
+
+function abrirModalNF(){
+  document.getElementById('nfEditIndex').value=-1;
+  document.getElementById('modalNFTitle').textContent='Novo Registro NF';
+  ['nfNum','nfNome','nfDoc','nfEndProp','nfValor','nfEndImovel'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('nfNum').value = dadosNF.length+1;
+  document.getElementById('modalNF').classList.add('open');
+}
+
+function editarNF(idx){
+  const n = dadosNF[idx];
+  document.getElementById('nfEditIndex').value = idx;
+  document.getElementById('modalNFTitle').textContent = 'Editar Registro NF';
+  document.getElementById('nfNum').value = n.num;
+  document.getElementById('nfNome').value = n.nome;
+  document.getElementById('nfDoc').value = n.doc;
+  document.getElementById('nfEndProp').value = n.endProp;
+  document.getElementById('nfValor').value = n.valor;
+  document.getElementById('nfEndImovel').value = n.endImovel;
+  document.getElementById('modalNF').classList.add('open');
+}
+
+function salvarNF(){
+  const nome = document.getElementById('nfNome').value.trim();
+  if(!nome){alert('Informe o nome.');return;}
+  const item = {
+    num: parseInt(document.getElementById('nfNum').value)||dadosNF.length+1,
+    nome, doc: document.getElementById('nfDoc').value,
+    endProp: document.getElementById('nfEndProp').value,
+    valor: parseFloat(document.getElementById('nfValor').value)||0,
+    endImovel: document.getElementById('nfEndImovel').value
+  };
+  const idx = parseInt(document.getElementById('nfEditIndex').value);
+  if(idx>=0) dadosNF[idx]=item; else dadosNF.push(item);
+  salvarNFStorage(); fecharModal('modalNF'); renderNF();
+}
+
+function excluirNF(idx){
+  if(!confirm('Excluir registro?'))return;
+  dadosNF.splice(idx,1); salvarNFStorage(); renderNF();
+}
+
+function exportarNF(){
+  const header = 'Nº,Nome,CPF/CNPJ,Endereço Proprietário,Valor NF,Endereço Imóvel';
+  const rows = dadosNF.map(n=>`${n.num},"${n.nome}","${n.doc}","${n.endProp}",${n.valor},"${n.endImovel}"`);
+  const csv = [header,...rows].join('\n');
+  const blob = new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href=url; a.download='Valores_NF.csv'; a.click();
+}
+
+// ══════════════════════════════════════════════════════════
+// FLUXO DE CAIXA
+// ══════════════════════════════════════════════════════════
+let custos = [];
+
+const CUSTOS_SEED = [
+  {categoria:'Aluguel Escritório',descricao:'Aluguel mensal do escritório',valor:0},
+  {categoria:'Água',descricao:'Conta de água',valor:0},
+  {categoria:'Luz/Energia',descricao:'Conta de energia elétrica',valor:0},
+  {categoria:'Internet',descricao:'Plano de internet',valor:0},
+  {categoria:'Portal Imobiliário',descricao:'Portal(is) imobiliário(s)',valor:0},
+  {categoria:'Sistema',descricao:'Sistema de gestão',valor:0},
+  {categoria:'Contabilidade',descricao:'Honorários contábeis',valor:0},
+];
+
+function carregarCustos(){
+  if(!localStorage.getItem('csi_custos_seeded')){
+    localStorage.setItem('csi_custos',JSON.stringify(CUSTOS_SEED));
+    localStorage.setItem('csi_custos_seeded','1');
+  }
+  custos = JSON.parse(localStorage.getItem('csi_custos')||'[]');
+}
+
+function salvarCustos(){
+  // Ler valores editados da tabela
+  const linhas = document.querySelectorAll('#tbodyCustos tr');
+  linhas.forEach((tr,i)=>{
+    if(custos[i]){
+      custos[i].categoria = tr.querySelector('.fc-cat').value;
+      custos[i].descricao  = tr.querySelector('.fc-desc').value;
+      custos[i].valor      = parseFloat(tr.querySelector('.fc-val').value)||0;
+    }
+  });
+  localStorage.setItem('csi_custos',JSON.stringify(custos));
+  renderFluxoCaixa();
+  alert('✅ Custos salvos!');
+}
+
+function renderFluxoCaixa(){
+  const receita = imoveis.filter(i=>i.status==='ativo').reduce((s,i)=>s+(+i.aluguel||0),0);
+  const totalCustos = custos.reduce((s,c)=>s+(+c.valor||0),0);
+  const resultado = receita - totalCustos;
+  document.getElementById('fcReceita').textContent = R(receita);
+  document.getElementById('fcCustos').textContent = R(totalCustos);
+  document.getElementById('fcResultado').textContent = R(resultado);
+  document.getElementById('fcResultado').style.color = resultado>=0?'var(--success)':'var(--danger)';
+  document.getElementById('fcTotalCustos').textContent = R(totalCustos);
+
+  const tb = document.getElementById('tbodyCustos');
+  tb.innerHTML = custos.map((c,i)=>`<tr>
+    <td><input class="fc-cat form-control" type="text" value="${c.categoria||''}" style="width:100%;padding:5px 8px;border:1px solid var(--border);border-radius:5px;font-size:12.5px;font-family:inherit"></td>
+    <td><input class="fc-desc form-control" type="text" value="${c.descricao||''}" style="width:100%;padding:5px 8px;border:1px solid var(--border);border-radius:5px;font-size:12.5px;font-family:inherit"></td>
+    <td style="text-align:right"><input class="fc-val" type="number" value="${c.valor||0}" min="0" step="0.01" onchange="atualizarTotalCustos()" style="width:110px;padding:5px 8px;border:1px solid var(--border);border-radius:5px;font-size:13px;text-align:right;font-family:inherit"></td>
+    <td style="text-align:center"><button class="btn btn-danger btn-sm" onclick="removerCusto(${i})">🗑</button></td>
+  </tr>`).join('');
+
+  // Resumo
+  const pct = receita>0?(totalCustos/receita*100).toFixed(1):0;
+  document.getElementById('fcResumo').innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:10px;font-size:13px">
+      <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">
+        <span>💰 Receita mensal (10% comissão)</span><strong class="text-success">${R(receita*.1)}</strong>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">
+        <span>💸 Total custos</span><strong class="text-danger">${R(totalCustos)}</strong>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">
+        <span>📊 Custos sobre receita</span><strong>${pct}%</strong>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:10px 0;background:${resultado>=0?'#dcfce7':'#fee2e2'};border-radius:7px;padding:12px 14px;margin-top:4px">
+        <span style="font-weight:700">🏆 Resultado líquido</span>
+        <strong style="font-size:16px;color:${resultado>=0?'var(--success)':'var(--danger)'}">${R(resultado)}</strong>
+      </div>
+    </div>`;
+}
+
+function atualizarTotalCustos(){
+  let total = 0;
+  document.querySelectorAll('.fc-val').forEach(inp=>total+=parseFloat(inp.value)||0);
+  document.getElementById('fcTotalCustos').textContent = R(total);
+  document.getElementById('fcCustos').textContent = R(total);
+  const receita = imoveis.filter(i=>i.status==='ativo').reduce((s,i)=>s+(+i.aluguel||0),0);
+  const resultado = receita - total;
+  document.getElementById('fcResultado').textContent = R(resultado);
+  document.getElementById('fcResultado').style.color = resultado>=0?'var(--success)':'var(--danger)';
+}
+
+function adicionarLinhaCusto(){
+  custos.push({categoria:'Nova categoria',descricao:'',valor:0});
+  renderFluxoCaixa();
+  // Focar na última linha
+  setTimeout(()=>{
+    const inputs = document.querySelectorAll('.fc-cat');
+    if(inputs.length) inputs[inputs.length-1].focus();
+  },100);
+}
+
+function addCustoRapido(cat){
+  // Verificar se já existe
+  const existe = custos.find(c=>c.categoria===cat);
+  if(existe){alert(`"${cat}" já está na lista!`);return;}
+  custos.push({categoria:cat,descricao:'',valor:0});
+  renderFluxoCaixa();
+}
+
+function removerCusto(idx){
+  if(!confirm('Remover este custo?'))return;
+  custos.splice(idx,1);
+  renderFluxoCaixa();
+}
+function cfgCora(){return{clientId:localStorage.getItem('cora_cid')||'',clientSecret:localStorage.getItem('cora_cs')||'',email:localStorage.getItem('cora_email')||'',nome:localStorage.getItem('cora_nome')||'Carvalho Soluções Imobiliárias'};}
+
+function abrirConfigCora(){
+  const c=cfgCora();
+  document.getElementById('coraClientId').value=c.clientId;
+  document.getElementById('coraClientSecret').value=c.clientSecret;
+  document.getElementById('coraEmailRemetente').value=c.email;
+  document.getElementById('coraEmailNome').value=c.nome;
+  document.getElementById('modalConfigCora').classList.add('open');
+}
+function salvarConfigCora(){
+  const id=document.getElementById('coraClientId').value.trim();
+  const cs=document.getElementById('coraClientSecret').value.trim();
+  const em=document.getElementById('coraEmailRemetente').value.trim();
+  if(!id||!cs||!em){alert('Preencha Client ID, Client Secret e E-mail.');return;}
+  localStorage.setItem('cora_cid',id);
+  localStorage.setItem('cora_cs',cs);
+  localStorage.setItem('cora_email',em);
+  localStorage.setItem('cora_nome',document.getElementById('coraEmailNome').value||'Carvalho Soluções Imobiliárias');
+  fecharModal('modalConfigCora');
+  alert('✅ Credenciais Cora salvas com sucesso!');
+  renderCobranca();
+}
+function testarConexaoCora(){
+  const c=cfgCora();
+  if(!c.clientId){alert('Configure o Client ID primeiro.');return;}
+  alert('🔌 Credenciais encontradas!\n\nClient ID: '+c.clientId.slice(0,24)+'...\n\nA integração real requer servidor HTTPS.\nEm uso local funciona em modo simulação.');
+}
+
+function cobKey(comp,idx){return`cob5_${comp}_${idx}`;}
+
+function gerarLoteCobranca(){
+  const comp=document.getElementById('cobCompetencia').value;
+  if(!comp){alert('Selecione a competência.');return;}
+  const ativos=imoveis.filter(i=>i.status==='ativo');
+  let gerados=0,existentes=0;
+  ativos.forEach(im=>{
+    const idx=imoveis.indexOf(im);
+    const key=cobKey(comp,idx);
+    if(!localStorage.getItem(key)){
+      const vencDia=String(im.vencimento||'5').padStart(2,'0');
+      // Calcula data de vencimento: se dia > dias do mês, usa último dia
+      const [y,m]=comp.split('-');
+      const diasMes=new Date(+y,+m,0).getDate();
+      const dia=Math.min(parseInt(im.vencimento||5),diasMes);
+      const vencimento=`${comp}-${String(dia).padStart(2,'0')}`;
+      const cob={
+        key,imovelIdx:idx,competencia:comp,
+        inquilino:im.nomeInquilino||'—',
+        endereco:im.endereco,
+        email:im.email||'',
+        telefone:im.telefone||'',
+        vencimento,
+        aluguel:+im.aluguel||0,
+        condominio:+im.condominio||0,  // pré-preenchido se cadastrado no contrato
+        iptu:+im.iptu||0,               // pré-preenchido se cadastrado no contrato
+        status:'pendente',
+        boletoId:null,linhaDigitavel:null,
+        geradoEm:null,enviadoEm:null,pagoEm:null
+      };
+      cob.total=cob.aluguel+cob.condominio+cob.iptu;
+      localStorage.setItem(key,JSON.stringify(cob));
+      gerados++;
+    } else {
+      existentes++;
+    }
+  });
+  if(gerados>0){
+    alert(`✅ Lote gerado com sucesso!\n\n📋 ${gerados} cobrança(s) criada(s) para ${fmtM(comp)}\n🔄 ${existentes} já existiam e foram mantidas.\n\nAgora edite Condomínio e IPTU onde necessário e clique em 📄 para emitir os boletos.`);
+  } else {
+    alert(`ℹ️ Todas as cobranças de ${fmtM(comp)} já foram geradas anteriormente (${existentes} registros).`);
+  }
+  renderCobranca();
+}
+
+function renderCobranca(){
+  const comp=document.getElementById('cobCompetencia')?.value;
+  const fv=document.getElementById('cobFiltroVenc')?.value||'';
+  const fs=document.getElementById('cobFiltroStatus')?.value||'';
+  const cfg=cfgCora();
+  const alerta=document.getElementById('cobAlertaConfig');
+  if(alerta)alerta.style.display=cfg.clientId?'none':'block';
+  if(!comp)return;
+
+  // Monta lista: para cada contrato ativo, usa cobrança salva ou cria visualização temporária
+  let lista=[];
+  imoveis.forEach((im,idx)=>{
+    if(im.status!=='ativo')return;
+    const key=cobKey(comp,idx);
+    const salvo=localStorage.getItem(key);
+    if(salvo){
+      lista.push(JSON.parse(salvo));
+    } else {
+      // Mostra o contrato mesmo sem lote gerado (modo visualização)
+      const [y,m]=comp.split('-');
+      const diasMes=new Date(+y,+m,0).getDate();
+      const dia=Math.min(parseInt(im.vencimento||5),diasMes);
+      const vencimento=`${comp}-${String(dia).padStart(2,'0')}`;
+      lista.push({
+        key, imovelIdx:idx, competencia:comp,
+        inquilino:im.nomeInquilino||'—',
+        endereco:im.endereco,
+        email:im.email||'',
+        telefone:im.telefone||'',
+        vencimento,
+        aluguel:+im.aluguel||0,
+        condominio:+im.condominio||0,
+        iptu:+im.iptu||0,
+        total:(+im.aluguel||0)+(+im.condominio||0)+(+im.iptu||0),
+        status:'pendente',
+        _naoSalvo:true  // flag: ainda não foi gerado no localStorage
+      });
+    }
+  });
+
+  // Aplicar filtros
+  if(fv) lista=lista.filter(c=>{const v=String(imoveis[c.imovelIdx]?.vencimento||'');return v===fv||v===fv.padStart(2,'0');});
+  if(fs) lista=lista.filter(c=>c.status===fs);
+
+  // KPIs
+  const total=lista.reduce((s,c)=>s+c.total,0);
+  document.getElementById('cobTotalValor').textContent=R(total);
+  document.getElementById('cobTotalQtd').textContent=lista.length+' cobranças';
+  document.getElementById('cobPagos').textContent=lista.filter(c=>c.status==='pago').length;
+  document.getElementById('cobAbertos').textContent=lista.filter(c=>c.status==='pendente'||c.status==='gerado').length;
+  document.getElementById('cobVencidos').textContent=lista.filter(c=>c.status==='vencido').length;
+
+  // Resumo por grupo de vencimento
+  const resumoEl=document.getElementById('cobResumoGrupos');
+  if(resumoEl){
+    const grupos={};
+    lista.forEach(c=>{
+      const v='Dia '+parseInt(imoveis[c.imovelIdx]?.vencimento||0);
+      grupos[v]=(grupos[v]||0)+1;
+    });
+    const partes=Object.entries(grupos).sort((a,b)=>parseInt(a[0].split(' ')[1])-parseInt(b[0].split(' ')[1])).map(([g,n])=>`${g}: ${n}`);
+    resumoEl.textContent=partes.length?'('+partes.join(' · ')+')':'';
+  }
+
+  const stMap={
+    pendente:'<span class="cob-pending">⏳ Pendente</span>',
+    gerado:'<span class="cob-generated">📄 Gerado</span>',
+    pago:'<span class="cob-paid">✅ Pago</span>',
+    vencido:'<span class="cob-overdue">🔴 Vencido</span>'
+  };
+
+  const tb=document.getElementById('tbodyCobranca');
+  if(!lista.length){
+    tb.innerHTML=`<tr><td colspan="11"><div class="empty-state"><div class="icon">💳</div><p>Nenhum contrato ativo encontrado.</p></div></td></tr>`;
+    return;
+  }
+
+  // Ordenar por vencimento depois por nome
+  lista.sort((a,b)=>{
+    const va=parseInt(imoveis[a.imovelIdx]?.vencimento||99);
+    const vb=parseInt(imoveis[b.imovelIdx]?.vencimento||99);
+    if(va!==vb)return va-vb;
+    return(a.inquilino||'').localeCompare(b.inquilino||'');
+  });
+
+  tb.innerHTML=lista.map(cob=>{
+    const vencDia=imoveis[cob.imovelIdx]?.vencimento||'—';
+    const totalCalc=(+cob.aluguel||0)+(+cob.condominio||0)+(+cob.iptu||0);
+    const naoSalvo=cob._naoSalvo;
+    return`<tr${naoSalvo?' style="opacity:.85"':''}>
+      <td><input type="checkbox" class="cob-check" data-key="${cob.key}"></td>
+      <td>
+        <strong style="font-size:12.5px">${cob.inquilino}</strong>
+        ${cob.email
+          ?`<br><small class="text-muted" style="font-size:10px">📧 ${cob.email}</small>`
+          :'<br><small style="color:#dc2626;font-size:10px">⚠️ sem e-mail</small>'}
+      </td>
+      <td style="font-size:11px;max-width:170px;line-height:1.4">${cob.endereco}</td>
+      <td style="text-align:center">
+        <strong>Dia ${vencDia}</strong>
+        <br><small class="text-muted" style="font-size:10px">${fmtD(cob.vencimento)}</small>
+      </td>
+      <td style="text-align:right"><strong class="text-success">${R(cob.aluguel)}</strong></td>
+      <td style="text-align:center">
+        <input class="cob-input" type="number" value="${cob.condominio||0}" min="0" step="0.01"
+          onchange="atualizarCobV3('${cob.key}','condominio',this.value,${cob.imovelIdx},'${comp}')"
+          title="Editar condomínio">
+      </td>
+      <td style="text-align:center">
+        <input class="cob-input" type="number" value="${cob.iptu||0}" min="0" step="0.01"
+          onchange="atualizarCobV3('${cob.key}','iptu',this.value,${cob.imovelIdx},'${comp}')"
+          title="Editar IPTU" style="width:80px">
+      </td>
+      <td style="text-align:right">
+        <strong style="font-size:13px;color:var(--primary)">${R(totalCalc)}</strong>
+      </td>
+      <td style="text-align:center">
+        <input class="cob-input" type="email" value="${cob.email||''}" placeholder="email@..."
+          onchange="atualizarCobV3('${cob.key}','email',this.value,${cob.imovelIdx},'${comp}')"
+          style="width:150px" title="Editar e-mail">
+      </td>
+      <td style="text-align:center">${stMap[cob.status]||cob.status}</td>
+      <td>
+        <div style="display:flex;gap:3px;flex-wrap:wrap;justify-content:center">
+          ${cob.status==='pendente'?`<button class="btn btn-primary btn-sm" onclick="emitirBoletoV3('${cob.key}',${cob.imovelIdx},'${comp}')" title="Emitir boleto">📄 Boleto</button>`:''}
+          ${cob.status!=='pago'?`<button class="btn btn-success btn-sm" onclick="enviarEmailCobV3('${cob.key}',${cob.imovelIdx},'${comp}')" title="Enviar e-mail">📧</button>`:''}
+          <button class="btn btn-outline btn-sm" onclick="verDetalheCobV3('${cob.key}',${cob.imovelIdx},'${comp}')" title="Ver detalhes">👁</button>
+          ${cob.status!=='pago'?`<button class="btn btn-accent btn-sm" onclick="marcarPagoCobV3('${cob.key}',${cob.imovelIdx},'${comp}')" title="Marcar pago">✅</button>`:''}
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+// Garante que a cobrança está salva antes de qualquer operação
+function garantirSalvo(key,imovelIdx,comp){
+  if(localStorage.getItem(key))return JSON.parse(localStorage.getItem(key));
+  const im=imoveis[imovelIdx];
+  if(!im)return null;
+  const [y,m]=comp.split('-');
+  const diasMes=new Date(+y,+m,0).getDate();
+  const dia=Math.min(parseInt(im.vencimento||5),diasMes);
+  const cob={
+    key,imovelIdx,competencia:comp,
+    inquilino:im.nomeInquilino||'—',
+    endereco:im.endereco,
+    email:im.email||'',
+    telefone:im.telefone||'',
+    vencimento:`${comp}-${String(dia).padStart(2,'0')}`,
+    aluguel:+im.aluguel||0,
+    condominio:+im.condominio||0,
+    iptu:+im.iptu||0,
+    status:'pendente',
+    boletoId:null,linhaDigitavel:null,
+    geradoEm:null,enviadoEm:null,pagoEm:null
+  };
+  cob.total=cob.aluguel+cob.condominio+cob.iptu;
+  localStorage.setItem(key,JSON.stringify(cob));
+  return cob;
+}
+
+function atualizarCobV3(key,campo,valor,imovelIdx,comp){
+  const cob=garantirSalvo(key,imovelIdx,comp);
+  if(!cob)return;
+  cob[campo]=campo==='email'?valor:(parseFloat(valor)||0);
+  cob.total=(+cob.aluguel||0)+(+cob.condominio||0)+(+cob.iptu||0);
+  delete cob._naoSalvo;
+  localStorage.setItem(key,JSON.stringify(cob));
+  renderCobranca();
+}
+
+function emitirBoletoV3(key,imovelIdx,comp){
+  const cob=garantirSalvo(key,imovelIdx,comp);
+  if(!cob)return;
+  const sim={...cob,status:'gerado',boletoId:'COB-'+Date.now(),
+    linhaDigitavel:'00190.00009 01234.567890 12345.678909 1 '+Math.round(cob.total*100).toString().padStart(10,'0'),
+    geradoEm:new Date().toISOString()};
+  delete sim._naoSalvo;
+  localStorage.setItem(key,JSON.stringify(sim));
+  alert(`📄 Boleto gerado!\n\nInquilino: ${cob.inquilino}\nValor: ${R(cob.total)}\nVencimento: ${fmtD(cob.vencimento)}\nID: ${sim.boletoId}\n\n⚠️ Modo simulação — configure servidor HTTPS para emissão real via API Cora.`);
+  renderCobranca();
+}
+
+function enviarEmailCobV3(key,imovelIdx,comp){
+  const cob=garantirSalvo(key,imovelIdx,comp);
+  if(!cob)return;
+  if(!cob.email){alert('⚠️ E-mail não cadastrado. Edite o campo e-mail na tabela.');return;}
+  const c=cfgCora();
+  const assunto=encodeURIComponent(`Boleto Aluguel ${fmtM(cob.competencia)} — ${cob.endereco}`);
+  const corpo=encodeURIComponent(
+    `Olá ${cob.inquilino},\n\nSegue cobrança referente a ${fmtM(cob.competencia)}.\n\n`+
+    `Imóvel: ${cob.endereco}\nAluguel: ${R(cob.aluguel)}`+
+    `${cob.condominio?'\nCondomínio: '+R(cob.condominio):''}${cob.iptu?'\nIPTU: '+R(cob.iptu):''}`+
+    `\nTotal: ${R(cob.total)}\nVencimento: ${fmtD(cob.vencimento)}`+
+    `${cob.linhaDigitavel?'\n\nLinha digitável:\n'+cob.linhaDigitavel:''}`+
+    `\n\nAtenciosamente,\n${c.nome}`
+  );
+  window.open(`mailto:${cob.email}?subject=${assunto}&body=${corpo}`);
+  cob.enviadoEm=new Date().toISOString();
+  delete cob._naoSalvo;
+  localStorage.setItem(key,JSON.stringify(cob));
+  renderCobranca();
+}
+
+function marcarPagoCobV3(key,imovelIdx,comp){
+  const cob=garantirSalvo(key,imovelIdx,comp);
+  if(!cob)return;
+  if(!confirm(`Confirmar pagamento?\n${cob.inquilino}\n${R(cob.total)}`))return;
+  cob.status='pago';cob.pagoEm=new Date().toISOString();
+  delete cob._naoSalvo;
+  localStorage.setItem(key,JSON.stringify(cob));
+  renderCobranca();
+}
+
+function verDetalheCobV3(key,imovelIdx,comp){
+  const cob=garantirSalvo(key,imovelIdx,comp);
+  if(!cob)return;
+  document.getElementById('detCobTitle').textContent=`${cob.inquilino} — ${fmtM(cob.competencia)}`;
+  document.getElementById('detCobContent').innerHTML=`
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;margin-bottom:14px">
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Inquilino</span><br><strong>${cob.inquilino}</strong></div>
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Competência</span><br>${fmtM(cob.competencia)}</div>
+    <div style="grid-column:1/-1"><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Endereço</span><br>${cob.endereco}</div>
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">E-mail</span><br>${cob.email||'—'}</div>
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Vencimento</span><br>${fmtD(cob.vencimento)}</div>
+  </div>
+  <hr class="divider">
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;font-size:13px;margin-bottom:14px">
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Aluguel</span><br><strong>${R(cob.aluguel)}</strong></div>
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Condomínio</span><br><strong>${R(cob.condominio||0)}</strong></div>
+    <div><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">IPTU</span><br><strong>${R(cob.iptu||0)}</strong></div>
+    <div style="grid-column:1/-1"><span style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Total</span><br><strong style="font-size:20px;color:var(--success)">${R(cob.total)}</strong></div>
+  </div>
+  ${cob.linhaDigitavel?`<hr class="divider"><div style="font-size:12px"><strong>Linha Digitável:</strong><br><code style="background:#f1f5f9;padding:6px 10px;border-radius:5px;display:block;margin-top:4px;font-size:11px;word-break:break-all">${cob.linhaDigitavel}</code></div>`:''}
+  ${cob.boletoId?`<div style="margin-top:8px;font-size:12px;color:var(--muted)">ID: ${cob.boletoId}</div>`:''}
+  ${cob.geradoEm?`<div style="font-size:11px;color:var(--muted)">Gerado: ${new Date(cob.geradoEm).toLocaleString('pt-BR')}</div>`:''}
+  ${cob.enviadoEm?`<div style="font-size:11px;color:var(--muted)">E-mail enviado: ${new Date(cob.enviadoEm).toLocaleString('pt-BR')}</div>`:''}
+  ${cob.pagoEm?`<div style="font-size:11px;color:var(--success);font-weight:700;margin-top:6px">✅ Pago em: ${new Date(cob.pagoEm).toLocaleString('pt-BR')}</div>`:''}`;
+  document.getElementById('modalDetCob').classList.add('open');
+}
+
+// MODAIS — FECHAR AO CLICAR FORA
+// ══════════════════════════════════════════════════════════
+
+function toggleTodosCob(cb){document.querySelectorAll('.cob-check').forEach(c=>c.checked=cb.checked);}
+function selecionarTodosCob(){document.querySelectorAll('.cob-check').forEach(c=>c.checked=true);const m=document.getElementById('checkTodosCob');if(m)m.checked=true;}
+function enviarEmailsLote(){
+  const checks=document.querySelectorAll('.cob-check:checked');
+  if(!checks.length){alert('Selecione ao menos uma cobrança.');return;}
+  const comp=document.getElementById('cobCompetencia').value;
+  let enviados=0,semEmail=0;
+  checks.forEach(ch=>{
+    const key=ch.dataset.key;
+    const parts=key.split('_');
+    const idx=parseInt(parts[parts.length-1]);
+    const s=localStorage.getItem(key);
+    const cob=s?JSON.parse(s):(imoveis[idx]?{email:imoveis[idx].email||''}:{});
+    if(cob.email){enviarEmailCobV3(key,idx,comp);enviados++;}else semEmail++;
+  });
+  if(semEmail>0)alert(semEmail+' cobrança(s) sem e-mail foram ignoradas.');
+}
+function trocarLogo(event){
+  const file=event.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=(e)=>{
+    const c=document.getElementById('logoIconContainer');
+    c.innerHTML='<img src="'+e.target.result+'" alt="Logo">';
+    localStorage.setItem('csi_logo',e.target.result);
+  };
+  reader.readAsDataURL(file);
+}
+function carregarLogo(){
+  const logo=localStorage.getItem('csi_logo');
+  if(logo){const c=document.getElementById('logoIconContainer');if(c)c.innerHTML='<img src="'+logo+'" alt="Logo">';}
+}
+
+document.querySelectorAll('.modal-overlay').forEach(mo=>mo.addEventListener('click',e=>{if(e.target===mo)mo.classList.remove('open');}));
+</script>
+</body>
+</html>
+
