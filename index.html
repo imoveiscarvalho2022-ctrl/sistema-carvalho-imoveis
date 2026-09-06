@@ -4,115 +4,420 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Carvalho Soluções Imobiliárias — Gestão Financeira</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--primary:#1a3c5e;--primary-light:#2563a8;--accent:#e8a020;--accent-light:#f5c842;--success:#16a34a;--danger:#dc2626;--warning:#d97706;--bg:#f1f5f9;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--shadow:0 2px 12px rgba(0,0,0,.08);--radius:10px}
+:root{
+  --primary:#1a3c5e;--primary-light:#2563a8;--primary-dark:#112840;
+  --accent:#e8a020;--accent-light:#f5c842;
+  --success:#16a34a;--danger:#dc2626;--warning:#d97706;
+  --bg:#eef2f7;--card:#fff;--text:#1e293b;--muted:#64748b;
+  --border:#e2e8f0;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 4px 14px rgba(0,0,0,.07);
+  --shadow-md:0 4px 20px rgba(0,0,0,.10);
+  --shadow-lg:0 8px 32px rgba(0,0,0,.16);
+  --radius:12px;--sidebar-w:220px
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-/* HEADER PRETO */
-header{background:#0d0d0d;color:#fff;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:62px;box-shadow:0 2px 8px rgba(0,0,0,.4);position:sticky;top:0;z-index:100}
-.logo{display:flex;align-items:center;gap:10px}
-.logo-icon{width:36px;height:36px;background:#e8a020;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;overflow:hidden;flex-shrink:0}
-.logo-icon img{width:100%;height:100%;object-fit:cover;border-radius:8px}
-.logo h1{font-size:15px;font-weight:700;line-height:1.2;color:#fff}
-.logo span{font-size:11px;color:#999}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+
+/* ── HEADER ─────────────────────────────── */
+header{
+  background:linear-gradient(135deg,#0d1f30 0%,#1a3c5e 100%);
+  color:#fff;padding:0 24px;display:flex;align-items:center;
+  justify-content:space-between;height:62px;
+  box-shadow:0 2px 12px rgba(0,0,0,.35);
+  position:sticky;top:0;z-index:200
+}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-icon{
+  width:38px;height:38px;background:var(--accent);
+  border-radius:10px;display:flex;align-items:center;
+  justify-content:center;font-size:19px;overflow:hidden;
+  flex-shrink:0;box-shadow:0 2px 8px rgba(232,160,32,.4)
+}
+.logo-icon img{width:100%;height:100%;object-fit:cover;border-radius:10px}
+.logo h1{font-size:15px;font-weight:700;line-height:1.3;color:#fff;letter-spacing:-.2px}
+.logo span{font-size:11px;color:rgba(255,255,255,.55);letter-spacing:.2px}
 .header-right{display:flex;align-items:center;gap:14px}
-#headerDate{font-size:12px;color:#999}
-.logo-upload-btn{font-size:11px;color:#777;cursor:pointer;padding:4px 8px;border:1px solid #333;border-radius:5px;transition:all .2s;white-space:nowrap}
-.logo-upload-btn:hover{color:#e8a020;border-color:#e8a020}
-/* NAV BRANCO */
-nav{background:#fff;border-bottom:2px solid var(--border);display:flex;padding:0 16px;overflow-x:auto;position:sticky;top:62px;z-index:90;box-shadow:0 1px 4px rgba(0,0,0,.05)}
-nav button{background:none;border:none;cursor:pointer;padding:12px 16px;font-size:12.5px;font-weight:600;color:var(--muted);border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s;display:flex;align-items:center;gap:6px}
-nav button:hover{color:var(--primary)}
-nav button.active{color:var(--primary);border-bottom-color:var(--accent)}
-main{padding:20px 24px;max-width:1400px;margin:0 auto}
-.section{display:none}.section.active{display:block}
-.card{background:var(--card);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);border:1px solid var(--border)}
-.card-title{font-size:14px;font-weight:700;color:var(--primary);margin-bottom:14px;display:flex;align-items:center;gap:7px}
-.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:20px}
-.kpi-card{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);border-left:4px solid var(--primary)}
-.kpi-card.accent{border-left-color:var(--accent)}.kpi-card.success{border-left-color:var(--success)}.kpi-card.danger{border-left-color:var(--danger)}.kpi-card.warning{border-left-color:var(--warning)}
-.kpi-label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
-.kpi-value{font-size:24px;font-weight:800;color:var(--primary);margin:3px 0 2px}
+#headerDate{font-size:11.5px;color:rgba(255,255,255,.55)}
+.logo-upload-btn{
+  font-size:11px;color:rgba(255,255,255,.6);cursor:pointer;
+  padding:5px 10px;border:1px solid rgba(255,255,255,.2);
+  border-radius:6px;transition:all .2s;white-space:nowrap
+}
+.logo-upload-btn:hover{color:var(--accent);border-color:var(--accent)}
+.hamburger{
+  display:none;background:none;border:none;cursor:pointer;
+  color:rgba(255,255,255,.7);font-size:20px;padding:6px;
+  border-radius:6px;transition:all .2s;line-height:1
+}
+.hamburger:hover{background:rgba(255,255,255,.1);color:#fff}
+
+/* ── APP SHELL ───────────────────────────── */
+.app-shell{display:flex;min-height:calc(100vh - 62px)}
+
+/* ── SIDEBAR ─────────────────────────────── */
+.sidebar{
+  width:var(--sidebar-w);
+  background:linear-gradient(180deg,#112840 0%,#1a3c5e 100%);
+  position:sticky;top:62px;height:calc(100vh - 62px);
+  overflow-y:auto;flex-shrink:0;
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+  z-index:90;border-right:1px solid rgba(255,255,255,.06)
+}
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:4px}
+.sidebar-label{
+  font-size:9.5px;font-weight:700;letter-spacing:1.2px;
+  color:rgba(255,255,255,.35);text-transform:uppercase;
+  padding:18px 18px 6px
+}
+nav{display:flex;flex-direction:column;padding:8px 0 16px}
+nav button{
+  background:none;border:none;cursor:pointer;
+  padding:10px 18px;font-size:13px;font-weight:500;
+  color:rgba(255,255,255,.65);text-align:left;
+  display:flex;align-items:center;gap:10px;
+  transition:all .18s;border:none;border-left:3px solid transparent;
+  margin:1px 8px;border-radius:0 8px 8px 0;
+  white-space:nowrap;line-height:1.4
+}
+nav button:hover{background:rgba(255,255,255,.09);color:#fff}
+nav button.active{
+  background:rgba(232,160,32,.18);color:var(--accent);
+  border-left-color:var(--accent);font-weight:600
+}
+nav .nav-icon{font-size:15px;width:20px;text-align:center;flex-shrink:0}
+
+/* ── CONTENT AREA ────────────────────────── */
+.content-area{flex:1;min-width:0;overflow-x:hidden}
+main{padding:22px 26px;max-width:1440px;margin:0 auto}
+.section{display:none;animation:fadeIn .2s ease}.section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── CARDS ───────────────────────────────── */
+.card{
+  background:var(--card);border-radius:var(--radius);
+  padding:20px;box-shadow:var(--shadow);
+  border:1px solid rgba(226,232,240,.7);
+  transition:box-shadow .2s
+}
+.card:hover{box-shadow:var(--shadow-md)}
+.card-title{font-size:13.5px;font-weight:700;color:var(--primary);margin-bottom:16px;display:flex;align-items:center;gap:8px;letter-spacing:-.1px}
+
+/* ── KPI CARDS ───────────────────────────── */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:22px}
+.kpi-card{
+  background:var(--card);border-radius:var(--radius);
+  padding:18px 18px 14px;box-shadow:var(--shadow);
+  border:1px solid rgba(226,232,240,.7);
+  border-top:3px solid var(--primary);
+  position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s
+}
+.kpi-card::before{
+  content:'';position:absolute;right:-12px;top:-12px;
+  width:60px;height:60px;border-radius:50%;
+  background:var(--primary);opacity:.04
+}
+.kpi-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.kpi-card.accent{border-top-color:var(--accent)}.kpi-card.accent .kpi-value{color:var(--accent)}
+.kpi-card.success{border-top-color:var(--success)}.kpi-card.success .kpi-value{color:var(--success)}
+.kpi-card.danger{border-top-color:var(--danger)}.kpi-card.danger .kpi-value{color:var(--danger)}
+.kpi-card.warning{border-top-color:var(--warning)}.kpi-card.warning .kpi-value{color:var(--warning)}
+.kpi-label{font-size:10.5px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.6px}
+.kpi-value{font-size:22px;font-weight:800;color:var(--primary);margin:5px 0 3px;letter-spacing:-.5px}
 .kpi-sub{font-size:11px;color:var(--muted)}
+
+/* ── GRID ────────────────────────────────── */
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-@media(max-width:800px){.grid-2{grid-template-columns:1fr}}
-.form-group{margin-bottom:12px}
-.form-group label{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.4px}
-.form-group input,.form-group select,.form-group textarea{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-size:13px;color:var(--text);background:#f8fafc;transition:border-color .2s;font-family:inherit}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--primary-light);background:#fff;box-shadow:0 0 0 3px rgba(37,99,168,.1)}
+@media(max-width:900px){.grid-2{grid-template-columns:1fr}}
+
+/* ── FORMS ───────────────────────────────── */
+.form-group{margin-bottom:13px}
+.form-group label{display:block;font-size:10.5px;font-weight:600;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
+.form-group input,.form-group select,.form-group textarea{
+  width:100%;padding:9px 11px;border:1.5px solid var(--border);
+  border-radius:8px;font-size:13px;color:var(--text);
+  background:#f8fafc;transition:all .18s;font-family:'Inter',sans-serif
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  outline:none;border-color:var(--primary-light);
+  background:#fff;box-shadow:0 0 0 3px rgba(37,99,168,.1)
+}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 @media(max-width:600px){.form-row,.form-row-3{grid-template-columns:1fr}}
-.btn{padding:9px 18px;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px}
-.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--primary-light);transform:translateY(-1px)}
-.btn-accent{background:var(--accent);color:#fff}.btn-accent:hover{background:var(--accent-light);color:var(--primary)}
-.btn-success{background:var(--success);color:#fff}.btn-success:hover{background:#15803d}
-.btn-danger{background:var(--danger);color:#fff}.btn-danger:hover{background:#b91c1c}
-.btn-outline{background:#fff;color:var(--primary);border:1.5px solid var(--primary)}.btn-outline:hover{background:var(--primary);color:#fff}
-.btn-sm{padding:5px 11px;font-size:11.5px}
+
+/* ── BUTTONS ─────────────────────────────── */
+.btn{
+  padding:9px 18px;border:none;border-radius:8px;font-size:13px;
+  font-weight:600;cursor:pointer;transition:all .18s;
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'Inter',sans-serif;letter-spacing:-.1px
+}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:0 2px 6px rgba(26,60,94,.3)}
+.btn-primary:hover{background:var(--primary-light);transform:translateY(-1px);box-shadow:0 4px 12px rgba(26,60,94,.35)}
+.btn-accent{background:var(--accent);color:#fff;box-shadow:0 2px 6px rgba(232,160,32,.3)}
+.btn-accent:hover{background:var(--accent-light);color:var(--primary);transform:translateY(-1px)}
+.btn-success{background:var(--success);color:#fff}.btn-success:hover{background:#15803d;transform:translateY(-1px)}
+.btn-danger{background:var(--danger);color:#fff}.btn-danger:hover{background:#b91c1c;transform:translateY(-1px)}
+.btn-outline{background:#fff;color:var(--primary);border:1.5px solid var(--border)}
+.btn-outline:hover{border-color:var(--primary);background:rgba(26,60,94,.04)}
+.btn-sm{padding:5px 12px;font-size:11.5px;border-radius:6px}
 .btn-group{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-.table-wrap{overflow-x:auto}
+
+/* ── TABLES ──────────────────────────────── */
+.table-wrap{overflow-x:auto;border-radius:8px}
 table{width:100%;border-collapse:collapse;font-size:12.5px}
-thead th{background:var(--primary);color:#fff;padding:10px 12px;text-align:left;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
-thead th:first-child{border-radius:6px 0 0 0}thead th:last-child{border-radius:0 6px 0 0}
-tbody tr{border-bottom:1px solid var(--border);transition:background .15s}
-tbody tr:hover{background:#f0f7ff}
-tbody td{padding:9px 12px;color:var(--text);vertical-align:middle}
-.badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:10.5px;font-weight:700;text-transform:uppercase}
+thead th{
+  background:var(--primary);color:#fff;
+  padding:11px 12px;text-align:left;font-weight:600;
+  font-size:10.5px;text-transform:uppercase;letter-spacing:.6px
+}
+thead th:first-child{border-radius:8px 0 0 0}thead th:last-child{border-radius:0 8px 0 0}
+tbody tr{border-bottom:1px solid var(--border);transition:background .12s}
+tbody tr:hover{background:#f0f6ff}
+tbody td{padding:10px 12px;color:var(--text);vertical-align:middle}
+
+/* ── BADGES ──────────────────────────────── */
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
 .badge-success{background:#dcfce7;color:#15803d}.badge-danger{background:#fee2e2;color:#b91c1c}
 .badge-warning{background:#fef3c7;color:#92400e}.badge-info{background:#dbeafe;color:#1e40af}
 .badge-purple{background:#f3e8ff;color:#7c3aed}
 .badge-ok{background:#dcfce7;color:#15803d}.badge-pend{background:#fef3c7;color:#92400e}
-.alert{padding:12px 14px;border-radius:7px;margin-bottom:12px;font-size:13px}
-.alert-warning{background:#fef3c7;border:1px solid #f59e0b;color:#92400e}
-.alert-danger{background:#fee2e2;border:1px solid #f87171;color:#991b1b}
-.alert-success{background:#dcfce7;border:1px solid #86efac;color:#166534}
-.alert-info{background:#dbeafe;border:1px solid #93c5fd;color:#1e40af}
-.calc-result{background:linear-gradient(135deg,#1a3c5e,#2563a8);color:#fff;border-radius:var(--radius);padding:18px;margin-top:14px}
-.calc-result h3{font-size:13px;opacity:.8;margin-bottom:6px}
-.calc-result .valor{font-size:28px;font-weight:800}
-.calc-result .detalhe{font-size:12px;opacity:.75;margin-top:5px}
-.hist-item{background:#f8fafc;border:1px solid var(--border);border-radius:7px;padding:12px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
-.hist-item:hover{background:#f0f7ff}
-.section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:8px}
-.section-header h2{font-size:18px;font-weight:800;color:var(--primary)}
+
+/* ── ALERTS ──────────────────────────────── */
+.alert{padding:12px 15px;border-radius:9px;margin-bottom:12px;font-size:13px;font-weight:500;display:flex;gap:8px;align-items:flex-start}
+.alert-warning{background:#fffbeb;border:1.5px solid #fcd34d;color:#92400e}
+.alert-danger{background:#fff1f2;border:1.5px solid #fca5a5;color:#991b1b}
+.alert-success{background:#f0fdf4;border:1.5px solid #86efac;color:#166534}
+.alert-info{background:#eff6ff;border:1.5px solid #93c5fd;color:#1e40af}
+
+/* ── CALC RESULT ─────────────────────────── */
+.calc-result{
+  background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);
+  color:#fff;border-radius:var(--radius);padding:20px;margin-top:14px;
+  box-shadow:0 4px 16px rgba(26,60,94,.3)
+}
+.calc-result h3{font-size:12px;opacity:.75;margin-bottom:8px;font-weight:500;letter-spacing:.5px;text-transform:uppercase}
+.calc-result .valor{font-size:30px;font-weight:800;letter-spacing:-.5px}
+.calc-result .detalhe{font-size:12px;opacity:.7;margin-top:6px}
+
+/* ── HIST ITEMS ──────────────────────────── */
+.hist-item{
+  background:#f8fafc;border:1px solid var(--border);
+  border-radius:9px;padding:12px 15px;margin-bottom:8px;
+  display:flex;justify-content:space-between;align-items:center;
+  transition:all .15s
+}
+.hist-item:hover{background:#eff6ff;border-color:#bfdbfe;transform:translateX(2px)}
+
+/* ── SECTION HEADER ──────────────────────── */
+.section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px}
+.section-header h2{font-size:19px;font-weight:800;color:var(--primary);letter-spacing:-.4px}
 .section-header span{font-size:12px;color:var(--muted)}
-.empty-state{text-align:center;padding:40px 20px;color:var(--muted)}
-.empty-state .icon{font-size:40px;margin-bottom:10px}
-.empty-state p{font-size:14px}
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center}
+
+/* ── EMPTY STATE ─────────────────────────── */
+.empty-state{text-align:center;padding:48px 20px;color:var(--muted)}
+.empty-state .icon{font-size:44px;margin-bottom:12px;opacity:.6}
+.empty-state p{font-size:14px;font-weight:500}
+
+/* ── MODALS ──────────────────────────────── */
+.modal-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(15,23,42,.55);backdrop-filter:blur(4px);
+  z-index:300;align-items:center;justify-content:center
+}
 .modal-overlay.open{display:flex}
-.modal{background:#fff;border-radius:11px;padding:24px;max-width:620px;width:95%;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
-.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
-.modal-header h3{font-size:16px;font-weight:700;color:var(--primary)}
-.modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted)}
-.form-tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:18px}
-.form-tab{background:none;border:none;padding:9px 14px;font-size:12.5px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px}
-.form-tab.active{color:var(--primary);border-bottom-color:var(--accent)}
+.modal{
+  background:#fff;border-radius:16px;padding:26px;
+  max-width:640px;width:96%;max-height:92vh;overflow-y:auto;
+  box-shadow:0 24px 64px rgba(0,0,0,.22);
+  animation:modalIn .22s cubic-bezier(.34,1.56,.64,1)
+}
+@keyframes modalIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.modal-header h3{font-size:16px;font-weight:700;color:var(--primary);letter-spacing:-.2px}
+.modal-close{
+  background:none;border:none;font-size:18px;cursor:pointer;
+  color:var(--muted);padding:4px 8px;border-radius:6px;
+  transition:all .15s;line-height:1
+}
+.modal-close:hover{background:var(--border);color:var(--text)}
+
+/* ── FORM TABS ───────────────────────────── */
+.form-tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:18px;gap:4px}
+.form-tab{
+  background:none;border:none;padding:9px 16px;font-size:12.5px;
+  font-weight:600;color:var(--muted);cursor:pointer;
+  border-bottom:3px solid transparent;margin-bottom:-2px;
+  border-radius:6px 6px 0 0;transition:all .15s;
+  font-family:'Inter',sans-serif
+}
+.form-tab:hover{background:#f1f5f9}
+.form-tab.active{color:var(--primary);border-bottom-color:var(--accent);background:#f8fafc}
 .form-tab-panel{display:none}.form-tab-panel.active{display:block}
+
+/* ── MISC ────────────────────────────────── */
 .divider{border:none;border-top:1px solid var(--border);margin:16px 0}
 .search-bar{position:relative}
-.search-bar input{padding-left:34px}
-.search-bar .icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px;pointer-events:none}
+.search-bar input{padding-left:36px}
+.search-bar .icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px;pointer-events:none}
 .mt-3{margin-top:12px}.mb-3{margin-bottom:12px}
 .text-success{color:var(--success)}.text-danger{color:var(--danger)}.text-muted{color:var(--muted)}.fw-bold{font-weight:700}
+
+/* ── FECH TABLE ──────────────────────────── */
 .fech-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
-.fech-table th{background:var(--primary);color:#fff;padding:10px 14px;text-align:center;font-size:12px;font-weight:700}
+.fech-table th{background:var(--primary);color:#fff;padding:10px 14px;text-align:center;font-size:12px;font-weight:700;border-radius:0}
 .fech-table td{padding:9px 14px;text-align:center;border-bottom:1px solid var(--border);font-weight:600}
-.fech-table tr:hover td{background:#f0f7ff}
+.fech-table tr:hover td{background:#f0f6ff}
 .fech-total{background:#f1f5f9;font-weight:800}
-/* COBRANÇA */
-.cob-pending{background:#fef3c7;color:#92400e;padding:2px 9px;border-radius:20px;font-size:10.5px;font-weight:700;text-transform:uppercase}
-.cob-paid{background:#dcfce7;color:#15803d;padding:2px 9px;border-radius:20px;font-size:10.5px;font-weight:700;text-transform:uppercase}
-.cob-overdue{background:#fee2e2;color:#b91c1c;padding:2px 9px;border-radius:20px;font-size:10.5px;font-weight:700;text-transform:uppercase}
-.cob-generated{background:#dbeafe;color:#1e40af;padding:2px 9px;border-radius:20px;font-size:10.5px;font-weight:700;text-transform:uppercase}
-.cob-input{width:90px;padding:3px 6px;border:1px solid var(--border);border-radius:4px;font-size:11.5px;font-family:inherit;background:#f8fafc}
+
+/* ── COBRANÇA ────────────────────────────── */
+.cob-pending{background:#fef3c7;color:#92400e;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase}
+.cob-paid{background:#dcfce7;color:#15803d;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase}
+.cob-overdue{background:#fee2e2;color:#b91c1c;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase}
+.cob-generated{background:#dbeafe;color:#1e40af;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase}
+.cob-input{width:90px;padding:4px 7px;border:1.5px solid var(--border);border-radius:6px;font-size:11.5px;font-family:'Inter',sans-serif;background:#f8fafc}
 .cob-input:focus{outline:none;border-color:var(--primary-light)}
-@media print{nav,header{display:none}main{padding:0}}
+
+/* ── SIDEBAR OVERLAY (mobile) ────────────── */
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:85}
+.sidebar-overlay.open{display:block}
+
+/* ── TOAST NOTIFICATION ──────────────────── */
+.toast-container{position:fixed;bottom:24px;right:24px;z-index:999;display:flex;flex-direction:column;gap:10px}
+.toast{
+  background:#1e293b;color:#fff;padding:12px 18px;border-radius:10px;
+  font-size:13px;font-weight:500;box-shadow:0 8px 24px rgba(0,0,0,.3);
+  display:flex;align-items:center;gap:10px;min-width:220px;max-width:340px;
+  animation:toastIn .3s ease;transition:opacity .3s
+}
+.toast.success{background:var(--success)}.toast.error{background:var(--danger)}.toast.warning{background:#d97706}
+@keyframes toastIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── RESPONSIVE ──────────────────────────── */
+@media(max-width:768px){
+  .hamburger{display:flex}
+  .sidebar{
+    position:fixed;top:62px;left:0;
+    transform:translateX(-100%);height:calc(100vh - 62px)
+  }
+  .sidebar.open{transform:translateX(0)}
+  main{padding:16px}
+  .kpi-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){.kpi-grid{grid-template-columns:1fr}}
+
+/* ── PRINT ───────────────────────────────── */
+@media print{
+  .sidebar,.sidebar-overlay,.hamburger,header{display:none!important}
+  .app-shell{display:block}
+  .content-area{display:block}
+  main{padding:0}
+  .card{box-shadow:none;border:1px solid #ccc}
+  .btn{display:none}
+}
+
+/* ── LOGIN PAGE ──────────────────────────── */
+#loginPage{
+  display:flex;min-height:100vh;
+  background:linear-gradient(135deg,#0d1f30 0%,#1a3c5e 60%,#2563a8 100%);
+  align-items:center;justify-content:center;
+  font-family:'Inter',sans-serif;
+  position:fixed;inset:0;z-index:9999
+}
+#loginPage.hidden{display:none}
+.login-card{
+  background:#fff;border-radius:20px;padding:44px 40px 36px;
+  max-width:420px;width:94%;
+  box-shadow:0 24px 80px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.04);
+  animation:modalIn .35s cubic-bezier(.34,1.3,.64,1)
+}
+.login-brand{text-align:center;margin-bottom:32px}
+.login-brand-icon{
+  width:64px;height:64px;background:linear-gradient(135deg,#1a3c5e,#2563a8);
+  border-radius:18px;display:flex;align-items:center;justify-content:center;
+  font-size:30px;margin:0 auto 14px;
+  box-shadow:0 8px 24px rgba(26,60,94,.35)
+}
+.login-brand h2{font-size:18px;font-weight:800;color:var(--primary);letter-spacing:-.3px}
+.login-brand p{font-size:12px;color:var(--muted);margin-top:4px}
+.login-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.login-field{margin-bottom:16px}
+.login-field label{display:block;font-size:10.5px;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.6px}
+.login-field input{
+  width:100%;padding:12px 14px;border:1.5px solid var(--border);
+  border-radius:10px;font-size:14px;color:var(--text);
+  background:#f8fafc;transition:all .18s;font-family:'Inter',sans-serif
+}
+.login-field input:focus{outline:none;border-color:var(--primary-light);background:#fff;box-shadow:0 0 0 3px rgba(37,99,168,.12)}
+.login-error{
+  background:#fff1f2;border:1.5px solid #fca5a5;color:#b91c1c;
+  border-radius:8px;padding:10px 13px;font-size:12.5px;font-weight:500;
+  margin-bottom:14px;display:none;align-items:center;gap:7px
+}
+.login-error.show{display:flex}
+.btn-login{
+  width:100%;padding:13px;background:linear-gradient(135deg,#1a3c5e,#2563a8);
+  color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;
+  cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:-.1px;
+  transition:all .2s;box-shadow:0 4px 14px rgba(26,60,94,.4);margin-top:4px
+}
+.btn-login:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(26,60,94,.5)}
+.btn-login:active{transform:translateY(0)}
+.login-footer{text-align:center;margin-top:22px;font-size:11px;color:var(--muted)}
+.login-bg-deco{position:absolute;pointer-events:none;opacity:.05}
+
+/* ── USER BADGE (header) ─────────────────── */
+.user-badge{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:8px;padding:5px 12px;cursor:default
+}
+.user-badge span{font-size:12px;color:rgba(255,255,255,.8);font-weight:500}
+.btn-logout{
+  font-size:11.5px;color:rgba(255,255,255,.55);background:none;
+  border:1px solid rgba(255,255,255,.2);border-radius:6px;
+  padding:5px 11px;cursor:pointer;font-family:'Inter',sans-serif;
+  transition:all .18s;font-weight:500
+}
+.btn-logout:hover{color:#fff;border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.08)}
 </style>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
+
+<!-- LOGIN PAGE -->
+<div id="loginPage">
+  <div class="login-card">
+    <div class="login-brand">
+      <div class="login-brand-icon">🏠</div>
+      <h2>Carvalho Soluções Imobiliárias</h2>
+      <p>CRECI-RJ 10930 · Niterói/RJ</p>
+    </div>
+    <div class="login-title">Acesso ao Sistema de Gestão</div>
+    <div class="login-error" id="loginError">
+      <span>⛔</span><span id="loginErrorMsg">Usuário ou senha incorretos.</span>
+    </div>
+    <div class="login-field">
+      <label>Usuário</label>
+      <input type="text" id="loginUser" placeholder="Digite seu usuário" autocomplete="username" onkeydown="if(event.key==='Enter')fazerLogin()">
+    </div>
+    <div class="login-field">
+      <label>Senha</label>
+      <input type="password" id="loginPass" placeholder="Digite sua senha" autocomplete="current-password" onkeydown="if(event.key==='Enter')fazerLogin()">
+    </div>
+    <button class="btn-login" onclick="fazerLogin()">🔐 Entrar no Sistema</button>
+    <div class="login-footer">
+      Sistema exclusivo · Carvalho Soluções Imobiliárias<br>
+      <span style="color:#94a3b8">Versão 2.0 · Niterói, RJ</span>
+    </div>
+  </div>
+</div>
 
 <header>
   <div class="logo">
@@ -123,48 +428,73 @@ tbody td{padding:9px 12px;color:var(--text);vertical-align:middle}
     </div>
   </div>
   <div class="header-right">
+    <div id="headerDate"></div>
+    <div class="user-badge" id="userBadge" style="display:none">
+      <span>👤</span><span id="userGreeting">Bernardo</span>
+    </div>
     <label class="logo-upload-btn" title="Clique para adicionar sua logo">
       🖼 Logo
       <input type="file" accept="image/*" style="display:none" onchange="trocarLogo(event)">
     </label>
-    <div id="headerDate"></div>
+    <button class="btn-logout" id="btnLogout" style="display:none" onclick="fazerLogout()" title="Sair do sistema">⎋ Sair</button>
+    <button class="hamburger" onclick="toggleSidebar()" title="Menu">☰</button>
   </div>
 </header>
 
-<nav>
-  <button class="active" onclick="showSection('dashboard',this)">📊 Dashboard</button>
-  <button onclick="showSection('imoveis',this)">🏠 Contratos</button>
-  <button onclick="showSection('valoresNF',this)">🧾 Valores p/ NF</button>
-  <button onclick="showSection('fluxoCaixa',this)">💼 Fluxo de Caixa</button>
-  <button onclick="showSection('reajuste',this)">📈 Reajuste</button>
-  <button onclick="showSection('financeiro',this)">💰 Financeiro</button>
-  <button onclick="showSection('historico',this)">📋 Histórico</button>
-  <button onclick="showSection('seguros',this)">🔥 Seguros</button>
-  <button onclick="showSection('fechamentos',this)">📅 Fechamentos</button>
-  <button onclick="showSection('alertas',this)">🔔 Alertas</button>
-  <button onclick="showSection('cobranca',this)">💳 Cobrança Cora</button>
-</nav>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-label">Menu Principal</div>
+    <nav>
+      <button class="active" onclick="showSection('dashboard',this)"><span class="nav-icon">📊</span> Dashboard</button>
+      <button onclick="showSection('imoveis',this)"><span class="nav-icon">🏠</span> Contratos</button>
+      <button onclick="showSection('valoresNF',this)"><span class="nav-icon">🧾</span> Valores p/ NF</button>
+      <button onclick="showSection('fluxoCaixa',this)"><span class="nav-icon">💼</span> Fluxo de Caixa</button>
+      <button onclick="showSection('reajuste',this)"><span class="nav-icon">📈</span> Reajuste IGP-M</button>
+      <button onclick="showSection('financeiro',this)"><span class="nav-icon">💰</span> Financeiro</button>
+      <button onclick="showSection('historico',this)"><span class="nav-icon">📋</span> Histórico</button>
+      <button onclick="showSection('seguros',this)"><span class="nav-icon">🔥</span> Seguros</button>
+      <button onclick="showSection('fechamentos',this)"><span class="nav-icon">📅</span> Fechamentos</button>
+      <button onclick="showSection('alertas',this)"><span class="nav-icon">🔔</span> Alertas</button>
+      <button onclick="showSection('cobranca',this)"><span class="nav-icon">💳</span> Cobrança Cora</button>
+    </nav>
+    <div style="padding:14px 18px;margin-top:auto;border-top:1px solid rgba(255,255,255,.08)">
+      <div style="font-size:9.5px;color:rgba(255,255,255,.28);line-height:1.8;letter-spacing:.1px">
+        <div style="color:rgba(255,255,255,.45);font-weight:600;font-size:10px;margin-bottom:4px">Carvalho Soluções Imob.</div>
+        CRECI-RJ 10930 · Niterói/RJ<br>
+        <span style="color:rgba(255,255,255,.18)">Sistema v2.0 · 2026</span>
+      </div>
+    </div>
+  </aside>
+  <div class="content-area">
+
+<div class="toast-container" id="toastContainer"></div>
 
 <main>
 
 <!-- DASHBOARD -->
 <div class="section active" id="dashboard">
-  <div class="section-header">
-    <div><h2>Dashboard Geral</h2><span>Visão completa da carteira — Carvalho Soluções Imobiliárias</span></div>
-    <button class="btn btn-primary btn-sm" onclick="showSection('imoveis',document.querySelectorAll('nav button')[1])">+ Novo Contrato</button>
+  <div style="background:linear-gradient(135deg,#0d1f30 0%,#1a3c5e 60%,#2563a8 100%);border-radius:14px;padding:22px 26px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <div>
+      <div style="font-size:12px;color:rgba(255,255,255,.55);font-weight:500;letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px">Carvalho Soluções Imobiliárias</div>
+      <div style="font-size:22px;font-weight:800;color:#fff;letter-spacing:-.4px">Bem-vindo, Bernardo! 👋</div>
+      <div style="font-size:12.5px;color:rgba(255,255,255,.6);margin-top:4px" id="dashSubtitle">Carregando resumo da carteira...</div>
+    </div>
+    <button class="btn btn-accent" onclick="showSection('imoveis',document.querySelectorAll('nav button')[1])">+ Novo Contrato</button>
   </div>
   <div id="dashAlerts"></div>
   <div class="kpi-grid">
-    <div class="kpi-card accent"><div class="kpi-label">Total Contratos</div><div class="kpi-value" id="kpiTotal">0</div><div class="kpi-sub">na carteira</div></div>
-    <div class="kpi-card success"><div class="kpi-label">Ativos</div><div class="kpi-value" id="kpiAtivos">0</div><div class="kpi-sub">locações em andamento</div></div>
-    <div class="kpi-card"><div class="kpi-label">Receita Mensal</div><div class="kpi-value" id="kpiReceita">R$ 0</div><div class="kpi-sub">soma dos aluguéis</div></div>
-    <div class="kpi-card warning"><div class="kpi-label">Reajustes (60d)</div><div class="kpi-value" id="kpiReajustes">0</div><div class="kpi-sub">próximos 60 dias</div></div>
-    <div class="kpi-card danger"><div class="kpi-label">Em Atraso</div><div class="kpi-value" id="kpiAtraso">0</div><div class="kpi-sub">pagamentos atrasados</div></div>
-    <div class="kpi-card success"><div class="kpi-label">Comissão (10%)</div><div class="kpi-value" id="kpiComissao">R$ 0</div><div class="kpi-sub">estimativa mensal</div></div>
+    <div class="kpi-card accent"><div class="kpi-label">Total Contratos</div><div class="kpi-value" id="kpiTotal">0</div><div class="kpi-sub">na carteira ativa</div></div>
+    <div class="kpi-card success"><div class="kpi-label">Contratos Ativos</div><div class="kpi-value" id="kpiAtivos">0</div><div class="kpi-sub">locações em andamento</div></div>
+    <div class="kpi-card"><div class="kpi-label">Receita Bruta Mensal</div><div class="kpi-value" id="kpiReceita">R$ 0</div><div class="kpi-sub">soma dos aluguéis vigentes</div></div>
+    <div class="kpi-card warning"><div class="kpi-label">Reajustes Próximos</div><div class="kpi-value" id="kpiReajustes">0</div><div class="kpi-sub">vencendo em até 60 dias</div></div>
+    <div class="kpi-card danger"><div class="kpi-label">Em Atraso</div><div class="kpi-value" id="kpiAtraso">0</div><div class="kpi-sub">pagamentos pendentes</div></div>
+    <div class="kpi-card success"><div class="kpi-label">Comissão Est. (10%)</div><div class="kpi-value" id="kpiComissao">R$ 0</div><div class="kpi-sub">receita de administração</div></div>
   </div>
   <div class="grid-2">
-    <div class="card"><div class="card-title">🏠 Últimos Contratos</div><div id="dashUltimos"></div></div>
-    <div class="card"><div class="card-title">📈 Próximos Reajustes</div><div id="dashProxRej"></div></div>
+    <div class="card"><div class="card-title">🏠 Últimos Contratos Cadastrados</div><div id="dashUltimos"></div></div>
+    <div class="card"><div class="card-title">📈 Próximos Reajustes (60 dias)</div><div id="dashProxRej"></div></div>
   </div>
 </div>
 
@@ -491,6 +821,8 @@ tbody td{padding:9px 12px;color:var(--text);vertical-align:middle}
 </div>
 
 </main>
+  </div><!-- /.content-area -->
+</div><!-- /.app-shell -->
 
 <!-- MODAL NF -->
 <div class="modal-overlay" id="modalNF">
@@ -639,6 +971,62 @@ tbody td{padding:9px 12px;color:var(--text);vertical-align:middle}
 
 <script>
 // ══════════════════════════════════════════════════════════
+// AUTENTICAÇÃO — login / logout / sessão
+// ══════════════════════════════════════════════════════════
+const AUTH = {
+  // credenciais ofuscadas (btoa)
+  _u: btoa('bernardo'),
+  _p: btoa('Carvalho@2024'),
+  _key: 'csi_session_v1',
+
+  check() {
+    return !!sessionStorage.getItem(this._key);
+  },
+
+  login(user, pass) {
+    if (btoa(user.trim().toLowerCase()) === this._u && btoa(pass) === this._p) {
+      sessionStorage.setItem(this._key, btoa(Date.now().toString()));
+      return true;
+    }
+    return false;
+  },
+
+  logout() {
+    sessionStorage.removeItem(this._key);
+    location.reload();
+  }
+};
+
+function fazerLogin() {
+  const user = document.getElementById('loginUser').value;
+  const pass = document.getElementById('loginPass').value;
+  const err  = document.getElementById('loginError');
+  const msg  = document.getElementById('loginErrorMsg');
+
+  if (!user || !pass) {
+    msg.textContent = 'Preencha usuário e senha para continuar.';
+    err.classList.add('show'); return;
+  }
+
+  if (AUTH.login(user, pass)) {
+    err.classList.remove('show');
+    document.getElementById('loginPage').classList.add('hidden');
+    document.getElementById('userBadge').style.display = 'flex';
+    document.getElementById('btnLogout').style.display = 'flex';
+    document.getElementById('userGreeting').textContent = 'Bernardo';
+  } else {
+    msg.textContent = 'Usuário ou senha incorretos. Tente novamente.';
+    err.classList.add('show');
+    document.getElementById('loginPass').value = '';
+    document.getElementById('loginPass').focus();
+  }
+}
+
+function fazerLogout() {
+  if (confirm('Deseja sair do sistema?')) AUTH.logout();
+}
+
+// ══════════════════════════════════════════════════════════
 // SEED DATA — todos os contratos, apólices e fechamentos
 // ══════════════════════════════════════════════════════════
 const SEED_IMOVEIS = [{"tipo": "Sala Comercial", "endereco": "RUA ANDRADE NEVES 09 - SALA 714", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "LUIZ", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1132.0, "vencimento": "15", "dataInicio": "2022-07-15", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO R$ 3.300,00 ( PROPRIETÁRIO)", "periodoContrato": "30 MESES", "mesReajuste": "JULHO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.459311"}, {"tipo": "Apartamento", "endereco": "RUA ZORAIDA BRASIL 137 - 202", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "DANIELA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1100.0, "vencimento": "05", "dataInicio": "2022-11-25", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO R$ 1.800,00 ( PROPRIETÁRIA)", "periodoContrato": "12/30 MESES", "mesReajuste": "NOVEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460450"}, {"tipo": "Apartamento", "endereco": "ESTR. FREI ORLANDO 567 - 408 / BLOCO 07", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "MÁRCIO/JULIANA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1600.0, "vencimento": "15", "dataInicio": "2023-04-20", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO R$ 3.600,00 ( PROPRIETÁRIO)", "periodoContrato": "30 MESES", "mesReajuste": "ABRIL", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460487"}, {"tipo": "Apartamento", "endereco": "LUIZ PALMIER 500 - 408/BLOCO 02", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "CARLOS", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2300.0, "vencimento": "05", "dataInicio": "2023-05-27", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "FIADOR", "periodoContrato": "18/30 MESES", "mesReajuste": "MAIO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460512"}, {"tipo": "Apartamento", "endereco": "RUA NORONHA TORREZÃO 24- 1011", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "ROGER", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1100.0, "vencimento": "10", "dataInicio": "2023-06-15", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 2.700,00 (PROPRIETAIO)", "periodoContrato": "12/30 MESES", "mesReajuste": "JUNHO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460535"}, {"tipo": "Galpão", "endereco": "RUA SILVA JARDIM 55 - GALPÃO", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "CONTERLURB", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 10296.0, "vencimento": "17", "dataInicio": "2023-07-24", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 30.000,00 (PROPRIETÁRIO)", "periodoContrato": "30 MESES", "mesReajuste": "JULHO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460559"}, {"tipo": "Apartamento", "endereco": "ESTR. WASHINGTON LUIS 739 - 108", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "THAMIRES/KARLA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1000.0, "vencimento": "10", "dataInicio": "2023-09-28", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 3.000,00 ( BERNARDO)", "periodoContrato": "30 MESES", "mesReajuste": "SETEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460580"}, {"tipo": "Apartamento", "endereco": "ARY PARREIRAS 15 - 1103", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "IURI", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1266.0, "vencimento": "10", "dataInicio": "2023-11-22", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 3.600,00 (BERNARDO)", "periodoContrato": "18/30 MESES", "mesReajuste": "NOVEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460599"}, {"tipo": "Sala Comercial", "endereco": "RUA CORONEL RODRIGUES 422 - SALA 510", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "LAYNA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1075.0, "vencimento": "05", "dataInicio": "2024-04-10", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 1.980 ( PROPRIETÁRIO)", "periodoContrato": "12/30 MESES", "mesReajuste": "ABRIL", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460663"}, {"tipo": "Apartamento", "endereco": "ALAMEDA SÃO BOA VENTURA 540 - 428", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "RICARDO/MONICA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 650.0, "vencimento": "05", "dataInicio": "2024-04-29", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 1.950 (ADM)", "periodoContrato": "30 MESES", "mesReajuste": "ABRIL", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460693"}, {"tipo": "Apartamento", "endereco": "TRAVESSA ELZIR BRANDÃO 113 - 504 BL E", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "CAMILA/PALO/BRUNA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 700.0, "vencimento": "15", "dataInicio": "2024-05-15", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 1.400,00 ( PROPRIETÁRIO)", "periodoContrato": "24 MESES", "mesReajuste": "MAIO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460724"}, {"tipo": "Sala Comercial", "endereco": "RUA CORONEL RODRIGUES 422 - SALA 606", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "MATHEUS", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 991.7, "vencimento": "05", "dataInicio": "2024-06-03", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇAÕ R$ 2.700 ( ADM)", "periodoContrato": "18/30 MESES", "mesReajuste": "JUNHO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460752"}, {"tipo": "Apartamento", "endereco": "TRAVESSA ELZIR BRANDÃO 110 - 201", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "OLGA/DOMITILA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2059.0, "vencimento": "10", "dataInicio": "2024-07-02", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "FIADOR", "periodoContrato": "30 MESES", "mesReajuste": "JULHO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460780"}, {"tipo": "Apartamento", "endereco": "RUA NORONHA TORREZÃO 24 - 605", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "HUGO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1029.0, "vencimento": "10", "dataInicio": "2024-07-03", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO - R$ 3 MIL ( ADM )", "periodoContrato": "30 MESES", "mesReajuste": "JULHO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460803"}, {"tipo": "Apartamento", "endereco": "ELZIR BRANDÃO 113 - 201 BLOCO D", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "FERNANDA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 770.0, "vencimento": "05", "dataInicio": "2024-07-20", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO - R$ 1,5 MIL ( ADM )", "periodoContrato": "30 MESES", "mesReajuste": "JULHO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460824"}, {"tipo": "Apartamento", "endereco": "RUA LUIZ PALMIER 500 - 709 BL 01", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "NATÁLIA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2369.0, "vencimento": "05", "dataInicio": "2024-08-15", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO - R$ 6,9MIL ( PROPRIETÁRIO)", "periodoContrato": "30 MESES", "mesReajuste": "AGOSTO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460844"}, {"tipo": "Apartamento", "endereco": "AV. JOÃO BRASIL 189  - 503 BL 02", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "JULIA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1545.0, "vencimento": "05", "dataInicio": "2024-08-20", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO - R$ 4,5 MIL ( ADM)", "periodoContrato": "18/30 MESES", "mesReajuste": "AGOSTO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460863"}, {"tipo": "Apartamento", "endereco": "TRAVESSA JOSÉ FERREIRA 711", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "EVARISTO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1133.0, "vencimento": "08", "dataInicio": "2024-08-30", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO 3,3MIL ( PROPRIETÁRIO)", "periodoContrato": "30 MESES", "mesReajuste": "AGOSTO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460916"}, {"tipo": "Apartamento", "endereco": "JOÃO BRASIL 189 - 603 BL 2", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "LUIZ/MARIA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1545.0, "vencimento": "10", "dataInicio": "2024-09-02", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "FIADOR", "periodoContrato": "30 MESES", "mesReajuste": "SETEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460940"}, {"tipo": "Apartamento", "endereco": "RUA HEITOR CARRILHO 1 - 405 BL 1", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "RODRIGO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2626.5, "vencimento": "05", "dataInicio": "2024-09-17", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "SETEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460962"}, {"tipo": "Apartamento", "endereco": "DR. PAULO CÉSAR 87 - 202 BL 03", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "BONG", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1300.0, "vencimento": "05", "dataInicio": "2024-10-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO 3MIL (ADM)", "periodoContrato": "30 MESES", "mesReajuste": "OUTUBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.460988"}, {"tipo": "Apartamento", "endereco": "RUA BENJAMIN CONSTANT 442 - 402/ B 10", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "THAÍS", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 700.0, "vencimento": "05", "dataInicio": "2024-10-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "OUTUBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461014"}, {"tipo": "Apartamento", "endereco": "BENJAMIN CONSTANT 51 - 412", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "VICTÓRIA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 950.0, "vencimento": "05", "dataInicio": "2024-10-14", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇAÕ R$ 2.850MILC( ADM)", "periodoContrato": "30 MESES", "mesReajuste": "OUTUBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461040"}, {"tipo": "Apartamento", "endereco": "PRAIA DE ICARAÍ 155 - 501", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "MATHEUS", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 3167.0, "vencimento": "05", "dataInicio": "2024-10-15", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "OUTUBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461070"}, {"tipo": "Apartamento", "endereco": "RUA GAVIÃO PEIXOTO 70 - 1509", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "DIOGO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1412.0, "vencimento": "05", "dataInicio": "2024-10-17", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "FIADOR", "periodoContrato": "30 MESES", "mesReajuste": "OUTUBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461113"}, {"tipo": "Apartamento", "endereco": "RUA DEPUTADO FEDERAL JOSÉ LEOMIL, 16", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "JAIME", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2500.0, "vencimento": "10", "dataInicio": "2024-11-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 7,5 MIL (ADM)", "periodoContrato": "30 MESES", "mesReajuste": "NOVEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461161"}, {"tipo": "Apartamento", "endereco": "RUA DA CONCEIÇÃO 141 - 408", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "MAYARA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 700.0, "vencimento": "05", "dataInicio": "2024-11-13", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "NOVEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461210"}, {"tipo": "Apartamento", "endereco": "RUA ZORAIDA BRASIL 56 - 201", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "MARIANA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 600.0, "vencimento": "10", "dataInicio": "2025-01-15", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO 1,8MIL ( PROP)", "periodoContrato": "18/30 MESES", "mesReajuste": "JANEIRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461280"}, {"tipo": "Apartamento", "endereco": "RUA PERERIA DA SILVA 212 - 602", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "ROUDON", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2500.0, "vencimento": "05", "dataInicio": "2025-02-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 1OMIL (ADM)", "periodoContrato": "12/30MESES", "mesReajuste": "FEVEREIRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461356"}, {"tipo": "Apartamento", "endereco": "MIGUEL DE FRIAS 245 - 303", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "LUCIANO/AMAURI", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2900.0, "vencimento": "05", "dataInicio": "2025-02-03", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "FIADOR", "periodoContrato": "30 MESES", "mesReajuste": "FEVEREIRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461410"}, {"tipo": "Apartamento", "endereco": "VISCONDE DE SEPETIBA 50 - 408", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "JOSÉ", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2500.0, "vencimento": "05", "dataInicio": "2025-02-04", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "FEVEREIRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461480"}, {"tipo": "Apartamento", "endereco": "RUA EUSÉBIO DE QUEIROS, 15 - 301", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "HERMES", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1100.0, "vencimento": "05", "dataInicio": "2025-02-15", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 3,3MIL (Adm)", "periodoContrato": "18/30 MESES", "mesReajuste": "FEVEREIRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461554"}, {"tipo": "Apartamento", "endereco": "RUA FAGUNDES VARELA 507 - 401", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "PAULO CÉSAR", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 3425.73, "vencimento": "10", "dataInicio": "2025-03-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "MARÇO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461673"}, {"tipo": "Apartamento", "endereco": "RUA MARIZ E BARROS 98 - 401", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "VICTOR", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2335.72, "vencimento": "05", "dataInicio": "2025-03-06", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 6.750 MIL (ADM)", "periodoContrato": "30 MESES", "mesReajuste": "MARÇO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461774"}, {"tipo": "Apartamento", "endereco": "RUA DA CONCEIÇÃO 141 - 307", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "CLARISSE", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 700.0, "vencimento": "05", "dataInicio": "2025-04-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 2.100 (Adm)", "periodoContrato": "30 MESES", "mesReajuste": "ABRIL", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461865"}, {"tipo": "Apartamento", "endereco": "RUA AMAPÁ 190 - 106", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "ALÉDIO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2300.0, "vencimento": "10", "dataInicio": "2025-04-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "FIADOR", "periodoContrato": "12/30MESES", "mesReajuste": "ABRIL", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.461934"}, {"tipo": "Apartamento", "endereco": "RUA DOMINGUES DE SÁ 461- 1101", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "ALAN", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 4500.0, "vencimento": "10", "dataInicio": "2025-04-26", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 13,5MIL (ADM)", "periodoContrato": "3O MESES", "mesReajuste": "ABRIL", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462078"}, {"tipo": "Apartamento", "endereco": "RUA DA CONCEIÇÃO 141 - 308", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "JOELMA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 650.0, "vencimento": "08", "dataInicio": "2025-05-17", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA (LOFT)", "periodoContrato": "30 MESES", "mesReajuste": "DEZEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462168"}, {"tipo": "Apartamento", "endereco": "RUA DA CONCEIÇÃO 141 - 309", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "DIEGO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 700.0, "vencimento": "05", "dataInicio": "2025-05-31", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 2.100 (Adm)", "periodoContrato": "30 MESES", "mesReajuste": "MAIO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462237"}, {"tipo": "Apartamento", "endereco": "RUA NORONHA TORREZÃO 407 - 504", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "EMERSON", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1100.0, "vencimento": "05", "dataInicio": "2025-06-02", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 3,3 (ADM)", "periodoContrato": "30 MESES", "mesReajuste": "JUHNO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462278"}, {"tipo": "Apartamento", "endereco": "RUA GERALDO MARTINS 64 - 303", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "MARIANNE", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 3900.0, "vencimento": "05", "dataInicio": "2025-06-17", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "15/30 MESES", "mesReajuste": "JUNHO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462317"}, {"tipo": "Apartamento", "endereco": "RUA LUIZ PALMIER 1001- 209 BL 6", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "RAQUEL", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2200.0, "vencimento": "10", "dataInicio": "2025-07-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "JULHO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462352"}, {"tipo": "Apartamento", "endereco": "RUA VIEIRA BUENO, 68", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "CADIC LTDA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 9000.0, "vencimento": "15", "dataInicio": "2025-07-03", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 27.000,00 ( PROP)", "periodoContrato": "24 MESES", "mesReajuste": "JULHO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462390"}, {"tipo": "Sala Comercial", "endereco": "LOJA 02 ITAIPU", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "TAINÁ", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 990.0, "vencimento": "05", "dataInicio": "2025-07-15", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "JULHO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462436"}, {"tipo": "Apartamento", "endereco": "RUA ANDRADE NEVES 63 - 302", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "JOANA/ANTÔNIO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1600.0, "vencimento": "05", "dataInicio": "2025-08-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 4.800,00 (PROP)", "periodoContrato": "12/30 MESES", "mesReajuste": "AGOSTO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462476"}, {"tipo": "Apartamento", "endereco": "RUA WALDIR CABRAL 22- 703", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "HEITOR", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1350.0, "vencimento": "05", "dataInicio": "2025-08-04", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "18/30 MESES", "mesReajuste": "AGOSTO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462511"}, {"tipo": "Apartamento", "endereco": "RUA PRINCESA ISABEL 130 -201", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "MATHEUS", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1100.0, "vencimento": "08", "dataInicio": "2025-08-18", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "CAUÇÃO R$ 3.300,00 (ADM)", "periodoContrato": "30 MESES", "mesReajuste": "AGOSTO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462566"}, {"tipo": "Casa", "endereco": "RUA SANTOS MOREIRA 64 - CASA 16", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "ANDRÉ", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1900.0, "vencimento": "08", "dataInicio": "2025-08-29", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "AGOSTO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462664"}, {"tipo": "Apartamento", "endereco": "TRAVESSA FANI 14 - 103", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "ALINE/MARINETE", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2150.0, "vencimento": "05", "dataInicio": "2025-09-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "SETEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462733"}, {"tipo": "Apartamento", "endereco": "RUBENS BRASIL 369 - 1305", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "LUCAS", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1300.0, "vencimento": "05", "dataInicio": "2025-09-05", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "SETEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462772"}, {"tipo": "Apartamento", "endereco": "RUA MIGUEL COUTO 371 - 1502", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "LUIZ", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2500.0, "vencimento": "05", "dataInicio": "2025-09-08", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "FIADOR", "periodoContrato": "30 MESES", "mesReajuste": "SETEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462815"}, {"tipo": "Apartamento", "endereco": "RUA ATOR PAULO GUSTAVO 388 - 1305", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "FÁTIMA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2100.0, "vencimento": "05", "dataInicio": "2025-09-15", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "SETEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462855"}, {"tipo": "Apartamento", "endereco": "RUA ZORAIDA BRASIL 137 - 201", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "THALIAT/JOÃO. V", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1100.0, "vencimento": "05", "dataInicio": "2025-09-25", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO R$2.400 ( PROPRIETÁRIA)", "periodoContrato": "12/30 MESES", "mesReajuste": "SETEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462906"}, {"tipo": "Apartamento", "endereco": "ESTRADA DA PACIÊNCIA 1235 - 105/ BL 3", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "MATHEUS", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1300.0, "vencimento": "05", "dataInicio": "2025-10-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 3.900,00 (PROPRIETÁIRO)", "periodoContrato": "30 MESES", "mesReajuste": "OUTUBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.462964"}, {"tipo": "Apartamento", "endereco": "RUA LUIZ EDURDO, 13 - 801", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "BRENDA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1700.0, "vencimento": "08", "dataInicio": "2025-10-15", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "OUTUBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463004"}, {"tipo": "Galpão", "endereco": "GALPÃO ITAIPU", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "BRUNO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 6000.0, "vencimento": "15", "dataInicio": "2025-10-17", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "FIADOR", "periodoContrato": "12/30 MESES", "mesReajuste": "OUTUBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463047"}, {"tipo": "Sala Comercial", "endereco": "LOJA 01 ITAIPU", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "FATIMA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 900.0, "vencimento": "08", "dataInicio": "2025-10-31", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "OUTUBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463078"}, {"tipo": "Apartamento", "endereco": "FREI ORLANDO 567 - 603 BL 01", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "MARCUS", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1400.0, "vencimento": "08", "dataInicio": "2025-11-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 4.200,00 (PROPRIETÁIRO)", "periodoContrato": "24 MESES", "mesReajuste": "NOVEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463109"}, {"tipo": "Apartamento", "endereco": "RUA EVILÁSIO SILVA 15 - FUNDOS", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "ANA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1100.0, "vencimento": "08", "dataInicio": "2025-11-19", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "CAUÇÃO R$ 2.200,00 (ADM)", "periodoContrato": "18/30 MESES", "mesReajuste": "NOVEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463138"}, {"tipo": "Apartamento", "endereco": "RUA MEN DE SÁ 117 - 802", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "ANA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 4500.0, "vencimento": "08", "dataInicio": "2025-12-01", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA", "periodoContrato": "30 MESES", "mesReajuste": "DEZEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463170"}, {"tipo": "Apartamento", "endereco": "RUA LOPES DA CUNHA 145 - 508", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "RAYSSA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1200.0, "vencimento": "08", "dataInicio": "2025-12-11", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 3.600,00 (PROP)", "periodoContrato": "30 MESES", "mesReajuste": "DEZEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463223"}, {"tipo": "Apartamento", "endereco": "RUA CAROLINA ALVES 32 - 306 BLOCO 1", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "PEDRO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2000.0, "vencimento": "08", "dataInicio": "2025-12-20", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA (LOFT)", "periodoContrato": "30 MESES", "mesReajuste": "DEZEMBRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463257"}, {"tipo": "Casa", "endereco": "DR. SARDINHA 46 - CASA 06", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "MARILISA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2400.0, "vencimento": "08", "dataInicio": "2026-01-20", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇLÃO 7.200 ADM", "periodoContrato": "30 MESES", "mesReajuste": "JANEIRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463290"}, {"tipo": "Apartamento", "endereco": "RUA Desembargador Geraldo Toledo, 41 - 103", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "PIETRO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 2500.0, "vencimento": "08", "dataInicio": "2026-02-09", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "DEPÓSITO CAUÇÃO R$ 7.500,00 (PROP)", "periodoContrato": "18/30 MESES", "mesReajuste": "FEVEREIRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463323"}, {"tipo": "Apartamento", "endereco": "RUA GALDINO DO VALE 08", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "MARIA", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 5000.0, "vencimento": "08", "dataInicio": "2026-02-13", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "FIADOR", "periodoContrato": "30 MESES", "mesReajuste": "FEVEREIRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463351"}, {"tipo": "Apartamento", "endereco": "RUA ANDRADE NEVES 09- 727", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "RYAN", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1550.0, "vencimento": "08", "dataInicio": "2026-02-20", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "CAUÇÃO R$ 4.650,00 (PROP)", "periodoContrato": "30 MESES", "mesReajuste": "FEVEREIRO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463379"}, {"tipo": "Apartamento", "endereco": "RUA NORONHA TORREZÃO 407 - 901 BL3", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "FABIO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1100.0, "vencimento": "05", "dataInicio": "2026-03-17", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "CAUÇÃO R$ 3.300,00 (ADM)", "periodoContrato": "30 MESES", "mesReajuste": "MARÇO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463415"}, {"tipo": "Sala Comercial", "endereco": "RUA ANDRADE NEVES 09 - SALA 610", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "INGRID", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1250.0, "vencimento": "05", "dataInicio": "2026-03-17", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "-------------------------", "periodoContrato": "8 MESES", "mesReajuste": "MARÇO", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463451"}, {"tipo": "Apartamento", "endereco": "RUA ZORAIDA BRASIL 60 -301", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "JHONATAM", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 1400.0, "vencimento": "05", "dataInicio": "2026-05-15", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA LOFT", "periodoContrato": "30 MESES", "mesReajuste": "ABRIL", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463516"}, {"tipo": "Apartamento", "endereco": "RUA AMAPÁ 12 - 603", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "WILKER/LEANDRO", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 5500.0, "vencimento": "05", "dataInicio": "", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "SEGURO FIANÇA LOFT", "periodoContrato": "24 MESES", "mesReajuste": "ABRIL", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463565"}, {"tipo": "Apartamento", "endereco": "RUA GERALDO MARTINS 155- 1607", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "GABRIEL", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 3300.0, "vencimento": "05", "dataInicio": "", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "CARTA PETROBRAS", "periodoContrato": "30 MESES", "mesReajuste": "ABRIL", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463658"}, {"tipo": "Apartamento", "endereco": "RUA JOAQUIM TÁVORA 122 - 1606", "bairro": "", "cidade": "Niterói", "area": "", "quartos": "", "vagas": "", "nomeInquilino": "INGRID", "cpf": "", "telefone": "", "email": "", "fiador": "", "fiadorContato": "", "aluguel": 4300.0, "vencimento": "01", "dataInicio": "", "dataFim": "", "indice": "IGP-M", "periodicidade": "12", "status": "ativo", "comissao": "", "garantia": "CAUÇÃO R$ 12.900,00 (PROP)", "periodoContrato": "30 MESES", "mesReajuste": "ABRIL", "obsContrato": "", "obsImovel": "", "cadastradoEm": "2026-04-19T20:31:17.463706"}];
@@ -685,6 +1073,18 @@ function salvar() {
 // INIT
 // ══════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
+  // ── Verifica sessão ──────────────────────────────────────
+  const loginPage = document.getElementById('loginPage');
+  if (AUTH.check()) {
+    loginPage.classList.add('hidden');
+    document.getElementById('userBadge').style.display = 'flex';
+    document.getElementById('btnLogout').style.display = 'flex';
+    document.getElementById('userGreeting').textContent = 'Bernardo';
+  } else {
+    // foca no campo usuário
+    setTimeout(() => document.getElementById('loginUser').focus(), 200);
+  }
+
   carregarDados();
   carregarLogo();
   const hoje = new Date().toISOString().split('T')[0];
@@ -763,6 +1163,8 @@ function renderDash(){
   document.getElementById('kpiReajustes').textContent=rp;
   document.getElementById('kpiAtraso').textContent=atr;
   document.getElementById('kpiComissao').textContent=R(rec*.1);
+  const sub=document.getElementById('dashSubtitle');
+  if(sub)sub.textContent=ativ.length+' contratos ativos · Receita bruta '+R(rec)+'/mês · '+rp+' reajuste(s) em 60 dias';
   let ah='';
   imoveis.forEach(im=>{if(im.status!=='ativo')return;const p=proxReaj(im);if(p){const d=diasAte(p);if(d!=null&&d<=30&&d>=0)ah+=`<div class="alert alert-warning">⚠️ <strong>Reajuste em ${d===0?'HOJE':d+' dias'}</strong> — ${im.endereco} (${im.nomeInquilino||'—'}) · ${R(im.aluguel)} · ${fmtD(p)}</div>`;}});
   if(atr>0)ah+=`<div class="alert alert-danger">🔴 <strong>${atr} pagamento(s) em atraso.</strong></div>`;
@@ -1993,6 +2395,29 @@ function carregarLogo(){
 }
 
 document.querySelectorAll('.modal-overlay').forEach(mo=>mo.addEventListener('click',e=>{if(e.target===mo)mo.classList.remove('open');}));
+
+// ══════════════════════════════════════════════════════════
+// SIDEBAR TOGGLE
+// ══════════════════════════════════════════════════════════
+function toggleSidebar(){
+  const sb=document.getElementById('sidebar');
+  const ov=document.getElementById('sidebarOverlay');
+  sb.classList.toggle('open');
+  ov.classList.toggle('open');
+}
+
+// ══════════════════════════════════════════════════════════
+// TOAST NOTIFICATIONS
+// ══════════════════════════════════════════════════════════
+function showToast(msg,type='',duration=3200){
+  const c=document.getElementById('toastContainer');
+  const t=document.createElement('div');
+  t.className='toast'+(type?' '+type:'');
+  const ico=type==='success'?'✅':type==='error'?'❌':type==='warning'?'⚠️':'ℹ️';
+  t.innerHTML=`<span>${ico}</span><span>${msg}</span>`;
+  c.appendChild(t);
+  setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300);},duration);
+}
 </script>
 </body>
 </html>
